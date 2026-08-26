@@ -1,9 +1,61 @@
-\documentclass[11pt]{amsart}
+\documentclass[twoside,10pt]{article}
 
-\usepackage[a4paper,margin=1in]{geometry}
-\usepackage{amsmath,amssymb,mathtools}
-\usepackage{microtype}
-\usepackage[hidelinks]{hyperref}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{mathtools}
+\usepackage[small,labelfont=bf,labelsep=period]{caption}
+\usepackage{float}
+\usepackage[
+  letterpaper,
+  total={5.5in,8in},
+  vmarginratio=1:1,
+  hmarginratio=1:1,
+  headsep=21pt
+]{geometry}
+\usepackage{xcolor}
+\usepackage[
+  breaklinks=false,
+  linktocpage=true
+]{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor={purple},
+  urlcolor={purple},
+  citecolor={blue!80!black},
+  pdfauthor={Leslie P. Polzer},
+  pdftitle={Brownian-Bridge Scaling of Graph Complexity in Matchgate Dynamics},
+  pdfsubject={Average pairwise distance and complexity in matchgate commutator-graph components},
+  pdfkeywords={matchgate commutator graph, token graph, Brownian bridge, Wasserstein distance, graph complexity, Krylov complexity}
+}
+
+\medmuskip=4mu
+\thickmuskip=8mu
+\setlength{\emergencystretch}{2em}
+
+\numberwithin{equation}{section}
+
+\newtheoremstyle{slbody}
+  {8pt}
+  {8pt}
+  {\normalfont\slshape}
+  {}
+  {\bfseries}
+  {.}
+  {0.5em}
+  {\thmname{#1}\thmnumber{ #2}%
+   \thmnote{ {\normalfont\itshape(\ignorespaces#3\unskip)}}}
+\theoremstyle{slbody}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
 
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\Pp}{\mathbb{P}}
@@ -11,19 +63,67 @@
 \newcommand{\1}{\mathbf{1}}
 \newcommand{\N}{\mathbb{N}}
 
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{corollary}[theorem]{Corollary}
-\theoremstyle{remark}
-\newtheorem{remark}[theorem]{Remark}
-
-\title{Brownian-Bridge Scaling of Graph Complexity in Matchgate Dynamics}
+\title{Brownian-bridge scaling of graph complexity\\
+in matchgate dynamics}
 \author{Leslie P. Polzer}
-\email{polzer@fastmail.com}
+\newcommand{\authoraffiliation}{Independent Researcher}
+\newcommand{\authoremail}{polzer@fastmail.com}
 \date{August 25, 2026}
 
+\makeatletter
+\renewcommand{\section}{%
+  \@startsection{section}{1}{\z@}%
+    {-3.5ex \@plus -1ex \@minus -.2ex}%
+    {2.3ex \@plus .2ex}%
+    {\normalfont\large\bfseries}}
+\renewcommand{\@seccntformat}[1]{%
+  \csname the#1\endcsname.\enspace}
+
+\def\tagform@#1{%
+  \maketag@@@{(\ignorespaces{\oldstylenums{#1}}\unskip\@@italiccorr)}}
+\renewcommand{\eqref}[1]{%
+  \textup{{\normalfont(\oldstylenums{\ref{#1}}}\normalfont)}}
+
+\newcommand{\shorttitle}{BROWNIAN-BRIDGE SCALING IN MATCHGATE GRAPHS}
+\newcommand{\shortauthors}{LESLIE P. POLZER}
+\newcommand{\ps@bookheader}{%
+  \renewcommand\@oddfoot{\hfil}%
+  \renewcommand\@evenfoot{\hfil}%
+  \renewcommand\@oddhead{%
+    \ifnum\value{page}>1
+      {\small\hfil\shortauthors}\hfil\thepage
+    \else
+      \hfil
+    \fi}%
+  \renewcommand\@evenhead{%
+    \thepage\hfil\small\shorttitle\hfil}}
+\pagestyle{bookheader}
+
+\renewcommand{\maketitle}{%
+  \begin{center}
+    {\large\bfseries\@title}\\
+    \vskip36pt
+    \ifx\@author\@empty
+      \mbox{}\par
+    \else
+      {\scshape\@author}\par
+      \medskip
+      {\small\authoraffiliation}\par
+      \smallskip
+      {\small\texttt{\authoremail}}\par
+      \smallskip
+      {\small\@date}\par
+    \fi
+    \vskip36pt
+  \end{center}}
+\makeatother
+
+\renewenvironment{abstract}
+  {\quotation\noindent\small{\bfseries\abstractname.\enspace}}
+  {\endquotation}
+
 \begin{document}
+\maketitle
 
 \begin{abstract}
 We determine the average pairwise distance in every positive-density component
@@ -46,12 +146,22 @@ We further prove
  \left(\frac{28}{15}-\frac\pi2\right)n^3
 \]
 and, in the central component, an exact finite sum and its first correction
-$-5\sqrt{2\pi}\,n^{1/2}/64$.  We also record the resulting Haar-averaged
-graph-complexity statement and the pointwise Krylov lower bound for a specified
-Hamiltonian evolution.
+$-5\sqrt{2\pi}\,n^{1/2}/64$.  We also record the resulting graph-complexity
+statement, averaged jointly over a uniform initial Pauli vertex and an
+independent Haar matchgate unitary, and the pointwise Krylov lower bound for a
+specified Hamiltonian evolution.
+
+\vskip5pt
+\noindent\textbf{Keywords.}\enspace Matchgate commutator graph; token graph;
+Brownian bridge; Wasserstein distance; graph complexity; Krylov complexity.
+
+\vskip5pt
+\noindent\textbf{MSC2020 Classification.}\enspace
+60F17; 05C12; 60J65; 81P68.
 \end{abstract}
 
-\maketitle
+\vskip50pt
+\baselineskip=13.5pt
 
 \section{Introduction}
 
@@ -468,10 +578,27 @@ group $\mathcal M_n$.  Then
 \end{corollary}
 
 \begin{proof}
-Equation~(38) of West et al.~\cite{WestEtAl} states, for fixed $P_n$, that
-the Haar expectation of graph complexity is the mean of
-$d_{\mathcal C_{k_n}}(P_n,Q)$ over uniform $Q\in\mathcal C_{k_n}$.  Averaging
-also over $P_n$ gives exactly $\E D_{2n,k_n}$.  Apply
+Fix $P_n$ and, for $Q\in\mathcal C_{k_n}$, write the normalized Pauli
+coefficient as
+\[
+ c_Q(U):=\langle Q,U^\dagger P_nU\rangle_{\mathrm{HS}}
+ =2^{-n}\operatorname{Tr}(Q^\dagger U^\dagger P_nU).
+\]
+Proposition~7 of West et al.~\cite{WestEtAl} is stated using the unnormalized
+Hilbert--Schmidt pairing.  Together with invariance of Haar measure under
+$U\mapsto U^\dagger$, it gives
+\[
+ \E_U\left|\operatorname{Tr}(Q^\dagger U^\dagger P_nU)\right|^2
+ =\frac{2^{2n}}{|\mathcal C_{k_n}|}.
+\]
+Thus $\E_U|c_Q(U)|^2=|\mathcal C_{k_n}|^{-1}$.  Substitution in
+\eqref{eq:graph-complexity-definition} gives Eq.~(38) of that paper:
+\[
+ \E_U\mathsf G_{P_n}(U^\dagger P_nU)
+ =\frac{1}{|\mathcal C_{k_n}|}
+   \sum_{Q\in\mathcal C_{k_n}}d_{\mathcal C_{k_n}}(P_n,Q).
+\]
+Averaging also over $P_n$ gives exactly $\E D_{2n,k_n}$.  Apply
 Theorem~\ref{thm:main}.
 \end{proof}
 
@@ -503,6 +630,15 @@ expectations exist.
 \end{corollary}
 
 \begin{proof}
+Since the Pauli generators are Hermitian and $h_g\in\mathbb R$, one has
+$H^\dagger=H$.  The Liouvillian is self-adjoint for the normalized
+Hilbert--Schmidt inner product: cyclicity of the trace gives
+\begin{align*}
+ \langle A,\mathcal L_HB\rangle_{\mathrm{HS}}
+ &=2^{-n}\operatorname{Tr}(A^\dagger HB-A^\dagger BH)\\
+ &=2^{-n}\operatorname{Tr}(A^\dagger HB-HA^\dagger B)
+ =\langle\mathcal L_HA,B\rangle_{\mathrm{HS}}.
+\end{align*}
 For $j\geq0$, let
 \[
  \mathcal F_j:=\operatorname{span}\{Q\in\mathcal C_k:
@@ -517,12 +653,13 @@ commutation, to a scalar multiple of an adjacent Pauli string.  Consequently
  \mathcal L_H\mathcal F_j\subseteq\mathcal F_{j+1},
  \qquad \mathcal L_H^jP\in\mathcal F_j.
 \]
-The Lanczos construction gives
-$O_j\in\operatorname{span}\{P,\mathcal L_HP,\ldots,\mathcal L_H^jP\}$
-before termination, hence $\mathcal K_j\subseteq\mathcal F_j$ for every
-$j\geq0$.  The full cyclic Krylov space is invariant under $\mathcal L_H$;
-therefore $P_t=e^{it\mathcal L_H}P$ belongs to
-$\mathcal K_{d_K-1}$.
+The Lanczos construction for the self-adjoint operator $\mathcal L_H$ gives
+$O_j\in\operatorname{span}\{\mathcal L_H^\ell P:0\leq\ell\leq j\}$
+before its first zero residual, hence
+$\mathcal K_j\subseteq\mathcal F_j$ for every $j\geq0$.  Its completed basis
+spans the cyclic space $\operatorname{span}\{\mathcal L_H^\ell P:\ell\geq0\}$,
+which is invariant under $\mathcal L_H$ in the finite-dimensional operator space.
+Therefore $P_t=e^{it\mathcal L_H}P$ belongs to $\mathcal K_{d_K-1}$.
 Let $\Pi_j^{\mathcal F}$ and $\Pi_j^{\mathcal K}$ be the orthogonal projections
 onto these two spaces.  Expanding the integer weights in
 \eqref{eq:graph-complexity-definition} as sums of unit increments gives
@@ -813,8 +950,9 @@ $-5\sqrt{2\pi}/64=-0.195830333955547\ldots$.
 Here and in Table~\ref{tab:numerics},
 $c=\sqrt{2\pi}/4=0.626657068657750\ldots$.
 
-\begin{table}[t]
+\begin{table}[H]
 \centering
+\small
 \begin{tabular}{rccc}
 $n$ & $\E D_{2n,n}/n^{3/2}$
 & $(\E D_{2n,n}-cn^{3/2})/\sqrt n$
