@@ -1,0 +1,830 @@
+\documentclass[11pt]{amsart}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Pp}{\mathbb{P}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\1}{\mathbf{1}}
+\newcommand{\N}{\mathbb{N}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\title{Brownian-Bridge Scaling of Graph Complexity in Matchgate Dynamics}
+\author{Leslie P. Polzer}
+\email{polzer@fastmail.com}
+\date{August 25, 2026}
+
+\begin{document}
+
+\begin{abstract}
+We determine the average pairwise distance in every positive-density component
+of the matchgate commutator graph.  If $S$ and $T$ are independent uniform
+$\kappa_n$-subsets of $[2n]$ and $\kappa_n/(2n)\to\rho\in(0,1)$, the graph
+distance is $D_n=\sum_i|s_i-t_i|$ and
+\[
+ \frac{D_n}{n^{3/2}}
+ \Rightarrow 4\sqrt{\rho(1-\rho)}\int_0^1|B(t)|\,dt,
+ \qquad
+ \E D_n\sim
+ \frac{\sqrt{2\pi}}2\sqrt{\rho(1-\rho)}\,n^{3/2},
+\]
+where $B$ is a standard Brownian bridge.  In the central component this
+becomes $D_n/n^{3/2}\Rightarrow2\int_0^1|B(t)|\,dt$ and
+$\E D_n\sim\sqrt{2\pi}\,n^{3/2}/4$, resolving Conjecture~14 of West et al.
+We further prove
+\[
+ \Var(D_n)\sim\rho(1-\rho)
+ \left(\frac{28}{15}-\frac\pi2\right)n^3
+\]
+and, in the central component, an exact finite sum and its first correction
+$-5\sqrt{2\pi}\,n^{1/2}/64$.  We also record the resulting Haar-averaged
+graph-complexity statement and the pointwise Krylov lower bound for a specified
+Hamiltonian evolution.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+West et al.~\cite{WestEtAl} describe the component $\mathcal C_\kappa$ of the
+matchgate commutator graph by the $\kappa$-element subsets of $[2n]$.  Their
+Appendix~C, Eq.~(C2), identifies the graph distance between
+$S=(s_1<\cdots<s_\kappa)$ and $T=(t_1<\cdots<t_\kappa)$ as
+\begin{equation}\label{eq:matching-distance}
+ d_{\mathcal C_\kappa}(S,T)=\sum_{i=1}^{\kappa}|s_i-t_i|.
+\end{equation}
+Theorem~13 of that paper gives a finite sum for the average of
+\eqref{eq:matching-distance}, and Conjecture~14 asserts that the central value
+is superlinear and subquadratic in $n$.  The purpose of this paper is to give
+the limiting law and its expectation constant.
+
+The probabilistic mechanism is one-dimensional transport.  The matching
+distance is the area between two cumulative counting functions, and each
+centered counting function is a finite-population bridge.  Ros\'en's
+finite-population invariance principle~\cite[Theorem~13.1]{Rosen} supplies
+convergence in $C[0,1]$.  The remaining issue for the mean is uniform
+integrability; Proposition~\ref{prop:second-moment} gives it directly from the
+exact hypergeometric variance.
+
+The component in \eqref{eq:matching-distance} is the $\kappa$-token graph of a
+path, also called a symmetric power of a path.  This terminology predates the
+matchgate application, and the ordered-coordinate distance formula appears,
+for example, in Ibarra and Rivera~\cite[Lemma~5.2]{IbarraRivera}.  The transport
+identity below is the discrete one-dimensional $1$-Wasserstein identity: in one
+dimension, $W_1$ is the area between cumulative distribution functions
+\cite{DeAngelisGray}.  Brownian-bridge limits for $L^1$ empirical-process and
+Wasserstein functionals likewise have a substantial literature; see, for
+example, del Barrio, Gin\'e, and Matr\'an~\cite{delBarrioGineMatran}.
+
+The sampling law here is different from the usual independent empirical-sample
+setting: each sample is a fixed-size subset of a finite population and occupies
+a nonvanishing fraction of that population.  Ros\'en's finite-population
+invariance principle supplies the resulting density-dependent bridge factor.
+Janson~\cite[Section~20]{Janson} surveys the Brownian-bridge area and its
+moments, while Schwerdtfeger~\cite[Section~14.2]{Schwerdtfeger} proves joint
+moment convergence for the absolute area and endpoint of a Bernoulli walk.
+The contributions established here are the application to the matchgate
+component and Conjecture~14, the fixed-density finite-population law and
+variance, and the exact central-component formula and finite-size correction in
+Section~6.
+
+\section{The matchgate metric and discrete transport}
+
+For integers $1\leq k<N$, let $\Omega_{N,k}$ be the set of $k$-subsets of
+$[N]=\{1,\ldots,N\}$.  Write each $S\in\Omega_{N,k}$ as
+$S=(s_1<\cdots<s_k)$ and define
+\[
+ D_{N,k}(S,T):=\sum_{i=1}^k|s_i-t_i|,
+ \qquad
+ C_S(r):=|S\cap[r]|.
+\]
+
+\begin{proposition}[Configuration-graph distance]\label{prop:graph-metric}
+Consider the graph on $\Omega_{N,k}$ in which one particle may move by one
+lattice site across an unoccupied edge.  This is the $k$-token graph
+$F_k(P_N)$, and its graph distance is $D_{N,k}$.  When $N=2n$, it is the
+matchgate component $\mathcal C_k$ with the metric in
+\eqref{eq:matching-distance}.
+\end{proposition}
+
+\begin{proof}
+Every edge changes one coordinate by one, so every path from $S$ to $T$ has
+length at least $D_{N,k}(S,T)$.  For the reverse inequality, suppose first
+that $s_i<t_i$ for some $i$, and choose the largest such $i$.  The move
+$s_i\mapsto s_i+1$ stays in $[N]$: if $i<k$, then
+$s_i+1\leq s_{i+1}\leq N$, while if $i=k$, then
+$s_k+1\leq t_k\leq N$.  It is also unblocked: if $i<k$ and
+$s_i+1=s_{i+1}$, maximality gives $s_{i+1}\geq t_{i+1}$, whereas
+$s_{i+1}=s_i+1\leq t_i<t_{i+1}$, a contradiction.  Thus this move reduces
+$D_{N,k}$ by one.  If no such $i$ exists but $S\neq T$, choose the smallest
+$i$ for which $s_i>t_i$.  The move stays in $[N]$: if $i>1$, then
+$s_i-1\geq s_{i-1}\geq1$, while if $i=1$, then
+$s_1-1\geq t_1\geq1$.  If $i>1$ and the move were blocked, then
+$s_i-1=s_{i-1}$; minimality would give $s_{i-1}\leq t_{i-1}$, whereas
+$s_{i-1}=s_i-1\geq t_i>t_{i-1}$, a contradiction.  Hence
+$s_i\mapsto s_i-1$ is an allowed move and again reduces $D_{N,k}$ by one.
+Iteration constructs a path of length $D_{N,k}$.  The token-graph terminology
+and the same distance formula are recorded by Ibarra and
+Rivera~\cite[Definition in Section~1 and Lemma~5.2]{IbarraRivera}.  For
+$N=2n$, the matchgate identification and adjacency rule are Eq.~(50) and
+Eq.~(51) of West et al.~\cite[Section~IV and Appendix~C]{WestEtAl}.
+\end{proof}
+
+If $\mu_S=k^{-1}\sum_{i=1}^k\delta_{s_i}$ and
+$\mu_T=k^{-1}\sum_{i=1}^k\delta_{t_i}$, then
+$D_{N,k}(S,T)=kW_1(\mu_S,\mu_T)$.  Lemma~\ref{lem:transport} is therefore the
+lattice form of the one-dimensional identity expressing $W_1$ as the area
+between the two cumulative distribution functions~\cite{DeAngelisGray}.
+
+\begin{lemma}[Discrete transport identity]\label{lem:transport}
+For all $S,T\in\Omega_{N,k}$,
+\begin{equation}\label{eq:transport}
+ D_{N,k}(S,T)=\sum_{r=1}^{N-1}|C_S(r)-C_T(r)|.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For $a,b\in[N]$,
+\[
+ |a-b|=\sum_{r=1}^{N-1}|\1_{\{a\leq r\}}-\1_{\{b\leq r\}}|.
+\]
+Fix $r$.  The nonzero differences
+$\1_{\{s_i\leq r\}}-\1_{\{t_i\leq r\}}$ cannot have both signs.  If a
+positive difference occurred at $i$ and a negative difference at $j$, then
+$i<j$ would imply $t_i<t_j\leq r<t_i$, while $j<i$ would imply
+$s_j<s_i\leq r<s_j$; both are impossible.  Hence the sum of the absolute
+values at level $r$ equals
+$|C_S(r)-C_T(r)|$.  Summing first over $i$ and then over $r$ proves
+\eqref{eq:transport}.
+\end{proof}
+
+\section{Finite-population bridges and moment control}
+
+Let $S_N,T_N$ be independent and uniform in $\Omega_{N,k_N}$, put
+$p_N=k_N/N$, and let $G_N^S$ be the polygonal process whose values on the
+grid are
+\begin{equation}\label{eq:single-bridge}
+ G_N^S(m/N)=\frac{C_{S_N}(m)-mp_N}{\sqrt N},
+ \qquad 0\leq m\leq N.
+\end{equation}
+
+\begin{lemma}[Finite-population bridge limit]\label{lem:bridge-fclt}
+If $p_N\to\rho\in(0,1)$, then in $C[0,1]$ with the uniform norm,
+\[
+ G_N^S\Rightarrow\sqrt{\rho(1-\rho)}B,
+\]
+where $B$ is a standard Brownian bridge.  If $G_N^T$ is the independent
+copy formed from $T_N$, then
+\begin{equation}\label{eq:difference-bridge}
+ H_N:=G_N^S-G_N^T
+ \Rightarrow \sqrt{2\rho(1-\rho)}B.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Apply Ros\'en~\cite[Theorem~13.1, pp.~407--410]{Rosen} to the population
+containing $k_N$ ones and $N-k_N$ zeros, sampled by a uniform random
+permutation through its full size $N$.  Its mean is $p_N$, its population
+variance in Ros\'en's normalization is
+\[
+ \sigma_N^2=\frac{N}{N-1}p_N(1-p_N)
+ \longrightarrow\rho(1-\rho).
+\]
+For the full sample of size $N$, Ros\'en's normalized polygon has, at time
+$m/N$, the value
+\[
+ \frac{C_{S_N}(m)-mp_N}{\sigma_N\sqrt N}
+ =\frac{G_N^S(m/N)}{\sigma_N}.
+\]
+Ros\'en's Noether condition is satisfied because, with
+$Q_N^2=\sum_{i=1}^N(a_i-p_N)^2=Np_N(1-p_N)$,
+\[
+ \frac{\max_i|a_i-p_N|}{Q_N}
+ \leq\frac{1}{\sqrt{Np_N(1-p_N)}}\longrightarrow0.
+\]
+The cited theorem therefore applies to exactly this polygon and gives
+$G_N^S/\sigma_N\Rightarrow B$ in $C[0,1]$.  Since
+$\sigma_N\to\sqrt{\rho(1-\rho)}$, Slutsky's theorem proves the first assertion.
+Independence makes the joint law of $(G_N^S,G_N^T)$ the product of its
+marginal laws, so it converges to two independent bridges.  Subtraction is
+continuous on $C[0,1]^2$, and the difference of two independent standard
+bridges has the law of $\sqrt2B$.  This proves
+\eqref{eq:difference-bridge}.
+\end{proof}
+
+\begin{proposition}[Moment bounds]\label{prop:second-moment}
+For independent uniform $S,T\in\Omega_{N,k}$,
+\begin{equation}\label{eq:second-moment-bound}
+ \E D_{N,k}(S,T)^2
+ \leq \frac{k(N-k)(N^2-1)}{3N}.
+\end{equation}
+Moreover,
+\begin{equation}\label{eq:fourth-moment-bound}
+ \E D_{N,k}(S,T)^4\leq N^6.
+\end{equation}
+In particular, if $N=2n$ and $k/(2n)$ stays in a compact subset of $(0,1)$,
+then $\Var(D_{2n,k})=O(n^3)$ and
+$\{D_{2n,k}/n^{3/2}\}$ is uniformly integrable.  For every sequence
+$1\leq k_n<2n$, the family
+$\{(D_{2n,k_n}/n^{3/2})^2:n\geq1\}$ is uniformly integrable.
+\end{proposition}
+
+\begin{proof}
+Let $\Delta_r=C_S(r)-C_T(r)$ and put $p=k/N$.  For the membership
+indicators $I_j=\1_{\{j\in S\}}$, one has
+$\E I_j=p$, $\Var(I_j)=p(1-p)$, and, for $i\neq j$,
+\[
+ \operatorname{Cov}(I_i,I_j)
+ =\frac{k(k-1)}{N(N-1)}-p^2
+ =-\frac{p(1-p)}{N-1}.
+\]
+Summing these covariances over the first $r$ sites, and then using the
+independence of $S$ and $T$, gives
+\begin{equation}\label{eq:hypergeom-var}
+ \E\Delta_r^2
+ =2\Var(C_S(r))
+ =\frac{2k(N-k)}{N-1}\frac rN\left(1-\frac rN\right).
+\end{equation}
+By Lemma~\ref{lem:transport} and Cauchy--Schwarz,
+\[
+ \E D_{N,k}^2
+ \leq (N-1)\sum_{r=1}^{N-1}\E\Delta_r^2
+ =2k(N-k)\sum_{r=1}^{N-1}\frac{r(N-r)}{N^2}.
+\]
+The finite sum is $(N^2-1)/(6N)$, which proves
+\eqref{eq:second-moment-bound}.  The variance bound follows from
+$\Var(D_{N,k})\leq\E D_{N,k}^2$.  If $N=2n$ and $k=k_n$ with
+$k_n/(2n)$ in a compact subset of $(0,1)$, division by $n^3$ gives
+\[
+ \sup_n \E\left(\frac{D_{2n,k_n}}{n^{3/2}}\right)^2<\infty.
+\]
+An $L^2$-bounded family is uniformly integrable.
+
+For the fourth moment, put $q_r=\min(r,N-r)$.  If $X$ is Bernoulli with
+mean $p$ and $\psi(\lambda)=\log\E\exp(\lambda(X-p))$, then
+$\psi(0)=\psi'(0)=0$ and
+$\psi''(\lambda)=p_\lambda(1-p_\lambda)\leq1/4$, where $p_\lambda$ is the
+success probability under exponential tilting.  Taylor's formula therefore
+gives $\psi(\lambda)\leq\lambda^2/8$ for every $\lambda\in\mathbb R$.
+Hoeffding's convex comparison for sampling without
+replacement~\cite[Theorem~3.1]{Rosen}, applied separately to the two
+independent counts, gives for $r\leq N/2$
+\[
+ \E e^{\lambda(C_S(r)-rp)}\leq e^{r\lambda^2/8},
+ \qquad
+ \E e^{-\lambda(C_T(r)-rp)}\leq e^{r\lambda^2/8}.
+\]
+Independence therefore gives, with $q_r=\min(r,N-r)$,
+\[
+ \E e^{\lambda\Delta_r}\leq e^{q_r\lambda^2/4}.
+\]
+For $r>N/2$ this uses
+$\Delta_r=-[(k-C_S(r))-(k-C_T(r))]$ and samples the complementary block of
+size $N-r$.  Chernoff's bound and integration of the tail give
+\[
+ \Pp(|\Delta_r|\geq x)\leq2e^{-x^2/q_r},
+ \qquad
+ \E|\Delta_r|^4
+ =4\int_0^\infty x^3\Pp(|\Delta_r|>x)\,dx
+ \leq4q_r^2.
+\]
+H\"older's inequality and $\sum_{r=1}^{N-1}q_r^2\leq N^3/4$ now yield
+\[
+ \E D_{N,k}^4
+ \leq(N-1)^3\sum_{r=1}^{N-1}\E|\Delta_r|^4
+ \leq N^6.
+\]
+Thus $D_{2n,k}/n^{3/2}$ is bounded in $L^4$, which proves the last uniform
+integrability assertion.
+\end{proof}
+
+\section{The Brownian-area law}
+
+Set
+\[
+ \mathcal A:=\int_0^1|B(t)|\,dt.
+\]
+
+\begin{theorem}[Fixed-density matchgate distance]\label{thm:main}
+Let $N=2n$, let $k_n/(2n)\to\rho\in(0,1)$, and let $S_n,T_n$ be independent
+uniform $k_n$-subsets of $[2n]$.  Then
+\begin{equation}\label{eq:distribution-main}
+ \frac{D_{2n,k_n}(S_n,T_n)}{n^{3/2}}
+ \Rightarrow 4\sqrt{\rho(1-\rho)}\,\mathcal A,
+\end{equation}
+and
+\begin{equation}\label{eq:expectation-main}
+ \E D_{2n,k_n}(S_n,T_n)
+ =\frac{\sqrt{2\pi}}2\sqrt{\rho(1-\rho)}\,n^{3/2}
+   +o(n^{3/2}).
+\end{equation}
+Its variance satisfies
+\begin{equation}\label{eq:variance-main}
+ \Var(D_{2n,k_n})
+ =\rho(1-\rho)\left(\frac{28}{15}-\frac\pi2\right)n^3
+  +o(n^3).
+\end{equation}
+For the central component $k_n=n$ this specializes to
+\begin{equation}\label{eq:central-main}
+ \frac{D_{2n,n}}{n^{3/2}}\Rightarrow2\mathcal A,
+ \qquad
+ \E D_{2n,n}=\frac{\sqrt{2\pi}}4n^{3/2}+o(n^{3/2}).
+\end{equation}
+In that case
+\begin{equation}\label{eq:central-variance}
+ \Var(D_{2n,n})
+ =\left(\frac7{15}-\frac\pi8\right)n^3+o(n^3).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+With $N=2n$, form $H_N$ from $S_n,T_n$ as in
+Lemma~\ref{lem:bridge-fclt}.  At the grid points it satisfies
+$H_N(r/N)=(C_{S_n}(r)-C_{T_n}(r))/\sqrt N$.  Thus
+Lemma~\ref{lem:transport} gives
+\begin{equation}\label{eq:riemann-area}
+ \frac{D_{N,k_n}}{N^{3/2}}
+ =\frac1N\sum_{r=1}^{N-1}|H_N(r/N)|.
+\end{equation}
+On each grid interval, $H_N$ is linear and its endpoint values differ by at
+most $N^{-1/2}$.  Since the absolute-value map is one-Lipschitz,
+\begin{equation}\label{eq:riemann-error}
+ \left|
+ \frac1N\sum_{r=1}^{N-1}|H_N(r/N)|
+ -\int_0^1|H_N(t)|\,dt
+ \right|\leq N^{-1/2}.
+\end{equation}
+The map $f\mapsto\int_0^1|f(t)|\,dt$ is one-Lipschitz on $C[0,1]$ in the
+uniform norm.  Lemma~\ref{lem:bridge-fclt}, the continuous mapping theorem,
+and \eqref{eq:riemann-error} therefore yield
+\[
+ \frac{D_{N,k_n}}{N^{3/2}}
+ \Rightarrow\sqrt{2\rho(1-\rho)}\,\mathcal A.
+\]
+Since $N^{3/2}=2\sqrt2\,n^{3/2}$, this is
+\eqref{eq:distribution-main}.
+
+Proposition~\ref{prop:second-moment} makes
+$D_{2n,k_n}/n^{3/2}$ uniformly integrable, so its expectations converge to
+the expectation of the limit in \eqref{eq:distribution-main}.  For every
+$t\in[0,1]$, $B(t)$ is centered Gaussian with variance $t(1-t)$; hence
+Tonelli's theorem gives
+\begin{align*}
+ \E\mathcal A
+ &=\int_0^1\E|B(t)|\,dt
+ =\sqrt{\frac2\pi}\int_0^1\sqrt{t(1-t)}\,dt \\
+ &=\sqrt{\frac2\pi}\,\mathrm B(3/2,3/2)
+ =\sqrt{\frac2\pi}\,\frac\pi8
+ =\frac{\sqrt{2\pi}}8.
+\end{align*}
+Multiplication by $4\sqrt{\rho(1-\rho)}$ proves
+\eqref{eq:expectation-main}; setting $\rho=1/2$ proves
+\eqref{eq:central-main}.
+
+Put $X_n=D_{2n,k_n}/n^{3/2}$ and
+$X=4\sqrt{\rho(1-\rho)}\,\mathcal A$.  The fourth-moment bound in
+Proposition~\ref{prop:second-moment} makes $\{X_n^2\}$ uniformly integrable,
+while \eqref{eq:distribution-main} gives $X_n\Rightarrow X$.  Consequently
+$\E X_n^2\to\E X^2$.  Together with the already proved convergence
+$\E X_n\to\E X$, this gives $\Var(X_n)\to\Var(X)$.  The Brownian-bridge area
+has
+\begin{equation}\label{eq:brownian-area-second-moment}
+ \E\mathcal A^2=\frac7{60};
+\end{equation}
+this is recorded, with the same normalization, in
+Janson~\cite[Section~20, Eq.~(135) and Table~2, p.~107]{Janson}.  The variance of the limit in
+\eqref{eq:distribution-main} is therefore
+\[
+ 16\rho(1-\rho)\frac7{60}
+ -\left(\frac{\sqrt{2\pi}}2\sqrt{\rho(1-\rho)}\right)^2
+ =\rho(1-\rho)\left(\frac{28}{15}-\frac\pi2\right).
+\]
+This proves \eqref{eq:variance-main}; setting $\rho=1/2$ gives
+\eqref{eq:central-variance}.
+\end{proof}
+
+\begin{corollary}[Resolution of Conjecture 14]\label{cor:conjecture}
+Let $A(n,n)$ be the central-component average in Theorem~13 of
+West et al.~\cite{WestEtAl}.  Then
+\[
+ A(n,n)=\frac{\sqrt{2\pi}}4n^{3/2}+o(n^{3/2}).
+\]
+Consequently $A(n,n)=\omega(n)$ and $A(n,n)=o(n^2)$, as asserted in their
+Conjecture~14.
+\end{corollary}
+
+\begin{proof}
+The average $A(n,n)$ is $\E D_{2n,n}$ by Proposition~\ref{prop:graph-metric}
+and the definition preceding Theorem~13 of West et al.  The conclusion is
+the central case of Theorem~\ref{thm:main}.
+\end{proof}
+
+\section{Graph and Krylov complexity}
+
+Write $\mathsf G_P(U^\dagger P U)$ for graph complexity based at the Pauli
+vertex $P$, in the notation of West et al.~\cite[Eq.~(37)]{WestEtAl}.
+
+\begin{corollary}[Haar-averaged matchgate graph complexity]\label{cor:complexity}
+Let $k_n/(2n)\to\rho\in(0,1)$, let $P_n$ be uniform in the matchgate component
+$\mathcal C_{k_n}$, and let $U_n$ be independently Haar distributed in the
+matchgate group.  Under the normalization of West et al.,
+\[
+ \E_{P_n,U_n}\mathsf G_{P_n}(U_n^\dagger P_nU_n)
+ =\frac{\sqrt{2\pi}}2\sqrt{\rho(1-\rho)}\,n^{3/2}
+  +o(n^{3/2}).
+\]
+\end{corollary}
+
+\begin{proof}
+Equation~(38) of West et al.~\cite{WestEtAl} states, for fixed $P_n$, that
+the Haar expectation of graph complexity is the mean of
+$d_{\mathcal C_{k_n}}(P_n,Q)$ over uniform $Q\in\mathcal C_{k_n}$.  Averaging
+also over $P_n$ gives exactly $\E D_{2n,k_n}$.  Apply
+Theorem~\ref{thm:main}.
+\end{proof}
+
+\begin{corollary}[Pointwise Krylov implication]\label{cor:krylov}
+Fix $n$, an initial Pauli string $P\in\mathcal C_k$, and a time-independent
+Hamiltonian $H$ whose Pauli terms belong to the generating set used to define
+the matchgate commutator graph.  Put
+\[
+ P_t=e^{iHt}Pe^{-iHt},
+\]
+and let $\mathsf K_{H,P}(t)$ be the Krylov complexity constructed from the
+Liouvillian $\mathcal L_H=[H,\,\cdot\,]$ and initial operator $P$.  Then, for
+every $t\in\mathbb R$,
+\[
+ \mathsf G_P(P_t)\leq \mathsf K_{H,P}(t).
+\]
+Consequently, for every probability law on triples $(P,H,t)$ supported on the
+stated class, $\E\mathsf G_P(P_t)\leq\E\mathsf K_{H,P}(t)$ whenever the two
+expectations exist.
+\end{corollary}
+
+\begin{proof}
+This is West et al.~\cite[Lemma~9 and Eqs.~(A78)--(A86)]{WestEtAl}.  Their proof
+uses the Krylov basis generated by $\mathcal L_H$ and the fact that the $j$th
+Krylov vector can have Pauli support only at graph distance at most $j$ from
+$P$.  The expectation statement follows by integrating the pointwise
+inequality.
+\end{proof}
+
+\begin{remark}[Why the Haar and Krylov statements are separate]
+The Haar-distributed endpoint $U^\dagger P U$ in
+Corollary~\ref{cor:complexity} does not by itself specify a Hamiltonian, a
+Liouvillian, or a Lanczos basis.  Krylov complexity is therefore not a function
+of that endpoint alone.  Corollary~\ref{cor:krylov} applies once the
+Hamiltonian evolution supplying those data has been specified; no
+Haar-averaged Krylov quantity is asserted without such a joint dynamical law.
+\end{remark}
+
+\section{Exact finite-size evaluation}
+
+The central component has an additional decomposition which gives both an
+exact formula and the first finite-size correction.  Let $W^{(m)}$ be a
+uniform simple random-walk bridge of length $2m$, with increments $+1$ and
+$-1$ occurring $m$ times each, and put
+\[
+ \mathcal A_m=\sum_{j=1}^{2m-1}|W^{(m)}_j|.
+\]
+
+\begin{lemma}[Mean area of a simple-walk bridge]\label{lem:discrete-bridge-area}
+For every $m\geq1$,
+\begin{equation}\label{eq:discrete-bridge-area}
+ \E\mathcal A_m=\frac{m4^m}{2\binom{2m}{m}}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Let $L_{m,h}$ be the number of pairs $(w,j)$ in which $w$ is a bridge of
+length $2m$, $0\leq j\leq2m$, and $w_j=h$.  The generating function for
+unrestricted walks from $0$ to $h$ is
+\[
+ P_h(z)=\sum_{j\geq0}\#\{w:0\to h\text{ in }j\text{ steps}\}z^j
+ =\frac{r(z)^{|h|}}{\sqrt{1-4z^2}},
+ \qquad
+ r(z)=\frac{1-\sqrt{1-4z^2}}{2z}.
+\]
+This follows by solving the recurrence
+$P_h=\1_{\{h=0\}}+z(P_{h-1}+P_{h+1})$ with the solution that is a formal
+power series at zero.  Splitting a bridge at its marked time gives
+$\sum_{m\geq0}L_{m,h}z^{2m}=P_h(z)^2$.  Therefore, if $T_m$ is the total
+absolute area over all $\binom{2m}{m}$ bridges, then
+\begin{align*}
+ \sum_{m\geq0}T_mz^{2m}
+ &=\sum_{h\in\mathbb Z}|h|P_h(z)^2
+ =\frac{2}{1-4z^2}\sum_{h\geq1}h r(z)^{2h}\\
+ &=\frac{2r(z)^2}{(1-4z^2)(1-r(z)^2)^2}
+ =\frac{2z^2}{(1-4z^2)^2}.
+\end{align*}
+In the last equality we used $r=z(1+r^2)$.  The coefficient of $z^{2m}$
+is $m4^m/2$.  Division by the number of bridges proves
+\eqref{eq:discrete-bridge-area}.
+\end{proof}
+
+\begin{proposition}[Exact central-component mean]\label{prop:central-exact}
+For independent uniform $n$-subsets $S,T$ of $[2n]$,
+\begin{equation}\label{eq:central-exact}
+ \E D_{2n,n}
+ =\frac{2n+1}{2\binom{2n}{n}}
+ \sum_{m=1}^n
+ \binom{n}{m}^2
+ \frac{m4^m}{(2m+1)\binom{2m}{m}}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Let $M=|S\setminus T|=|T\setminus S|$.  Conditional on $S$, choosing $T$
+gives
+\begin{equation}\label{eq:M-law}
+ \Pp(M=m)=\frac{\binom{n}{m}^2}{\binom{2n}{n}},
+ \qquad 0\leq m\leq n.
+\end{equation}
+Conditional on $M=m$, mark the $2m$ sites in the symmetric difference by
+$+1$ on $S\setminus T$ and $-1$ on $T\setminus S$.  The active sites form a
+uniform $2m$-subset of $[2n]$, independently of a uniform ordering of $m$
+plus and $m$ minus signs.  To see this directly, for every fixed signed active
+configuration the common intersection $S\cap T$ can be any $(n-m)$-subset of
+the remaining $2n-2m$ sites, a number independent of that configuration.
+
+Write the active locations as $J_1<\cdots<J_{2m}$ and let $W_j$ be the sign
+partial sum after the $j$th active location.  Lemma~\ref{lem:transport} gives
+\begin{equation}\label{eq:stretched-area}
+ D_{2n,n}=\sum_{j=1}^{2m-1}|W_j|(J_{j+1}-J_j).
+\end{equation}
+The $2m+1$ gaps before, between, and after the active sites are exchangeable
+and contain $2n-2m$ inactive sites in total.  Hence
+\[
+ \E(J_{j+1}-J_j\mid M=m)=1+\frac{2n-2m}{2m+1}
+ =\frac{2n+1}{2m+1}.
+\]
+The active locations and signs are independent, so
+Lemma~\ref{lem:discrete-bridge-area} yields
+\[
+ \E(D_{2n,n}\mid M=m)
+ =\frac{2n+1}{2m+1}\frac{m4^m}{2\binom{2m}{m}}.
+\]
+For $m=0$ the distance is zero.  Averaging the displayed identity for
+$1\leq m\leq n$ with \eqref{eq:M-law} therefore proves
+\eqref{eq:central-exact}.
+\end{proof}
+
+\begin{lemma}[Concentration and expansions]\label{lem:finite-size-input}
+For the variable $M$ in \eqref{eq:M-law}, with $\mu=n/2$,
+for every $t\geq0$,
+\begin{equation}\label{eq:M-concentration}
+ \Pp(|M-\mu|\geq t)\leq2e^{-2t^2/n}.
+\end{equation}
+Moreover, as $m\to\infty$,
+\begin{align}
+ \frac{4^m}{\binom{2m}{m}}
+ &=\sqrt{\pi m}\left(1+\frac1{8m}+O(m^{-2})\right),
+ \label{eq:binomial-expansion}
+\end{align}
+and, as $n\to\infty$,
+\begin{align}
+ \E\left[\sqrt M\,;\,|M-\mu|\leq n/4\right]
+ &=\sqrt{\frac n2}\left(1-\frac1{16n}+O(n^{-2})\right),
+ \label{eq:sqrt-M-expansion}\\
+ \E\left[M^{-1/2}\,;\,|M-\mu|\leq n/4\right]
+ &=\sqrt{\frac2n}\left(1+O(n^{-1})\right).
+ \label{eq:inverse-sqrt-M-expansion}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+The law of $M$ is sampling without replacement from a population of $n$ zeros
+and $n$ ones.  Hoeffding's convex comparison, stated as Theorem~3.1 by
+Ros\'en~\cite[p.~386]{Rosen}, bounds its centered moment generating function
+by the one for $n$ independent Bernoulli$(1/2)$ variables:
+\[
+ \E e^{\lambda(M-\mu)}
+ \leq\cosh(\lambda/2)^n
+ \leq e^{n\lambda^2/8}.
+\]
+Chernoff's argument with $\lambda=4t/n$, followed by the same argument for
+$-M$, proves \eqref{eq:M-concentration}.  Integrating this tail bound gives
+$\E|M-\mu|^q=O(n^{q/2})$ for each fixed $q$.
+
+Stirling's formula with remainder,
+\[
+ m!=\sqrt{2\pi m}(m/e)^m
+ \exp\left(\frac1{12m}+O(m^{-3})\right),
+\]
+applied to $(2m)!/(m!)^2$ proves
+\eqref{eq:binomial-expansion}.  The distribution in
+\eqref{eq:M-law} is symmetric about $\mu$.  The same indicator-covariance
+calculation as in \eqref{eq:hypergeom-var}, now with population size $2n$,
+sample size $n$, and $n$ marked sites, gives
+\begin{equation}\label{eq:M-variance}
+ \Var(M)=\frac{n^2}{4(2n-1)}.
+\end{equation}
+On $|M-\mu|\leq n/4$, Taylor's formula for $x^{1/2}$ through degree three
+has a remainder bounded by a constant multiple of
+$\mu^{-7/2}|M-\mu|^4$.  Symmetry of both the law and the truncation event
+cancels the degree-one and degree-three terms.  By
+\eqref{eq:M-concentration}, the truncated second moment differs from
+$\Var(M)$ by an exponentially small quantity, while the expected remainder
+is $O(\mu^{-7/2}n^2)=O(n^{-3/2})$.  Hence
+\[
+ \E\left[\sqrt M\,;\,|M-\mu|\leq n/4\right]
+ =\sqrt\mu-\frac{\Var(M)}{8\mu^{3/2}}+O(n^{-3/2})
+ =\sqrt{\frac n2}\left(1-\frac1{16n}+O(n^{-2})\right).
+\]
+The probability omitted by the truncation is exponentially small by
+\eqref{eq:M-concentration}.  For completeness, on the same event, with
+$X=M-\mu$, Taylor's formula gives
+\[
+ M^{-1/2}
+ =\mu^{-1/2}-\frac{X}{2\mu^{3/2}}
+   +\frac{3X^2}{8\mu^{5/2}}+R,
+ \qquad
+ |R|\leq C\mu^{-7/2}|X|^3.
+\]
+Symmetry cancels the linear term, the truncated second moment differs from
+$\Var(M)$ by an exponentially small quantity, and the integrated tail bound
+gives $\E|X|^3=O(n^{3/2})$.  Hence
+\[
+ \E\left[M^{-1/2};\,|M-\mu|\leq n/4\right]
+ =\mu^{-1/2}+\frac{3\Var(M)}{8\mu^{5/2}}+O(n^{-2})
+ =\sqrt{\frac2n}\left(1+O(n^{-1})\right),
+\]
+which is \eqref{eq:inverse-sqrt-M-expansion}.
+\end{proof}
+
+\begin{theorem}[First central finite-size correction]\label{thm:finite-size}
+The central-component mean has the expansion
+\begin{equation}\label{eq:finite-size}
+ \E D_{2n,n}
+ =\frac{\sqrt{2\pi}}4n^{3/2}
+ -\frac{5\sqrt{2\pi}}{64}n^{1/2}
+ +O(n^{-1/2}).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+For $m\in[n/4,3n/4]$, combine
+\eqref{eq:binomial-expansion} with
+\begin{align*}
+ \frac{2n+1}{2m+1}
+ &=\frac nm\left(1+\frac1{2n}\right)
+   \left(1-\frac1{2m}+O(m^{-2})\right)
+\end{align*}
+to obtain, uniformly on that interval,
+\begin{equation}\label{eq:conditional-expansion}
+ \E(D_{2n,n}\mid M=m)
+ =\frac{\sqrt\pi}{2}n
+ \left(\sqrt m+\frac{\sqrt m}{2n}
+       -\frac{3}{8\sqrt m}+O(n^{-3/2})\right).
+\end{equation}
+Since the $i$th order statistic of an $n$-subset of $[2n]$ lies in
+$[i,n+i]$, every summand in $D_{2n,n}$ is at most $n$ and the distance is at
+most $n^2$.  At $t=n/4$, \eqref{eq:M-concentration} gives
+\[
+ \E\left[D_{2n,n};\,|M-n/2|>n/4\right]
+ \leq 2n^2e^{-n/8},
+\]
+so this contribution is $O(n^{-A})$ for every fixed $A>0$.  Taking
+expectations in
+\eqref{eq:conditional-expansion} and using
+\eqref{eq:sqrt-M-expansion}--\eqref{eq:inverse-sqrt-M-expansion} gives
+\begin{align*}
+ \E D_{2n,n}
+ &=\frac{\sqrt\pi}{2}n\sqrt{\frac n2}
+ \left(1-\frac1{16n}+\frac1{2n}-\frac3{4n}
+       +O(n^{-2})\right)\\
+ &=\frac{\sqrt{2\pi}}4n^{3/2}
+ \left(1-\frac5{16n}+O(n^{-2})\right),
+\end{align*}
+which is \eqref{eq:finite-size}.
+\end{proof}
+
+The transport identity gives an exact one-dimensional computation that avoids
+enumerating pairs of subsets.  If $H_{N,k,r}$ is hypergeometric with population
+size $N$, $k$ selected sites, and an initial segment of length $r$, and
+$H'_{N,k,r}$ is an independent copy, then
+\begin{proposition}[Exact hypergeometric sum]\label{prop:exact-computation}
+\[
+ \E D_{N,k}=\sum_{r=1}^{N-1}
+ \E|H_{N,k,r}-H'_{N,k,r}|.
+\]
+For a probability mass function $p_j=\Pp(H_{N,k,r}=j)$, each summand admits
+the linear-time evaluation
+\[
+ \E|H-H'|
+ =2\sum_jp_j\left(j\sum_{h<j}p_h-\sum_{h<j}hp_h\right).
+\]
+\end{proposition}
+
+\begin{proof}
+The first identity follows from Lemma~\ref{lem:transport}, Tonelli's theorem,
+and the fact that $C_S(r)$ has the stated hypergeometric law.  For the second,
+split the double sum $\sum_{h,j}|j-h|p_jp_h$ into the two regions $h<j$ and
+$h>j$ and use symmetry.
+\end{proof}
+
+The OpenMP program \texttt{code/exact\_mean.cpp} evaluates
+Proposition~\ref{prop:exact-computation} with normalized log-binomial weights.
+It reports $\E D_{2n,k}/n^{3/2}$ together with the constant in
+Theorem~\ref{thm:main} and the finite-size residuals.  In the central case it
+also evaluates Proposition~\ref{prop:central-exact} independently.
+Table~\ref{tab:numerics} shows representative outputs; the predicted
+coefficient of $n^{1/2}$ in Theorem~\ref{thm:finite-size} is
+$-5\sqrt{2\pi}/64=-0.195830333955547\ldots$.
+
+\begin{table}[t]
+\centering
+\begin{tabular}{rccc}
+$n$ & $\E D_{2n,n}/n^{3/2}$
+& $(\E D_{2n,n}-cn^{3/2})/\sqrt n$
+& independent-formula difference\\
+\hline
+25   & 0.618994383468 & -0.191567129755 & $<10^{-13}$\\
+100  & 0.624709598771 & -0.194746988669 & $7\times10^{-14}$\\
+400  & 0.626168172704 & -0.195558381301 & $9\times10^{-13}$\\
+800  & 0.626412450827 & -0.195694264208 & $2\times10^{-11}$\\
+1600 & 0.626534717235 & -0.195762275705 & $4\times10^{-11}$
+\end{tabular}
+\caption{Floating-point evaluations of the exact finite sums in
+Propositions~\ref{prop:exact-computation} and~\ref{prop:central-exact}.}
+\label{tab:numerics}
+\end{table}
+Here $c=\sqrt{2\pi}/4=0.626657068657750\ldots$.  The values are deterministic
+floating-point evaluations of finite sums, not Monte Carlo estimates or
+certified interval bounds.
+
+\section*{Data and code availability}
+
+The source archive accompanying this manuscript contains the checker and its
+recorded output under \texttt{code/} and \texttt{results/}, together with the
+\texttt{Makefile}.  It is built and run, for example, with
+\[
+ \texttt{make exact-mean},\qquad
+ \texttt{./build/exact\_mean 100 400 800 1600}.
+\]
+The build requires a C++20 compiler with OpenMP support.  The values in
+Table~\ref{tab:numerics} were produced with GCC~13.3.0.  The implementation
+uses \texttt{long double}, \texttt{lgammal}, and normalized exponential
+weights to evaluate the exact finite-sum identities numerically.
+
+\begin{thebibliography}{9}
+
+\bibitem{DeAngelisGray}
+M. De Angelis and A. Gray,
+\emph{Why the 1-Wasserstein distance is the area between the two marginal
+CDFs}, arXiv:2111.03570 (2021).
+\href{https://doi.org/10.48550/arXiv.2111.03570}{doi:10.48550/arXiv.2111.03570}.
+
+\bibitem{delBarrioGineMatran}
+E. del Barrio, E. Gin\'e, and C. Matr\'an,
+\emph{Central limit theorems for the Wasserstein distance between the empirical
+and the true distributions},
+Annals of Probability \textbf{27} (1999), 1009--1071.
+\href{https://doi.org/10.1214/aop/1022677394}{doi:10.1214/aop/1022677394}.
+
+\bibitem{IbarraRivera}
+S. Ibarra and L. M. Rivera,
+\emph{The automorphism groups of some token graphs},
+Proyecciones Journal of Mathematics \textbf{42} (2023), 1627--1651.
+\href{https://doi.org/10.22199/issn.0717-6279-5954}%
+{doi:10.22199/issn.0717-6279-5954}.
+
+\bibitem{Janson}
+S. Janson,
+\emph{Brownian excursion area, Wright's constants in graph enumeration, and
+other Brownian areas},
+Probability Surveys \textbf{4} (2007), 80--145.
+\href{https://doi.org/10.1214/07-PS104}{doi:10.1214/07-PS104}.
+
+\bibitem{Rosen}
+B. Ros\'en,
+\emph{Limit theorems for sampling from finite populations},
+Arkiv f\"or Matematik \textbf{5} (1965), 383--424.
+\href{https://doi.org/10.1007/BF02591138}{doi:10.1007/BF02591138}.
+
+\bibitem{Schwerdtfeger}
+U. Schwerdtfeger,
+\emph{Linear functional equations with a catalytic variable and area limit
+laws for lattice paths and polygons},
+European Journal of Combinatorics \textbf{36} (2014), 608--640.
+\href{https://doi.org/10.1016/j.ejc.2013.10.004}{doi:10.1016/j.ejc.2013.10.004}.
+
+\bibitem{WestEtAl}
+M. West, N. Dowling, A. Southwell, M. Sevior, M. Usman, K. Modi, and T. Quella,
+\emph{A graph-theoretic approach to chaos and complexity in quantum systems},
+SciPost Physics Core \textbf{8} (2025), 081.
+\href{https://doi.org/10.21468/SciPostPhysCore.8.4.081}%
+{doi:10.21468/SciPostPhysCore.8.4.081}.
+
+\end{thebibliography}
+
+\end{document}
