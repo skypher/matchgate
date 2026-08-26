@@ -24,6 +24,13 @@ complexity in quantum systems,” SciPost Physics Core 8, 081 (2025),
   generated from the initial Pauli string, graph complexity at time t is
   bounded above by that H-dependent Krylov complexity.
 
+The transition from Eq. (A81) to Eq. (A82) in the cited proof is not used in
+the manuscript: coefficient products in that display need not be nonnegative.
+Corollary 5.2 instead gives a self-contained proof from the nested inclusions
+between the Lanczos filtration and the graph-distance filtration.  The cited
+lemma records the originating statement, while the projection argument in the
+manuscript supplies the inequality used here.
+
 These are two distinct statements. A Haar-distributed endpoint U†PU does not
 by itself specify H or a Krylov basis. The manuscript therefore uses Eq. (38)
 only for the Haar graph-complexity average and states Lemma 9 separately as a
