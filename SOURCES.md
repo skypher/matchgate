@@ -24,9 +24,13 @@ complexity in quantum systems,” SciPost Physics Core 8, 081 (2025),
   generated from the initial Pauli string, graph complexity at time t is
   bounded above by that H-dependent Krylov complexity.
 
+Lemma 5.1 of the manuscript independently derives the matchgate specialization
+of Proposition 7 from adjacent Majorana exchanges, Haar invariance, and
+Parseval's identity; the citation records the originating general statement.
+
 The transition from Eq. (A81) to Eq. (A82) in the cited proof is not used in
 the manuscript: coefficient products in that display need not be nonnegative.
-Corollary 5.2 instead gives a self-contained proof from the nested inclusions
+Corollary 5.3 instead gives a self-contained proof from the nested inclusions
 between the Lanczos filtration and the graph-distance filtration.  The cited
 lemma records the originating statement, while the projection argument in the
 manuscript supplies the inequality used here.

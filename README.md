@@ -25,6 +25,12 @@ make exact-mean
 ./build/exact_mean 100 200 400 800
 ```
 
+Replay every recorded acceptance row with tolerance checks using:
+
+```sh
+make check-exact-mean
+```
+
 The recorded table was generated with GCC 13.3.0 using C++20 and OpenMP. The
 program evaluates exact finite-sum identities with `long double`, `lgammal`,
 and normalized exponential weights; its decimal outputs are floating-point

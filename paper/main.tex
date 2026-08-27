@@ -68,7 +68,7 @@ in matchgate dynamics}
 \author{Leslie P. Polzer}
 \newcommand{\authoraffiliation}{Independent Researcher}
 \newcommand{\authoremail}{polzer@fastmail.com}
-\date{August 25, 2026}
+\date{August 27, 2026}
 
 \makeatletter
 \renewcommand{\section}{%
@@ -145,11 +145,14 @@ We further prove
  \Var(D_n)\sim\rho(1-\rho)
  \left(\frac{28}{15}-\frac\pi2\right)n^3
 \]
-and, in the central component, an exact finite sum and its first correction
-$-5\sqrt{2\pi}\,n^{1/2}/64$.  We also record the resulting graph-complexity
-statement, averaged jointly over a uniform initial Pauli vertex and an
-independent Haar matchgate unitary, and the pointwise Krylov lower bound for a
-specified Hamiltonian evolution.
+and, in the central component, an exact finite sum with expansion
+\[
+ \E D_n=\frac{\sqrt{2\pi}}4n^{3/2}
+ -\frac{5\sqrt{2\pi}}{64}n^{1/2}+O(n^{-1/2}).
+\]
+We also record the resulting graph-complexity statement, averaged jointly over
+a uniform initial Pauli vertex and an independent Haar matchgate unitary, and
+the pointwise Krylov lower bound for a specified Hamiltonian evolution.
 
 \vskip5pt
 \noindent\textbf{Keywords.}\enspace Matchgate commutator graph; token graph;
@@ -249,8 +252,13 @@ $N=2n$, the matchgate identification and adjacency rule are Eq.~(50) and
 Eq.~(51) of West et al.~\cite[Section~IV and Appendix~C]{WestEtAl}.
 \end{proof}
 
-If $\mu_S=k^{-1}\sum_{i=1}^k\delta_{s_i}$ and
-$\mu_T=k^{-1}\sum_{i=1}^k\delta_{t_i}$, then
+For the empirical measures
+\[
+ \mu_S=\frac1k\sum_{i=1}^k\delta_{s_i},
+ \qquad
+ \mu_T=\frac1k\sum_{i=1}^k\delta_{t_i},
+\]
+one has
 $D_{N,k}(S,T)=kW_1(\mu_S,\mu_T)$.  Lemma~\ref{lem:transport} is therefore the
 lattice form of the one-dimensional identity expressing $W_1$ as the area
 between the two cumulative distribution functions~\cite{DeAngelisGray}.
@@ -380,7 +388,11 @@ $k_n/(2n)$ in a compact subset of $(0,1)$, division by $n^3$ gives
 An $L^2$-bounded family is uniformly integrable.
 
 For the fourth moment, put $q_r=\min(r,N-r)$.  If $X$ is Bernoulli with
-mean $p$ and $\psi(\lambda)=\log\E\exp(\lambda(X-p))$, then
+mean $p$, define
+\[
+ \psi(\lambda):=\log\E\exp(\lambda(X-p)).
+\]
+Then
 $\psi(0)=\psi'(0)=0$ and
 $\psi''(\lambda)=p_\lambda(1-p_\lambda)\leq1/4$, where $p_\lambda$ is the
 success probability under exponential tilting.  Taylor's formula therefore
@@ -566,6 +578,63 @@ $P\in\mathcal C_k$ by
 \end{equation}
 This is the normalization of West et al.~\cite[Eq.~(37)]{WestEtAl}.
 
+\begin{lemma}[Uniform Haar coefficient]\label{lem:haar-coefficient}
+For every $1\leq k<2n$, every $P,Q\in\mathcal C_k$, and Haar-distributed
+$U\in\mathcal M_n$,
+\[
+ \E_U\left|\langle Q,U^\dagger P U\rangle_{\mathrm{HS}}\right|^2
+ =\frac1{|\mathcal C_k|}
+ =\binom{2n}{k}^{-1}.
+\]
+\end{lemma}
+
+\begin{proof}
+In the standard Jordan--Wigner Majorana basis $c_1,\ldots,c_{2n}$,
+\[
+ Z_j=-i c_{2j-1}c_{2j},
+ \qquad
+ X_jX_{j+1}=-i c_{2j}c_{2j+1}.
+\]
+For each $1\leq a<2n$, the operator
+$g_a:=-ic_ac_{a+1}$ is therefore in $\Gamma_n$, and
+$V_a:=e^{-i\pi g_a/4}$ satisfies
+\[
+ V_a^\dagger c_aV_a=-c_{a+1},\qquad
+ V_a^\dagger c_{a+1}V_a=c_a,\qquad
+ V_a^\dagger c_bV_a=c_b\quad(b\notin\{a,a+1\}).
+\]
+Thus products of these adjacent exchanges act transitively, up to unit
+phases, on the degree-$k$ Majorana monomials, which are the Pauli strings in
+$\mathcal C_k$.
+
+For fixed $P$ and $Q\in\mathcal C_k$, put
+\[
+ a_Q:=\E_U\left|\langle Q,U^\dagger P U\rangle_{\mathrm{HS}}\right|^2.
+\]
+Given $Q,R\in\mathcal C_k$, choose $V\in\mathcal M_n$ and $|\zeta|=1$ such
+that $V^\dagger QV=\zeta R$.  Unitary invariance of the Hilbert--Schmidt
+inner product and right invariance of Haar measure, with $W=UV^\dagger$,
+give
+\begin{align*}
+ a_R
+ &=\E_U\left|\langle V^\dagger QV,U^\dagger P U\rangle_{\mathrm{HS}}\right|^2\\
+ &=\E_U\left|\langle Q,VU^\dagger PUV^\dagger\rangle_{\mathrm{HS}}\right|^2
+ =\E_W\left|\langle Q,W^\dagger P W\rangle_{\mathrm{HS}}\right|^2
+ =a_Q.
+\end{align*}
+Hence $a_Q$ is independent of $Q$.  Conjugation by $\mathcal M_n$ preserves
+the degree-$k$ Majorana span, and Parseval's identity gives, for every $U$,
+\[
+ \sum_{Q\in\mathcal C_k}
+ \left|\langle Q,U^\dagger P U\rangle_{\mathrm{HS}}\right|^2
+ =\|U^\dagger P U\|_{\mathrm{HS}}^2=1.
+\]
+Taking expectations proves $|\mathcal C_k|a_Q=1$.  The component size is
+$|\mathcal C_k|=\binom{2n}{k}$ by the Majorana-subset identification.
+This is the matchgate specialization of Proposition~7 of West et
+al.~\cite{WestEtAl}, with the normalized pairing made explicit.
+\end{proof}
+
 \begin{corollary}[Haar-averaged matchgate graph complexity]\label{cor:complexity}
 Let $k_n/(2n)\to\rho\in(0,1)$, let $P_n$ be uniform in the matchgate component
 $\mathcal C_{k_n}$, and let $U_n$ be independently Haar distributed in the
@@ -584,14 +653,8 @@ coefficient as
  c_Q(U):=\langle Q,U^\dagger P_nU\rangle_{\mathrm{HS}}
  =2^{-n}\operatorname{Tr}(Q^\dagger U^\dagger P_nU).
 \]
-Proposition~7 of West et al.~\cite{WestEtAl} is stated using the unnormalized
-Hilbert--Schmidt pairing.  Together with invariance of Haar measure under
-$U\mapsto U^\dagger$, it gives
-\[
- \E_U\left|\operatorname{Tr}(Q^\dagger U^\dagger P_nU)\right|^2
- =\frac{2^{2n}}{|\mathcal C_{k_n}|}.
-\]
-Thus $\E_U|c_Q(U)|^2=|\mathcal C_{k_n}|^{-1}$.  Substitution in
+Lemma~\ref{lem:haar-coefficient} gives
+$\E_U|c_Q(U)|^2=|\mathcal C_{k_n}|^{-1}$.  Substitution in
 \eqref{eq:graph-complexity-definition} gives Eq.~(38) of that paper:
 \[
  \E_U\mathsf G_{P_n}(U^\dagger P_nU)
@@ -766,7 +829,14 @@ partial sum after the $j$th active location.  Lemma~\ref{lem:transport} gives
  D_{2n,n}=\sum_{j=1}^{2m-1}|W_j|(J_{j+1}-J_j).
 \end{equation}
 The $2m+1$ gaps before, between, and after the active sites are exchangeable
-and contain $2n-2m$ inactive sites in total.  Hence
+and contain $2n-2m$ inactive sites in total.  Indeed, the map
+\[
+ (J_1,\ldots,J_{2m})\longmapsto
+ (J_1-1,J_2-J_1-1,\ldots,J_{2m}-J_{2m-1}-1,2n-J_{2m})
+\]
+is a bijection from active $2m$-subsets to weak compositions of $2n-2m$
+into $2m+1$ parts.  The uniform law on active subsets therefore makes the
+gaps exchangeable.  Consequently,
 \[
  \E(J_{j+1}-J_j\mid M=m)=1+\frac{2n-2m}{2m+1}
  =\frac{2n+1}{2m+1}.
@@ -916,9 +986,15 @@ which is \eqref{eq:finite-size}.
 \end{proof}
 
 The transport identity gives an exact one-dimensional computation that avoids
-enumerating pairs of subsets.  If $H_{N,k,r}$ is hypergeometric with population
-size $N$, $k$ selected sites, and an initial segment of length $r$, and
-$H'_{N,k,r}$ is an independent copy, then
+enumerating pairs of subsets.  Let $H_{N,k,r}$ count how many sites of a
+uniform $k$-subset of $[N]$ lie in a fixed marked set of size $r$.  Explicitly,
+\[
+ \Pp(H_{N,k,r}=j)
+ =\frac{\binom rj\binom{N-r}{k-j}}{\binom Nk},
+ \qquad
+ \max\{0,k-N+r\}\leq j\leq\min\{k,r\}.
+\]
+Let $H'_{N,k,r}$ be an independent copy.  Then
 \begin{proposition}[Exact hypergeometric sum]\label{prop:exact-computation}
 \[
  \E D_{N,k}=\sum_{r=1}^{N-1}
@@ -987,9 +1063,9 @@ quantity without an additional dynamical law.
 
 \section*{AI-use disclosure}
 
-The proof architecture was developed with assistance from OpenAI GPT-5.6 Sol
-(\texttt{gpt-5.6-sol}) at max reasoning effort.  The model served as an
-interactive research assistant for developing and stress-testing arguments,
+OpenAI GPT-5.6 Sol assisted with developing the proof architecture at max
+reasoning effort; its model identifier was \texttt{gpt-5.6-sol}.  It served as
+an interactive research assistant for developing and stress-testing arguments,
 auditing citations and calculations, preparing exact verification code, and
 revising the manuscript.  The author directed the research, selected and
 checked the final arguments, and takes responsibility for all mathematical
@@ -1002,14 +1078,17 @@ recorded output under \texttt{code/} and \texttt{results/}, together with the
 \texttt{Makefile}.  The versioned source package is available at
 \url{https://github.com/skypher/matchgate}.  It is built and run, for example,
 with
-\[
+\begin{gather*}
  \texttt{make exact-mean},\qquad
- \texttt{./build/exact\_mean 100 400 800 1600}.
-\]
+ \texttt{./build/exact\_mean 100 400 800 1600},\\
+ \texttt{make check-exact-mean}.
+\end{gather*}
 The build requires a C++20 compiler with OpenMP support.  The values in
 Table~\ref{tab:numerics} were produced with GCC~13.3.0.  The implementation
 uses \texttt{long double}, \texttt{lgammal}, and normalized exponential
-weights to evaluate the exact finite-sum identities numerically.
+weights to evaluate the exact finite-sum identities numerically.  The
+\texttt{check-exact-mean} target replays every recorded row and fails if an
+output leaves its stated numerical tolerance.
 
 \begin{thebibliography}{9}
 
