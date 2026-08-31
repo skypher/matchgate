@@ -24,9 +24,9 @@
   urlcolor={purple},
   citecolor={blue!80!black},
   pdfauthor={Leslie P. Polzer},
-  pdftitle={Brownian-Bridge Scaling of Distances in Matchgate Commutator Graphs},
-  pdfsubject={Average pairwise distance and complexity in matchgate commutator-graph components},
-  pdfkeywords={matchgate commutator graph, token graph, Brownian bridge, Wasserstein distance, graph complexity, Krylov complexity}
+  pdftitle={Matchgate Commutator Graphs as Rectangular Minuscule Lattices},
+  pdfsubject={Brownian-bridge distances and complexity in matchgate commutator-graph components},
+  pdfkeywords={matchgate commutator graph, rectangular minuscule lattice, token graph, Wiener index, Brownian bridge, Wasserstein distance, graph complexity, Krylov complexity}
 }
 
 \medmuskip=4mu
@@ -63,8 +63,8 @@
 \newcommand{\1}{\mathbf{1}}
 \newcommand{\N}{\mathbb{N}}
 
-\title{Brownian-bridge scaling of distances in\\
-matchgate commutator graphs}
+\title{Matchgate commutator graphs as rectangular minuscule lattices:\\
+Brownian-bridge distances and complexity}
 \author{Leslie P. Polzer}
 \newcommand{\authoraffiliation}{Independent Researcher}
 \newcommand{\authoremail}{polzer@fastmail.com}
@@ -84,7 +84,7 @@ matchgate commutator graphs}
 \renewcommand{\eqref}[1]{%
   \textup{{\normalfont(\oldstylenums{\ref{#1}}}\normalfont)}}
 
-\newcommand{\shorttitle}{BROWNIAN-BRIDGE SCALING IN MATCHGATE GRAPHS}
+\newcommand{\shorttitle}{MATCHGATE GRAPHS AND MINUSCULE LATTICES}
 \newcommand{\shortauthors}{LESLIE P. POLZER}
 \newcommand{\ps@bookheader}{%
   \renewcommand\@oddfoot{\hfil}%
@@ -123,15 +123,20 @@ matchgate commutator graphs}
   {\endquotation}
 
 \begin{document}
+\raggedbottom
 \maketitle
 
 \begin{abstract}
-We determine the distributional asymptotics and mean of the distance between
-two independent uniformly sampled vertices, for every sequence of matchgate
-commutator-graph components satisfying
-$\kappa_n/(2n)\to\rho\in(0,1)$.  If $S$ and $T$ are the corresponding uniform
-$\kappa_n$-subsets of $[2n]$, the graph distance is
-$D_n=\sum_i|s_i-t_i|$ and
+Matchgate commutator-graph components are Hasse graphs of rectangular
+minuscule lattices.  Defant, F\'eray, Nadeau, and Williams previously proved
+the fixed-aspect-ratio Brownian-bridge distance law for these lattices, with
+moment convergence, and obtained a closed Wiener-index
+formula~\cite{DefantEtAl}.  We give an
+independent finite-population derivation valid for every sequence of matchgate
+components satisfying $\kappa_n/(2n)\to\rho\in(0,1)$ and translate the result
+to matchgate complexity.  If $S$ and $T$ are independent uniform
+$\kappa_n$-subsets of $[2n]$, set
+$D_n:=D_{2n,\kappa_n}(S,T)=\sum_i|s_i-t_i|$.  Then
 \[
  \frac{D_n}{n^{3/2}}
  \Rightarrow 4\sqrt{\rho(1-\rho)}\int_0^1|B(t)|\,dt,
@@ -141,13 +146,15 @@ $D_n=\sum_i|s_i-t_i|$ and
 \]
 where $B$ is a standard Brownian bridge.  In the central component this
 becomes $D_n/n^{3/2}\Rightarrow2\int_0^1|B(t)|\,dt$ and
-$\E D_n\sim\sqrt{2\pi}\,n^{3/2}/4$, resolving Conjecture~14 of West et al.
-We further prove
+$\E D_n\sim\sqrt{2\pi}\,n^{3/2}/4$, which resolves Conjecture~14 of West et
+al. after the matchgate--minuscule-lattice identification.  Moment convergence
+also gives
 \[
  \Var(D_n)\sim\rho(1-\rho)
- \left(\frac{28}{15}-\frac\pi2\right)n^3
+ \left(\frac{28}{15}-\frac\pi2\right)n^3.
 \]
-and, in the central component, an exact finite sum with expansion
+We give an independent symmetric-difference finite sum in the central
+component; the published closed form yields the expansion
 \[
  \E D_n=\frac{\sqrt{2\pi}}4n^{3/2}
  -\frac{5\sqrt{2\pi}}{64}n^{1/2}+O(n^{-1/2}).
@@ -159,12 +166,13 @@ that graph complexity is a pointwise lower bound for Krylov complexity under a
 specified Hamiltonian evolution.
 
 \vskip5pt
-\noindent\textbf{Keywords.}\enspace Matchgate commutator graph; token graph;
-Brownian bridge; Wasserstein distance; graph complexity; Krylov complexity.
+\noindent\textbf{Keywords.}\enspace Matchgate commutator graph; rectangular
+minuscule lattice; token graph; Wiener index; Brownian bridge; Wasserstein
+distance; graph complexity; Krylov complexity.
 
 \vskip5pt
 \noindent\textbf{2020 Mathematics Subject Classification.}\enspace
-60F17; 05C12; 60J65; 81P68.
+60F17; 05C12; 06A07; 60J65; 81P68.
 \end{abstract}
 
 \vskip50pt
@@ -181,45 +189,67 @@ $S=(s_1<\cdots<s_\kappa)$ and $T=(t_1<\cdots<t_\kappa)$ as
 \end{equation}
 Theorem~13 of West et al. gives a finite sum for the average of
 \eqref{eq:matching-distance}, and Conjecture~14 asserts that the central value
-is superlinear and subquadratic in $n$.  The purpose of this paper is to give
-the limiting law and its expectation constant, and then to transfer the mean
-asymptotic to graph complexity.  That transfer averages first over a Haar
+is superlinear and subquadratic in $n$.
+
+The same graph and distance were studied earlier in the language of minuscule
+lattices.  Let
+\[
+ \mathcal P_{m,\ell}:=J([m]\times[\ell])
+\]
+be the distributive lattice of order ideals of an $m\times\ell$ rectangle.
+Reading the membership word of a $k$-subset of $[N]$ as an up--down path
+identifies the token graph with the Hasse graph of
+$\mathcal P_{k,N-k}$.  If $p_r$ is the height of the path for $S$ after $r$
+steps, then $p_r=2C_S(r)-r$; hence the path-area distance used for rectangular
+minuscule lattices is exactly \eqref{eq:matching-distance}.  Defant, F\'eray,
+Nadeau, and Williams~\cite[Corollary~3 and Proposition~5]{DefantEtAl} give a
+closed formula for its Wiener index and prove the fixed-aspect-ratio
+Brownian-bridge limit in distribution and in moments.  Under the standard
+unordered-pair convention for the Wiener index $W(G)$, the average used by
+West et al. is $2W(G)/|V(G)|^2$.
+
+For rectangles with a fixed aspect ratio, taking
+$\alpha=\rho/(1-\rho)$ in the result of Defant et al. gives the same limiting
+law, mean, and variance constants as those stated below; at $\alpha=1$ it gives
+the central case.  Thus their theorem, combined with the matchgate component
+identification of West et al., already implies Conjecture~14.  The purpose of
+the present paper is to make this implication explicit, give an independent
+finite-population proof valid for every sequence $k_n/(2n)\to\rho$, and
+formulate the exact matchgate graph- and Krylov-complexity consequences.  The
+Haar transfer averages first over a Haar
 matchgate unitary and then over the initial Pauli vertex; it is not a
 pointwise-in-vertex scaling statement.
 
-The probabilistic mechanism is one-dimensional transport.  The matching
-distance is the area between two cumulative counting functions, and each
-centered counting function is a finite-population bridge.  Ros\'en's
+The alternative probabilistic proof uses one-dimensional transport.  The
+matching distance is the area between two cumulative counting functions, and
+each centered counting function is a finite-population bridge.  Ros\'en's
 finite-population invariance principle~\cite[Theorem~13.1]{Rosen} supplies
-convergence in $C[0,1]$.  The remaining issue for the mean is uniform
-integrability; Proposition~\ref{prop:second-moment} gives it directly from the
-exact hypergeometric variance.
+convergence in $C[0,1]$.  Proposition~\ref{prop:second-moment} proves the
+uniform integrability needed for moment convergence directly from
+hypergeometric moment bounds.
 
-The component in \eqref{eq:matching-distance} is the $\kappa$-token graph of a
-path~\cite{FabilaMonroy}, also called a symmetric power of a
-path~\cite{AudenaertEtAl}.  This terminology predates the matchgate
-application, and the ordered-coordinate distance formula appears, for example,
-in Ibarra and Rivera~\cite[Lemma~5.2]{IbarraRivera}.  The transport
+The token-graph terminology is due to Fabila-Monroy et
+al.~\cite{FabilaMonroy}; the same graph is also called a symmetric power of a
+path~\cite{AudenaertEtAl}.  The ordered-coordinate distance formula appears,
+for example, in Ibarra and Rivera~\cite[Lemma~5.2]{IbarraRivera}.  The transport
 identity below is the discrete one-dimensional $1$-Wasserstein identity.  In
 one dimension, $W_1$ is the area between cumulative distribution functions
-\cite{Vallender,DeAngelisGray}.  Brownian-bridge limits for $L^1$
-empirical-process and Wasserstein functionals are classical; see, for example,
-del Barrio, Gin\'e, and Matr\'an~\cite{delBarrioGineMatran}.
+\cite{Vallender,DeAngelisGray}.  Expected one-dimensional earth mover distance
+under a different, simplex-based sampling law is studied by Bourn and
+Willenbring~\cite{BournWillenbring}.  Brownian-bridge limits for $L^1$
+empirical-process and Wasserstein functionals are classical; see del Barrio,
+Gin\'e, and Matr\'an~\cite{delBarrioGineMatran} and their correction to separate
+heavy-tail statements~\cite{delBarrioCorrection}.  Those corrected statements
+are not used here.
 
-The sampling law here is different from the usual independent empirical-sample
-setting: each sample is a fixed-size subset of a finite population and occupies
-a nonvanishing fraction of that population.  Ros\'en's finite-population
-invariance principle supplies the resulting density-dependent bridge factor.
 Janson~\cite[Section~20]{Janson} surveys the Brownian-bridge area and its
 moments, while Schwerdtfeger~\cite[Section~12.2]{Schwerdtfeger} proves joint
 moment convergence for the absolute area and endpoint of a Bernoulli walk.
-Thus the token-graph name and metric, the one-dimensional transport identity,
-and the Brownian-area functional are prior frameworks rather than contributions
-of this paper.  The results established here are their matchgate application
-resolving Conjecture~14, the explicit positive-density finite-population limit
-and variance, the exact central-component formula and finite-size correction in
-Section~6, and the separately formulated graph-complexity and
-Hamiltonian-dependent Krylov consequences.
+Section~6 records the published rectangular-lattice closed form, gives an
+independent symmetric-difference identity for its central specialization, and
+extracts the leading $n^{1/2}$ finite-size correction.  Section~5 supplies the
+explicit Haar specialization and a projection proof of the
+Hamiltonian-dependent graph--Krylov comparison.
 
 \section{The matchgate metric and discrete transport}
 
@@ -235,8 +265,9 @@ $S=(s_1<\cdots<s_k)$ and define
 \begin{proposition}[Configuration-graph distance]\label{prop:graph-metric}
 Consider the graph on $\Omega_{N,k}$ in which one particle may move by one
 lattice step to an unoccupied neighboring site.  This is the $k$-token graph
-$F_k(P_N)$, and its graph distance is $D_{N,k}$.  When $N=2n$, it is the
-matchgate component $\mathcal C_k$ with the metric in
+$F_k(P_N)$ and the Hasse graph of the rectangular minuscule lattice
+$\mathcal P_{k,N-k}$, and its graph distance is $D_{N,k}$.  When $N=2n$, it is
+the matchgate component $\mathcal C_k$ with the metric in
 \eqref{eq:matching-distance}.
 \end{proposition}
 
@@ -257,7 +288,14 @@ $s_1-1\geq t_1\geq1$.  If $i>1$ and the move were blocked, then
 $s_i-1=s_{i-1}$; minimality would give $s_{i-1}\leq t_{i-1}$, whereas
 $s_{i-1}=s_i-1\geq t_i>t_{i-1}$, a contradiction.  Hence
 $s_i\mapsto s_i-1$ is an allowed move and again reduces $D_{N,k}$ by one.
-Iteration constructs a path of length $D_{N,k}$.  The token-graph terminology
+Iteration constructs a path of length $D_{N,k}$.
+
+For the lattice identification, encode $S$ by a path with an up-step in
+position $r$ when $r\in S$ and a down-step otherwise.  Such paths bound the
+order ideals of a $k\times(N-k)$ rectangle.  A token move swaps consecutive
+up--down steps, which adds or removes one cell, so token edges are precisely
+Hasse edges.  This is the path model of Defant et
+al.~\cite[Section~1.3 and Eq.~(2)]{DefantEtAl}.  The token-graph terminology
 is introduced by Fabila-Monroy et al.~\cite{FabilaMonroy}; the definition and
 the same distance formula are also recorded by Ibarra and
 Rivera~\cite[Definition in Section~1 and Lemma~5.2]{IbarraRivera}.  For
@@ -272,7 +310,8 @@ For the empirical measures
  \mu_T=\frac1k\sum_{i=1}^k\delta_{t_i},
 \]
 one has
-$D_{N,k}(S,T)=kW_1(\mu_S,\mu_T)$.  Lemma~\ref{lem:transport} is therefore the
+$D_{N,k}(S,T)=kW_1(\mu_S,\mu_T)$, where $W_1$ uses the ground cost
+$|x-y|$ on $[N]$.  Lemma~\ref{lem:transport} is therefore the
 lattice form of the one-dimensional identity expressing $W_1$ as the area
 between the two cumulative distribution functions
 \cite{Vallender,DeAngelisGray}.
@@ -363,11 +402,17 @@ Moreover,
 \begin{equation}\label{eq:fourth-moment-bound}
  \E D_{N,k}(S,T)^4\leq N^6.
 \end{equation}
-In particular, if $N=2n$ and $k/(2n)$ stays in a compact subset of $(0,1)$,
-then $\Var(D_{2n,k})=O(n^3)$ and
-$\{D_{2n,k}/n^{3/2}\}$ is uniformly integrable.  For every sequence
-$1\leq k_n<2n$, the family
-$\{(D_{2n,k_n}/n^{3/2})^2:n\geq1\}$ is uniformly integrable.
+In particular, for every sequence $1\leq k_n<2n$,
+\[
+ \Var(D_{2n,k_n})=O(n^3).
+\]
+Both families
+\[
+ \left\{\frac{D_{2n,k_n}}{n^{3/2}}:n\geq1\right\},
+ \qquad
+ \left\{\left(\frac{D_{2n,k_n}}{n^{3/2}}\right)^2:n\geq1\right\}
+\]
+are uniformly integrable.
 \end{proposition}
 
 \begin{proof}
@@ -394,8 +439,8 @@ By Lemma~\ref{lem:transport} and Cauchy--Schwarz,
 \]
 The finite sum is $(N^2-1)/(6N)$, which proves
 \eqref{eq:second-moment-bound}.  The variance bound follows from
-$\Var(D_{N,k})\leq\E D_{N,k}^2$.  If $N=2n$ and $k=k_n$ with
-$k_n/(2n)$ in a compact subset of $(0,1)$, division by $n^3$ gives
+$\Var(D_{N,k})\leq\E D_{N,k}^2$.  If $N=2n$ and $k=k_n$, then
+$k_n(2n-k_n)\leq n^2$, so division by $n^3$ gives
 \[
  \sup_n \E\left(\frac{D_{2n,k_n}}{n^{3/2}}\right)^2<\infty.
 \]
@@ -456,7 +501,7 @@ Set
  \mathcal A:=\int_0^1|B(t)|\,dt.
 \]
 
-\begin{theorem}[Fixed-density matchgate distance]\label{thm:main}
+\begin{theorem}[Density-sequence matchgate distance]\label{thm:main}
 Let $N=2n$, let $k_n/(2n)\to\rho\in(0,1)$, and let $S_n,T_n$ be independent
 uniform $k_n$-subsets of $[2n]$.  Then
 \begin{equation}\label{eq:distribution-main}
@@ -567,7 +612,10 @@ Conjecture~14.
 \begin{proof}
 The average $A(n,n)$ is $\E D_{2n,n}$ by Proposition~\ref{prop:graph-metric}
 and the definition preceding Theorem~13 of West et al.  The conclusion is
-the central case of Theorem~\ref{thm:main}.
+the central case of Theorem~\ref{thm:main}.  It also follows from
+Proposition~5 of Defant et al.~\cite{DefantEtAl} at rectangle aspect ratio one;
+the present corollary records that published lattice result in the matchgate
+notation of West et al.
 \end{proof}
 
 \section{Graph and Krylov complexity}
@@ -637,9 +685,13 @@ More generally, the canonical anticommutation relations give
  &=\sin(2\theta)c_a+\cos(2\theta)c_{a+1}.
 \end{align*}
 Thus conjugation by $\mathcal M_n$ preserves each degree-$k$ Majorana span.
-Moreover, products of the adjacent exchanges above act transitively on the
-degree-$k$ Majorana monomials.  Up to phases of modulus one, these monomials
-are the Pauli strings in $\mathcal C_k$.  This transitivity is the only
+The adjacent transpositions generate the full symmetric group on the $2n$
+Majorana labels.  Given two $k$-element supports, choose a permutation carrying
+the first support to the second and express it as a product of adjacent
+transpositions.  The corresponding product of the $V_a$ maps the first
+degree-$k$ Majorana monomial to the second up to a phase of modulus one.
+These monomials are, up to such phases, the Pauli strings in $\mathcal C_k$.
+This transitivity is the only
 representation-theoretic input below.  In particular, the argument does not
 assume that the degree-$k$ Majorana representation is irreducible; this matters
 for the middle component $k=n$.
@@ -704,7 +756,8 @@ Theorem~\ref{thm:main} gives the stated asymptotic.
 \end{proof}
 
 We use the operator-Krylov/Lanczos convention of Parker et
-al.~\cite{ParkerEtAl}.
+al.~\cite[Section~III, Eqs.~(3)--(8), and Section~V.A,
+Eq.~(26)]{ParkerEtAl}.
 
 \begin{corollary}[Pointwise graph--Krylov comparison for generator-supported
 Hamiltonians]\label{cor:krylov}
@@ -732,8 +785,7 @@ then, for every $t\in\mathbb R$,
  \mathsf G_P(P_t)\leq \mathsf K_{H,P}(t).
 \]
 Consequently, for every probability law on triples $(P,H,t)$ supported on the
-stated class, $\E\mathsf G_P(P_t)\leq\E\mathsf K_{H,P}(t)$ whenever the two
-expectations exist.
+stated class, $\E\mathsf G_P(P_t)\leq\E\mathsf K_{H,P}(t)$.
 \end{corollary}
 
 \begin{proof}
@@ -800,8 +852,39 @@ Haar-averaged Krylov quantity is asserted without such a joint dynamical law.
 
 \section{Exact finite-size evaluation}
 
-The central component has an additional decomposition which gives both an
-exact formula and the first finite-size correction.  Let $W^{(m)}$ be a
+The rectangular-minuscule-lattice Wiener index gives a closed form for every
+component.
+
+\begin{proposition}[Published rectangular-lattice mean]\label{prop:closed-form}
+For independent uniform $S,T\in\Omega_{N,k}$,
+\begin{equation}\label{eq:closed-form}
+ \E D_{N,k}(S,T)
+ =\frac{k(N-k)}{4N+2}
+   \frac{\binom{2N+2}{2k+1}}{\binom Nk^2}.
+\end{equation}
+In particular,
+\begin{equation}\label{eq:central-closed-form}
+ \E D_{2n,n}
+ =\frac{n^2}{8n+2}
+   \frac{\binom{4n+2}{2n+1}}{\binom{2n}{n}^2}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Proposition~\ref{prop:graph-metric} identifies the graph with the Hasse graph
+of $\mathcal P_{k,N-k}$, which has $\binom Nk$ vertices.  Defant et
+al.~\cite[Corollary~3]{DefantEtAl} define their Wiener index as the distance
+sum over all ordered vertex pairs and compute
+\[
+ \sum_{S,T\in\Omega_{N,k}}D_{N,k}(S,T)
+ =\frac{k(N-k)}{4N+2}\binom{2N+2}{2k+1}.
+\]
+Division by $\binom Nk^2$ proves \eqref{eq:closed-form}; setting $N=2n$ and
+$k=n$ gives \eqref{eq:central-closed-form}.
+\end{proof}
+
+The central component also has an independent symmetric-difference
+decomposition.  Let $W^{(m)}$ be a
 uniform simple random-walk bridge of length $2m$, with increments $+1$ and
 $-1$ occurring $m$ times each, and put
 \[
@@ -826,8 +909,10 @@ unrestricted walks from $0$ to $h$ is
  r(z)=\frac{1-\sqrt{1-4z^2}}{2z}.
 \]
 This follows by solving the recurrence
-$P_h=\1_{\{h=0\}}+z(P_{h-1}+P_{h+1})$ and selecting the unique solution regular
-at $z=0$.  Splitting a bridge at its marked time and reversing the segment
+$P_h=\1_{\{h=0\}}+z(P_{h-1}+P_{h+1})$ subject to
+$P_{-h}=P_h$ and $P_h(z)\in z^{|h|}\mathbb R[[z^2]]$.  These conditions select
+the displayed formal-power-series solution uniquely.  Splitting a bridge at
+its marked time and reversing the segment
 after that time gives
 $\sum_{m\geq0}L_{m,h}z^{2m}=P_h(z)^2$.  Therefore, if $T_m$ is the total
 absolute area over all $\binom{2m}{m}$ bridges, then
@@ -843,7 +928,7 @@ is $m4^m/2$.  Division by the number of bridges proves
 \eqref{eq:discrete-bridge-area}.
 \end{proof}
 
-\begin{proposition}[Exact central-component mean]\label{prop:central-exact}
+\begin{proposition}[Central symmetric-difference identity]\label{prop:central-exact}
 For independent uniform $n$-subsets $S,T$ of $[2n]$,
 \begin{equation}\label{eq:central-exact}
  \E D_{2n,n}
@@ -897,94 +982,7 @@ $1\leq m\leq n$ with \eqref{eq:M-law} therefore proves
 \eqref{eq:central-exact}.
 \end{proof}
 
-\begin{lemma}[Concentration and expansions]\label{lem:finite-size-input}
-For the variable $M$ in \eqref{eq:M-law}, with $\mu=n/2$ and
-$A_n:=\{|M-\mu|\leq n/4\}$,
-for every $t\geq0$,
-\begin{equation}\label{eq:M-concentration}
- \Pp(|M-\mu|\geq t)\leq2e^{-2t^2/n}.
-\end{equation}
-Moreover, as $m\to\infty$,
-\begin{align}
- \frac{4^m}{\binom{2m}{m}}
- &=\sqrt{\pi m}\left(1+\frac1{8m}+O(m^{-2})\right),
- \label{eq:binomial-expansion}
-\end{align}
-and, as $n\to\infty$,
-\begin{align}
- \E\left[\sqrt M\,;\,A_n\right]
- &=\sqrt{\frac n2}\left(1-\frac1{16n}+O(n^{-2})\right),
- \label{eq:sqrt-M-expansion}\\
- \E\left[M^{-1/2}\,;\,A_n\right]
- &=\sqrt{\frac2n}\left(1+O(n^{-1})\right).
- \label{eq:inverse-sqrt-M-expansion}
-\end{align}
-Here $\E[M^{-1/2};A_n]=\E[M^{-1/2}\1_{A_n}]$; it is well-defined because
-$M\geq n/4>0$ on $A_n$.
-\end{lemma}
-
-\begin{proof}
-The law of $M$ is sampling without replacement from a population of $n$ zeros
-and $n$ ones.  Hoeffding's convex comparison
-\cite[Theorem~4]{Hoeffding}, stated as Theorem~3.1 by
-Ros\'en~\cite[p.~386]{Rosen}, bounds its centered moment generating function
-by the one for $n$ independent Bernoulli$(1/2)$ variables:
-\[
- \E e^{\lambda(M-\mu)}
- \leq\cosh(\lambda/2)^n
- \leq e^{n\lambda^2/8}.
-\]
-Chernoff's argument with $\lambda=4t/n$, followed by the same argument for
-$-M$, proves \eqref{eq:M-concentration}.  Integrating this tail bound gives
-$\E|M-\mu|^q=O(n^{q/2})$ for each fixed $q$.
-
-Stirling's formula with remainder,
-\[
- m!=\sqrt{2\pi m}(m/e)^m
- \exp\left(\frac1{12m}+O(m^{-3})\right),
-\]
-applied to $(2m)!/(m!)^2$ proves
-\eqref{eq:binomial-expansion}.  The distribution in
-\eqref{eq:M-law} is symmetric about $\mu$.  The same indicator-covariance
-calculation as in \eqref{eq:hypergeom-var}, now with population size $2n$,
-sample size $n$, and $n$ marked sites, gives
-\begin{equation}\label{eq:M-variance}
- \Var(M)=\frac{n^2}{4(2n-1)}.
-\end{equation}
-On $A_n$, Taylor's formula for $x^{1/2}$ through degree three
-has a remainder bounded by a constant multiple of
-$\mu^{-7/2}|M-\mu|^4$.  Symmetry of both the law and the truncation event
-cancels the degree-one and degree-three terms.  By
-\eqref{eq:M-concentration}, the truncated second moment differs from
-$\Var(M)$ by an exponentially small quantity, while the expected remainder
-is $O(\mu^{-7/2}n^2)=O(n^{-3/2})$.  Hence
-\[
- \E\left[\sqrt M\,;\,A_n\right]
- =\sqrt\mu-\frac{\Var(M)}{8\mu^{3/2}}+O(n^{-3/2})
- =\sqrt{\frac n2}\left(1-\frac1{16n}+O(n^{-2})\right).
-\]
-The probability omitted by the truncation is exponentially small by
-\eqref{eq:M-concentration}.  For completeness, on the same event, with
-$X=M-\mu$, Taylor's formula gives
-\[
- M^{-1/2}
- =\mu^{-1/2}-\frac{X}{2\mu^{3/2}}
-   +\frac{3X^2}{8\mu^{5/2}}+R,
- \qquad
- |R|\leq C\mu^{-7/2}|X|^3.
-\]
-Symmetry cancels the linear term, the truncated second moment differs from
-$\Var(M)$ by an exponentially small quantity, and the integrated tail bound
-gives $\E|X|^3=O(n^{3/2})$.  Hence
-\[
- \E\left[M^{-1/2};\,A_n\right]
- =\mu^{-1/2}+\frac{3\Var(M)}{8\mu^{5/2}}+O(n^{-2})
- =\sqrt{\frac2n}\left(1+O(n^{-1})\right),
-\]
-which is \eqref{eq:inverse-sqrt-M-expansion}.
-\end{proof}
-
-\begin{theorem}[First central finite-size correction]\label{thm:finite-size}
+\begin{theorem}[Central finite-size correction from the closed form]\label{thm:finite-size}
 The central-component mean has the expansion
 \begin{equation}\label{eq:finite-size}
  \E D_{2n,n}
@@ -995,39 +993,40 @@ The central-component mean has the expansion
 \end{theorem}
 
 \begin{proof}
-For $m\in[n/4,3n/4]$, combine
-\eqref{eq:binomial-expansion} with
-\begin{align*}
- \frac{2n+1}{2m+1}
- &=\frac nm\left(1+\frac1{2n}\right)
-   \left(1-\frac1{2m}+O(m^{-2})\right)
-\end{align*}
-to obtain, uniformly on that interval,
-\begin{equation}\label{eq:conditional-expansion}
- \E(D_{2n,n}\mid M=m)
- =\frac{\sqrt\pi}{2}n
- \left(\sqrt m+\frac{\sqrt m}{2n}
-       -\frac{3}{8\sqrt m}+O(n^{-3/2})\right).
-\end{equation}
-Since the $i$th order statistic of an $n$-subset of $[2n]$ lies in
-$[i,n+i]$, every summand in $D_{2n,n}$ is at most $n$ and the distance is at
-most $n^2$.  At $t=n/4$, \eqref{eq:M-concentration} gives
+The Stirling expansion with remainder
 \[
- \E\left[D_{2n,n};\,|M-n/2|>n/4\right]
- \leq 2n^2e^{-n/8},
+ \log(m!)=\left(m+\frac12\right)\log m-m+\frac12\log(2\pi)
+ +\frac1{12m}-\frac1{360m^3}+O(m^{-5})
 \]
-so this contribution is $O(n^{-A})$ for every fixed $A>0$.  Taking
-expectations in
-\eqref{eq:conditional-expansion} and using
-\eqref{eq:sqrt-M-expansion}--\eqref{eq:inverse-sqrt-M-expansion} gives
+gives, as $m\to\infty$,
+\[
+ \binom{2m}{m}
+ =\frac{4^m}{\sqrt{\pi m}}
+  \left(1-\frac1{8m}+\frac1{128m^2}+O(m^{-3})\right).
+\]
+Write $C_m=\binom{2m}{m}$.  Applying this expansion at $m=n$ and
+$m=2n+1$ yields
 \begin{align*}
- \E D_{2n,n}
- &=\frac{\sqrt\pi}{2}n\sqrt{\frac n2}
- \left(1-\frac1{16n}+\frac1{2n}-\frac3{4n}
-       +O(n^{-2})\right)\\
- &=\frac{\sqrt{2\pi}}4n^{3/2}
- \left(1-\frac5{16n}+O(n^{-2})\right),
+ \frac{n^2}{8n+2}
+ &=\frac n8\left(1-\frac1{4n}+O(n^{-2})\right),\\
+ \frac{C_{2n+1}}{C_n^2}
+ &=\frac{4\pi n}{\sqrt{\pi(2n+1)}}
+   \frac{1-1/(8(2n+1))+O(n^{-2})}
+        {1-1/(4n)+O(n^{-2})}\\
+ &=2\sqrt{2\pi n}
+   \left(1-\frac1{4n}+O(n^{-2})\right)
+   \left(1-\frac1{16n}+O(n^{-2})\right)
+   \left(1+\frac1{4n}+O(n^{-2})\right)\\
+ &=2\sqrt{2\pi n}
+   \left(1-\frac1{16n}+O(n^{-2})\right).
 \end{align*}
+Substitution in the published closed form
+\eqref{eq:central-closed-form} gives
+\[
+ \E D_{2n,n}
+ =\frac{\sqrt{2\pi}}4n^{3/2}
+  \left(1-\frac5{16n}+O(n^{-2})\right),
+\]
 which is \eqref{eq:finite-size}.
 \end{proof}
 
@@ -1095,15 +1094,17 @@ Monte Carlo estimates or certified interval bounds.
 
 \section{Conclusion}
 
-The cumulative-count representation identifies the matchgate graph distance
-with the area of the difference of two finite-population bridges.  This gives
-the fixed-density Brownian-bridge area law, its mean and variance constants,
-and the $n^{3/2}$ central-component growth conjectured by West et al.  The
-central symmetric-difference decomposition further gives the exact finite sum
-and its first $n^{1/2}$ correction.  For complexity, the distance asymptotic
-implies Corollary~\ref{cor:complexity} only after averaging both the initial
-Pauli vertex and the Haar matchgate unitary.  Corollary~\ref{cor:krylov} is a
-separate pointwise comparison for the specified Hamiltonian
+The matchgate components of West et al. are rectangular minuscule lattices, so
+the distance law and moment convergence of Defant et al. imply the
+$n^{3/2}$ central growth in Conjecture~14.  The cumulative-count argument gives
+an independent finite-population proof, including arbitrary density sequences
+and explicit moment bounds.  The published Wiener-index formula supplies the
+closed finite-size mean and its leading $n^{1/2}$ correction, while the central
+symmetric-difference decomposition gives an independent finite-sum identity.
+For complexity, the distance asymptotic implies
+Corollary~\ref{cor:complexity} only after averaging both the initial Pauli
+vertex and the Haar matchgate unitary.  Corollary~\ref{cor:krylov} is a separate
+pointwise comparison for the specified Hamiltonian
 \eqref{eq:matchgate-Hamiltonian}; it does not identify a Haar-averaged Krylov
 quantity without an additional dynamical law.
 
@@ -1122,8 +1123,8 @@ The source archive accompanying this manuscript contains the checker and its
 recorded output under \texttt{code/} and \texttt{results/}, together with the
 \texttt{Makefile}.  The versioned source package is available at
 \url{https://github.com/skypher/matchgate}.  This revised manuscript is
-identified by the Git tag \texttt{paper-2026-08-31-r1} at
-\url{https://github.com/skypher/matchgate/tree/paper-2026-08-31-r1}.  It is
+identified by the Git tag \texttt{paper-2026-08-31-r2} at
+\url{https://github.com/skypher/matchgate/tree/paper-2026-08-31-r2}.  It is
 built and run, for example, with
 \begin{gather*}
  \texttt{make paper},\qquad \texttt{make exact-mean},\\
@@ -1135,8 +1136,9 @@ compiler with OpenMP support, and the checker requires Python~3.  The values in
 Table~\ref{tab:numerics} were produced with GCC~13.3.0.  The implementation
 uses \texttt{long double}, \texttt{lgammal}, and normalized exponential
 weights to evaluate the exact finite-sum identities numerically.  The
-\texttt{check-exact-mean} target first checks Propositions~\ref{prop:graph-metric}
-and~\ref{prop:exact-computation} and Lemma~\ref{lem:transport} by exact rational
+\texttt{check-exact-mean} target first checks
+Propositions~\ref{prop:graph-metric}, \ref{prop:closed-form}, and
+\ref{prop:exact-computation} and Lemma~\ref{lem:transport} by exact rational
 enumeration for $N\leq8$, Lemma~\ref{lem:discrete-bridge-area} for $m\leq6$,
 and Proposition~\ref{prop:central-exact} for $n\leq5$.  It then replays every
 recorded floating-point row and fails if an output leaves its stated numerical
@@ -1152,11 +1154,24 @@ Journal of Combinatorial Theory, Series B \textbf{97} (2007), 74--90.
 \href{https://doi.org/10.1016/j.jctb.2006.04.002}%
 {doi:10.1016/j.jctb.2006.04.002}.
 
+\bibitem{BournWillenbring}
+R. Bourn and J. F. Willenbring,
+\emph{Expected value of the one-dimensional earth mover's distance},
+Algebraic Statistics \textbf{11} (2020), 53--78.
+\href{https://doi.org/10.2140/astat.2020.11.53}%
+{doi:10.2140/astat.2020.11.53}.
+
 \bibitem{DeAngelisGray}
 M. De Angelis and A. Gray,
 \emph{Why the 1-Wasserstein distance is the area between the two marginal
 CDFs}, arXiv:2111.03570 (2021).
 \href{https://doi.org/10.48550/arXiv.2111.03570}{doi:10.48550/arXiv.2111.03570}.
+
+\bibitem{DefantEtAl}
+C. Defant, V. F\'eray, P. Nadeau, and N. Williams,
+\emph{Wiener indices of minuscule lattices},
+Electronic Journal of Combinatorics \textbf{31} (2024), Paper No.~P1.41.
+\href{https://doi.org/10.37236/12002}{doi:10.37236/12002}.
 
 \bibitem{delBarrioGineMatran}
 E. del Barrio, E. Gin\'e, and C. Matr\'an,
@@ -1164,6 +1179,13 @@ E. del Barrio, E. Gin\'e, and C. Matr\'an,
 and the true distributions},
 Annals of Probability \textbf{27} (1999), 1009--1071.
 \href{https://doi.org/10.1214/aop/1022677394}{doi:10.1214/aop/1022677394}.
+
+\bibitem{delBarrioCorrection}
+E. del Barrio, E. Gin\'e, and C. Matr\'an,
+\emph{Correction: Central limit theorems for the Wasserstein distance between
+the empirical and the true distributions},
+Annals of Probability \textbf{31} (2003), 1142--1143.
+\href{https://doi.org/10.1214/aop/1048516548}{doi:10.1214/aop/1048516548}.
 
 \bibitem{FabilaMonroy}
 R. Fabila-Monroy, D. Flores-Pe\~naloza, C. Huemer, F. Hurtado, J. Urrutia,

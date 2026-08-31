@@ -43,6 +43,53 @@ pointwise Hamiltonian-dependent implication.
 The recent paper formulates Conjecture 14; its Section II.A attributes the
 introduction of commutator graphs to an earlier paper by Díaz et al.
 
+## Rectangular minuscule lattices and the prior distance theorem
+
+Colin Defant, Valentin Féray, Philippe Nadeau, and Nathan Williams, “Wiener
+Indices of Minuscule Lattices,” Electronic Journal of Combinatorics 31(1),
+P1.41 (2024),
+[doi:10.37236/12002](https://doi.org/10.37236/12002)
+([publisher PDF](https://www.combinatorics.org/ojs/index.php/eljc/article/download/v31i1p41/pdf/)).
+
+- Section 1.3 defines \(P_{m,k}=J([m]\times[k])\), whose elements are lattice
+  paths with \(m\) up-steps and \(k\) down-steps. Its Hasse graph is isomorphic
+  to the token graph \(F_m(P_{m+k})\): an adjacent up/down swap adds or removes
+  one cell of the order ideal.
+- Their Eq. (2) is \(d(p,q)=\frac12\sum_i|p_i-q_i|\). For the membership path
+  of a subset \(S\), \(p_i=2C_S(i)-i\), so this distance is exactly
+  \(\sum_i|C_S(i)-C_T(i)|=D_{N,k}(S,T)\).
+- Corollary 3 gives the ordered-pair Wiener index
+  \[
+  d(P_{m,k})=\frac{mk}{4m+4k+2}
+  \binom{2m+2k+2}{2k+1}.
+  \]
+  Dividing by \(\binom{m+k}{k}^2\) gives the exact uniform pairwise mean used
+  in the manuscript. In matchgate notation this is
+  \[
+  \mathbb E D_{N,k}=\frac{k(N-k)}{4N+2}
+  \frac{\binom{2N+2}{2k+1}}{\binom Nk^2}.
+  \]
+- Proposition 5 proves convergence in distribution and in moments for the
+  distance in an \((\alpha n)\times n\) rectangle:
+  \[
+  n^{-3/2}D_{\alpha,n}\Rightarrow
+  \sqrt{2\alpha(1+\alpha)}\int_0^1|B(t)|\,dt.
+  \]
+  With \(\alpha=\rho/(1-\rho)\), take the second rectangle dimension to be
+  \(N-k\).  Since \((N-k)/n\to2(1-\rho)\), conversion to the manuscript's
+  \(n^{-3/2}\) normalization multiplies the limiting coefficient by
+  \([2(1-\rho)]^{3/2}\), giving \(4\sqrt{\rho(1-\rho)}\). Moment convergence
+  also supplies the mean and variance constants for fixed-aspect rectangles.
+  At \(\alpha=1\), it gives the central law and Conjecture 14 after applying
+  West et al.'s matchgate-component identification.
+
+This 2024 result predates the matchgate conjecture and is the direct prior
+mathematical theorem. The manuscript's distinct roles are to make the
+matchgate/minuscule-lattice implication explicit, give an independent
+finite-population proof for arbitrary density sequences, derive the stated
+matchgate complexity consequences, and supply the projection proof of the
+graph--Krylov inequality.
+
 ## Token graphs of paths
 
 Ruy Fabila-Monroy, David Flores-Peñaloza, Clemens Huemer, Ferran Hurtado,
@@ -129,8 +176,9 @@ Combinatorics 36 (2014), 608–640,
   rescalings.
 - This is prior literature for the discrete bridge-area mechanism. The
   manuscript therefore attributes that mechanism and locates its distinct
-  contribution in the matchgate finite-population application, fixed-density
-  factor, exact central formula, and finite-size correction.
+  contribution in the explicit matchgate/minuscule-lattice application, the
+  independent finite-population proof for arbitrary density sequences, and
+  the graph- and Krylov-complexity consequences.
 
 ## Operator Krylov complexity
 
@@ -139,9 +187,11 @@ Altman, “A universal operator growth hypothesis,” Physical Review X 9 (2019)
 041017,
 [doi:10.1103/PhysRevX.9.041017](https://doi.org/10.1103/PhysRevX.9.041017).
 
-- This paper gives the operator-Lanczos convention underlying Krylov
-  complexity. The manuscript uses the same position expectation
-  ∑ⱼ j|dⱼ(t)|² and proves its matchgate graph comparison directly.
+- Section III, Eqs. (3)–(8), gives the infinite-temperature
+  Hilbert–Schmidt operator space, Liouvillian, Lanczos recursion, and Krylov
+  amplitudes. Section V.A, Eq. (26), defines the Krylov position expectation.
+  The manuscript uses the same ∑ⱼ j|dⱼ(t)|² convention and proves its matchgate
+  graph comparison directly.
 
 ## One-dimensional Wasserstein and empirical-process context
 
@@ -162,6 +212,15 @@ between the two marginal CDFs,” arXiv:2111.03570 (2021),
   the area between cumulative distribution functions. Lemma 2.2 of the
   manuscript is its equal-weight lattice specialization.
 
+Rebecca Bourn and Jeb F. Willenbring, “Expected Value of the One-Dimensional
+Earth Mover’s Distance,” Algebraic Statistics 11 (2020), 53–78,
+[doi:10.2140/astat.2020.11.53](https://doi.org/10.2140/astat.2020.11.53).
+
+- This paper studies expected one-dimensional earth mover distance under a
+  uniform probability-simplex law and gives a generating-function evaluation.
+  Its sampling law differs from the fixed-cardinality subset law in the
+  matchgate manuscript, but it is directly relevant combinatorial EMD context.
+
 Eustasio del Barrio, Evarist Giné, and Carlos Matrán, “Central limit theorems
 for the Wasserstein distance between the empirical and the true
 distributions,” Annals of Probability 27 (1999), 1009–1071,
@@ -174,17 +233,27 @@ distributions,” Annals of Probability 27 (1999), 1009–1071,
   without replacement from a growing finite population at nonzero sampling
   density; Rosén's finite-population bridge theorem supplies the different
   covariance factor.
+- The article has a correction in Annals of Probability 31 (2003), 1142–1143,
+  [doi:10.1214/aop/1048516548](https://doi.org/10.1214/aop/1048516548). The
+  correction concerns Proposition 6.4 and later heavy-tail results; those
+  statements are not used in the manuscript.
 
 ## Novelty-search boundary
 
-On 2026-08-25, searches covered the exact title and DOI of West et al.;
-“Conjecture 14” with “matchgate”; “Brownian bridge” with “matchgate commutator
-graph”; “A(n,n)” with “matchgate graph distance”; k-token graphs and symmetric
-powers of paths combined with average distance or Wiener index; and empirical
-Wasserstein/Brownian-bridge limits with sampling without replacement. These
-searches located the prior metric and transport frameworks recorded above but
-no separate resolution of the specific matchgate Conjecture 14. This records
-the scope of the search rather than a guarantee of priority. The distinct
-claims made in the manuscript are the matchgate application, its explicit
-positive-density finite-population limit and variance, and the exact central
-formula with its first finite-size correction.
+The initial 2026-08-25 search used matchgate and token-graph terminology and
+missed the rectangular-minuscule-lattice formulation.  A referee audit on
+2026-08-31 added searches for rectangular minuscule lattices, Hasse-diagram
+Wiener indices, lattice-path distance, and expected one-dimensional earth
+mover distance.  Those searches located Defant et al., whose Corollary 3 and
+Proposition 5 are the direct prior exact-mean and Brownian-bridge results for
+the same graphs.
+
+Accordingly, the manuscript does not claim priority for the fixed-aspect-ratio
+Brownian-bridge law, its moment limits, the closed pairwise mean, or the
+central correction obtained from that closed form.  Its distinct claims are
+the explicit matchgate/minuscule-lattice identification and resulting
+application to Conjecture 14; an independent finite-population proof valid for
+every density sequence; the Haar matchgate specialization; the projection
+proof of the graph--Krylov comparison; and the central symmetric-difference
+identity as an independent exact formula.  This records the scope of the
+search rather than a guarantee that no other overlapping work exists.

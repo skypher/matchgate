@@ -113,6 +113,19 @@ def exact_hypergeometric_mean(population_size: int, subset_size: int) -> Fractio
     return total
 
 
+def rectangular_lattice_mean_formula(
+    population_size: int, subset_size: int
+) -> Fraction:
+    """Return the closed rectangular-minuscule-lattice pairwise mean."""
+    return Fraction(
+        subset_size
+        * (population_size - subset_size)
+        * math.comb(2 * population_size + 2, 2 * subset_size + 1),
+        (4 * population_size + 2)
+        * math.comb(population_size, subset_size) ** 2,
+    )
+
+
 def exact_walk_bridge_area(half_length: int) -> Fraction:
     total_area = 0
     for up_steps_tuple in combinations(range(2 * half_length), half_length):
@@ -157,16 +170,26 @@ def run_exact_identity_checks() -> None:
             hypergeometric_mean = exact_hypergeometric_mean(
                 population_size, subset_size
             )
+            closed_form_mean = rectangular_lattice_mean_formula(
+                population_size, subset_size
+            )
             if pairwise_mean != hypergeometric_mean:
                 raise ValueError(
                     "exact hypergeometric mean mismatch: "
                     f"N={population_size} k={subset_size} "
                     f"pairwise={pairwise_mean} hypergeometric={hypergeometric_mean}"
                 )
+            if pairwise_mean != closed_form_mean:
+                raise ValueError(
+                    "rectangular-lattice closed-form mismatch: "
+                    f"N={population_size} k={subset_size} "
+                    f"pairwise={pairwise_mean} closed_form={closed_form_mean}"
+                )
             if population_size % 2 == 0 and subset_size == population_size // 2:
                 central_means[population_size // 2] = pairwise_mean
         print(
-            f"exact metric/transport/hypergeometric N={population_size}/8 pass",
+            "exact metric/transport/hypergeometric/closed-form "
+            f"N={population_size}/8 pass",
             flush=True,
         )
 

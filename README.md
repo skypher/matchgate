@@ -1,16 +1,18 @@
-# Brownian-bridge scaling of distances in matchgate commutator graphs
+# Matchgate commutator graphs as rectangular minuscule lattices
 
-This repository develops a paper proof of the Brownian-bridge area law for
-average distances in matchgate commutator-graph components and its consequence
-for graph complexity averaged over both the initial vertex and a Haar matchgate
-unitary.  The main source is [`paper/main.tex`](paper/main.tex).  Exact
-finite-size expectation checks are implemented in
+This repository identifies matchgate commutator-graph components with
+rectangular minuscule lattices, gives an independent finite-population proof of
+their Brownian-bridge distance law, and derives the matchgate graph- and
+Krylov-complexity consequences.  The manuscript explicitly incorporates the
+prior fixed-aspect-ratio theorem and Wiener-index formula of Defant, Féray,
+Nadeau, and Williams.  The main source is [`paper/main.tex`](paper/main.tex).
+Exact finite-size expectation checks are implemented in
 [`code/exact_mean.cpp`](code/exact_mean.cpp).
 
-For κₙ/(2n)→ρ∈(0,1), the manuscript gives the distributional limit, the mean
-constant, and
+For κₙ/(2n)→ρ∈(0,1), the manuscript proves the distributional limit for every
+density sequence, the mean constant, and
 Var(D₂ₙ,κₙ)∼ρ(1−ρ)(28/15−π/2)n³. It also gives the exact central mean and
-its first n¹ᐟ² correction. The Haar-averaged graph-complexity consequence is
+its leading n¹ᐟ² correction. The Haar-averaged graph-complexity consequence is
 stated separately from the Hamiltonian-dependent pointwise inequality between
 graph and Krylov complexity.
 
@@ -27,15 +29,16 @@ make exact-mean
 ./build/exact_mean 100 200 400 800
 ```
 
-Run exact rational small-case checks and replay every recorded floating-point
-acceptance row with tolerance checks using Python 3:
+Run exact rational small-case checks, including the published rectangular-
+lattice closed form, and replay every recorded floating-point acceptance row
+with tolerance checks using Python 3:
 
 ```sh
 make check-exact-mean
 ```
 
 The archived manuscript revision is tagged
-[`paper-2026-08-31`](https://github.com/skypher/matchgate/tree/paper-2026-08-31).
+[`paper-2026-08-31-r2`](https://github.com/skypher/matchgate/tree/paper-2026-08-31-r2).
 
 The recorded table was generated with GCC 13.3.0 using C++20 and OpenMP. The
 program evaluates exact finite-sum identities with `long double`, `lgammal`,
