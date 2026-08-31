@@ -45,6 +45,23 @@ introduction of commutator graphs to an earlier paper by Díaz et al.
 
 ## Token graphs of paths
 
+Ruy Fabila-Monroy, David Flores-Peñaloza, Clemens Huemer, Ferran Hurtado,
+Jorge Urrutia, and David R. Wood, “Token graphs,” Graphs and Combinatorics 28
+(2012), 365–380,
+[doi:10.1007/s00373-011-1055-9](https://doi.org/10.1007/s00373-011-1055-9).
+
+- This paper introduces the k-token graph Fₖ(G): its vertices are the
+  k-subsets of V(G), and adjacency moves one token along an edge of G to an
+  unoccupied vertex.
+
+Koenraad M. R. Audenaert, Chris Godsil, Gordon Royle, and Terry Rudolph,
+“Symmetric squares of graphs,” Journal of Combinatorial Theory, Series B 97
+(2007), 74–90,
+[doi:10.1016/j.jctb.2006.04.002](https://doi.org/10.1016/j.jctb.2006.04.002).
+
+- This paper treats the equivalent symmetric-power graph construction and its
+  quantum-mechanical interpretation.
+
 Sofía Ibarra and Luis Manuel Rivera, “The automorphism groups of some token
 graphs,” Proyecciones Journal of Mathematics 42 (2023), 1627–1651,
 [doi:10.22199/issn.0717-6279-5954](https://doi.org/10.22199/issn.0717-6279-5954)
@@ -60,6 +77,15 @@ in the manuscript is the matchgate identification and the asymptotic analysis
 of its uniform pairwise distance, not the token-graph name or metric formula.
 
 ## Finite-population invariance principle
+
+Wassily Hoeffding, “Probability inequalities for sums of bounded random
+variables,” Journal of the American Statistical Association 58 (1963), 13–30,
+[doi:10.1080/01621459.1963.10500830](https://doi.org/10.1080/01621459.1963.10500830).
+
+- Theorem 4 compares convex functions of sums sampled without replacement to
+  their with-replacement counterparts. The manuscript uses this result for
+  moment-generating-function bounds, with Rosén's Theorem 3.1 supplying the
+  same formulation.
 
 Bengt Rosén, “Limit theorems for sampling from finite populations,” Arkiv för
 Matematik 5 (1965), 383–424,
@@ -105,6 +131,17 @@ Combinatorics 36 (2014), 608–640,
   manuscript therefore attributes that mechanism and locates its distinct
   contribution in the matchgate finite-population application, fixed-density
   factor, exact central formula, and finite-size correction.
+
+## Operator Krylov complexity
+
+Daniel E. Parker, Xiangyu Cao, Alexander Avdoshkin, Thomas Scaffidi, and Ehud
+Altman, “A universal operator growth hypothesis,” Physical Review X 9 (2019),
+041017,
+[doi:10.1103/PhysRevX.9.041017](https://doi.org/10.1103/PhysRevX.9.041017).
+
+- This paper gives the operator-Lanczos convention underlying Krylov
+  complexity. The manuscript uses the same position expectation
+  ∑ⱼ j|dⱼ(t)|² and proves its matchgate graph comparison directly.
 
 ## One-dimensional Wasserstein and empirical-process context
 

@@ -63,8 +63,8 @@
 \newcommand{\1}{\mathbf{1}}
 \newcommand{\N}{\mathbb{N}}
 
-\title{Brownian-bridge scaling of vertex-averaged\\
-graph complexity in matchgate dynamics}
+\title{Brownian-bridge scaling of distances in\\
+matchgate commutator graphs}
 \author{Leslie P. Polzer}
 \newcommand{\authoraffiliation}{Independent Researcher}
 \newcommand{\authoremail}{polzer@fastmail.com}
@@ -84,7 +84,7 @@ graph complexity in matchgate dynamics}
 \renewcommand{\eqref}[1]{%
   \textup{{\normalfont(\oldstylenums{\ref{#1}}}\normalfont)}}
 
-\newcommand{\shorttitle}{VERTEX-AVERAGED COMPLEXITY IN MATCHGATE GRAPHS}
+\newcommand{\shorttitle}{BROWNIAN-BRIDGE SCALING IN MATCHGATE GRAPHS}
 \newcommand{\shortauthors}{LESLIE P. POLZER}
 \newcommand{\ps@bookheader}{%
   \renewcommand\@oddfoot{\hfil}%
@@ -126,10 +126,11 @@ graph complexity in matchgate dynamics}
 \maketitle
 
 \begin{abstract}
-We determine the average pairwise distance in every positive-density component
-of the matchgate commutator graph.  If $S$ and $T$ are independent uniform
-$\kappa_n$-subsets of $[2n]$ and $\kappa_n/(2n)\to\rho\in(0,1)$, the graph
-distance is $D_n=\sum_i|s_i-t_i|$ and
+We determine the distributional asymptotics and mean of the uniform pairwise
+distance along every sequence of matchgate commutator-graph components
+satisfying $\kappa_n/(2n)\to\rho\in(0,1)$.  If $S$ and $T$ are independent
+uniform $\kappa_n$-subsets of $[2n]$, the graph distance is
+$D_n=\sum_i|s_i-t_i|$ and
 \[
  \frac{D_n}{n^{3/2}}
  \Rightarrow 4\sqrt{\rho(1-\rho)}\int_0^1|B(t)|\,dt,
@@ -150,9 +151,10 @@ and, in the central component, an exact finite sum with expansion
  \E D_n=\frac{\sqrt{2\pi}}4n^{3/2}
  -\frac{5\sqrt{2\pi}}{64}n^{1/2}+O(n^{-1/2}).
 \]
-We also record the resulting graph-complexity statement, averaged jointly over
-a uniform initial Pauli vertex and an independent Haar matchgate unitary, and
-the pointwise Krylov lower bound for a specified Hamiltonian evolution.
+After averaging jointly over a uniform initial Pauli vertex and an independent
+Haar matchgate unitary, the graph-complexity mean has the same asymptotic.  We
+also prove that graph complexity is a pointwise lower bound for Krylov
+complexity under a specified Hamiltonian evolution.
 
 \vskip5pt
 \noindent\textbf{Keywords.}\enspace Matchgate commutator graph; token graph;
@@ -175,13 +177,13 @@ $S=(s_1<\cdots<s_\kappa)$ and $T=(t_1<\cdots<t_\kappa)$ as
 \begin{equation}\label{eq:matching-distance}
  d_{\mathcal C_\kappa}(S,T)=\sum_{i=1}^{\kappa}|s_i-t_i|.
 \end{equation}
-Theorem~13 of that paper gives a finite sum for the average of
+Theorem~13 of West et al. gives a finite sum for the average of
 \eqref{eq:matching-distance}, and Conjecture~14 asserts that the central value
 is superlinear and subquadratic in $n$.  The purpose of this paper is to give
-the limiting law and its expectation constant, and then to transfer the result
-to graph complexity.  That transfer averages first over a Haar matchgate
-unitary and then over the initial Pauli vertex; it is not a pointwise-in-vertex
-scaling statement.
+the limiting law and its expectation constant, and then to transfer the mean
+asymptotic to graph complexity.  That transfer averages first over a Haar
+matchgate unitary and then over the initial Pauli vertex; it is not a
+pointwise-in-vertex scaling statement.
 
 The probabilistic mechanism is one-dimensional transport.  The matching
 distance is the area between two cumulative counting functions, and each
@@ -192,9 +194,10 @@ integrability; Proposition~\ref{prop:second-moment} gives it directly from the
 exact hypergeometric variance.
 
 The component in \eqref{eq:matching-distance} is the $\kappa$-token graph of a
-path, also called a symmetric power of a path.  This terminology predates the
-matchgate application, and the ordered-coordinate distance formula appears,
-for example, in Ibarra and Rivera~\cite[Lemma~5.2]{IbarraRivera}.  The transport
+path~\cite{FabilaMonroy}, also called a symmetric power of a
+path~\cite{AudenaertEtAl}.  This terminology predates the matchgate
+application, and the ordered-coordinate distance formula appears, for example,
+in Ibarra and Rivera~\cite[Lemma~5.2]{IbarraRivera}.  The transport
 identity below is the discrete one-dimensional $1$-Wasserstein identity: in one
 dimension, $W_1$ is the area between cumulative distribution functions
 \cite{Vallender,DeAngelisGray}.  Brownian-bridge limits for $L^1$ empirical-process and
@@ -229,15 +232,16 @@ $S=(s_1<\cdots<s_k)$ and define
 
 \begin{proposition}[Configuration-graph distance]\label{prop:graph-metric}
 Consider the graph on $\Omega_{N,k}$ in which one particle may move by one
-lattice site across an unoccupied edge.  This is the $k$-token graph
+lattice step to an unoccupied neighboring site.  This is the $k$-token graph
 $F_k(P_N)$, and its graph distance is $D_{N,k}$.  When $N=2n$, it is the
 matchgate component $\mathcal C_k$ with the metric in
 \eqref{eq:matching-distance}.
 \end{proposition}
 
 \begin{proof}
-Every edge changes one coordinate by one, so every path from $S$ to $T$ has
-length at least $D_{N,k}(S,T)$.  For the reverse inequality, suppose first
+For fixed $T$, every edge changes $D_{N,k}(\,\cdot\,,T)$ by at most one, so
+every path from $S$ to $T$ has length at least $D_{N,k}(S,T)$.  For the reverse
+inequality, suppose first
 that $s_i<t_i$ for some $i$, and choose the largest such $i$.  The move
 $s_i\mapsto s_i+1$ stays in $[N]$: if $i<k$, then
 $s_i+1\leq s_{i+1}\leq N$, while if $i=k$, then
@@ -252,7 +256,8 @@ $s_i-1=s_{i-1}$; minimality would give $s_{i-1}\leq t_{i-1}$, whereas
 $s_{i-1}=s_i-1\geq t_i>t_{i-1}$, a contradiction.  Hence
 $s_i\mapsto s_i-1$ is an allowed move and again reduces $D_{N,k}$ by one.
 Iteration constructs a path of length $D_{N,k}$.  The token-graph terminology
-and the same distance formula are recorded by Ibarra and
+is introduced by Fabila-Monroy et al.~\cite{FabilaMonroy}; the definition and
+the same distance formula are also recorded by Ibarra and
 Rivera~\cite[Definition in Section~1 and Lemma~5.2]{IbarraRivera}.  For
 $N=2n$, the matchgate identification and adjacency rule are Eq.~(50) and
 Eq.~(51) of West et al.~\cite[Section~IV and Appendix~C]{WestEtAl}.
@@ -404,9 +409,10 @@ $\psi(0)=\psi'(0)=0$ and
 $\psi''(\lambda)=p_\lambda(1-p_\lambda)\leq1/4$, where $p_\lambda$ is the
 success probability under exponential tilting.  Taylor's formula therefore
 gives $\psi(\lambda)\leq\lambda^2/8$ for every $\lambda\in\mathbb R$.
-Hoeffding's convex comparison for sampling without
-replacement~\cite[Theorem~3.1]{Rosen}, applied separately to the two
-independent counts, gives for $r\leq N/2$
+Hoeffding's convex comparison for sampling without replacement
+\cite[Theorem~4]{Hoeffding}, in the form stated by
+Ros\'en~\cite[Theorem~3.1]{Rosen}, applied separately to the two independent
+counts, gives for $r\leq N/2$
 \[
  \E e^{\lambda(C_S(r)-rp)}\leq e^{r\lambda^2/8},
  \qquad
@@ -432,8 +438,13 @@ H\"older's inequality and $\sum_{r=1}^{N-1}q_r^2\leq N^3/4$ now yield
  \leq(N-1)^3\sum_{r=1}^{N-1}\E|\Delta_r|^4
  \leq N^6.
 \]
-Thus $D_{2n,k}/n^{3/2}$ is bounded in $L^4$, which proves the last uniform
-integrability assertion.
+In fact, \eqref{eq:fourth-moment-bound} gives
+\[
+ \sup_{n\geq1}\sup_{1\leq k<2n}
+ \E\left(\frac{D_{2n,k}}{n^{3/2}}\right)^4\leq64.
+\]
+Thus the squared normalized distances are bounded in $L^2$, which proves the
+last uniform integrability assertion.
 \end{proof}
 
 \section{The Brownian-area law}
@@ -596,7 +607,13 @@ $U\in\mathcal M_n$,
 \end{lemma}
 
 \begin{proof}
-In the standard Jordan--Wigner Majorana basis $c_1,\ldots,c_{2n}$,
+Define the Jordan--Wigner Majorana operators by
+\[
+ c_{2j-1}=Z_1\cdots Z_{j-1}X_j,\qquad
+ c_{2j}=Z_1\cdots Z_{j-1}Y_j\qquad(1\leq j\leq n).
+\]
+They satisfy $c_a^\dagger=c_a$ and
+$\{c_a,c_b\}=2\delta_{ab}I$.  In this basis,
 \[
  Z_j=-i c_{2j-1}c_{2j},
  \qquad
@@ -610,12 +627,20 @@ $V_a:=e^{-i\pi g_a/4}$ satisfies
  V_a^\dagger c_{a+1}V_a=c_a,\qquad
  V_a^\dagger c_bV_a=c_b\quad(b\notin\{a,a+1\}).
 \]
-Thus products of these adjacent exchanges act transitively, up to unit
-phases, on the degree-$k$ Majorana monomials, which are the Pauli strings in
-$\mathcal C_k$.  This transitivity is the only representation-theoretic input
-below.  In particular, the argument does not assume that the degree-$k$
-Majorana representation is irreducible; this matters for the middle component
-$k=n$.
+More generally, the canonical anticommutation relations give
+\begin{align*}
+ e^{i\theta g_a}c_ae^{-i\theta g_a}
+ &=\cos(2\theta)c_a-\sin(2\theta)c_{a+1},\\
+ e^{i\theta g_a}c_{a+1}e^{-i\theta g_a}
+ &=\sin(2\theta)c_a+\cos(2\theta)c_{a+1}.
+\end{align*}
+Thus conjugation by $\mathcal M_n$ preserves each degree-$k$ Majorana span.
+Moreover, products of the adjacent exchanges above act transitively, up to
+phases of modulus one, on the degree-$k$ Majorana monomials, which are the
+Pauli strings in $\mathcal C_k$.  This transitivity is the only
+representation-theoretic input below.  In particular, the argument does not
+assume that the degree-$k$ Majorana representation is irreducible; this matters
+for the middle component $k=n$.
 
 For fixed $P$ and $Q\in\mathcal C_k$, put
 \[
@@ -665,7 +690,7 @@ coefficient as
 \]
 Lemma~\ref{lem:haar-coefficient} gives
 $\E_U|c_Q(U)|^2=|\mathcal C_{k_n}|^{-1}$.  Substitution in
-\eqref{eq:graph-complexity-definition} gives Eq.~(38) of that paper:
+\eqref{eq:graph-complexity-definition} gives Eq.~(38) of West et al.:
 \[
  \E_U\mathsf G_{P_n}(U^\dagger P_nU)
  =\frac{1}{|\mathcal C_{k_n}|}
@@ -675,12 +700,18 @@ Averaging also over $P_n$ gives exactly $\E D_{2n,k_n}$.  Apply
 Theorem~\ref{thm:main}.
 \end{proof}
 
-\begin{corollary}[Pointwise Krylov implication]\label{cor:krylov}
+We use the operator-Krylov/Lanczos convention of Parker et
+al.~\cite{ParkerEtAl}.
+
+\begin{corollary}[Pointwise graph--Krylov comparison for generator-supported
+Hamiltonians]\label{cor:krylov}
 Fix $n$, an initial Pauli string $P\in\mathcal C_k$, and a time-independent
 Hamiltonian
 \begin{equation}\label{eq:matchgate-Hamiltonian}
  H=\sum_{g\in\Gamma_n}h_g g,\qquad h_g\in\mathbb R.
 \end{equation}
+Thus $H$ lies in the real linear span of the nearest-neighbor generator family
+$\Gamma_n$; this restriction is part of the statement.
 Put
 \[
  P_t=e^{iHt}Pe^{-iHt},
@@ -792,8 +823,9 @@ unrestricted walks from $0$ to $h$ is
  r(z)=\frac{1-\sqrt{1-4z^2}}{2z}.
 \]
 This follows by solving the recurrence
-$P_h=\1_{\{h=0\}}+z(P_{h-1}+P_{h+1})$ with the solution that is a formal
-power series at zero.  Splitting a bridge at its marked time gives
+$P_h=\1_{\{h=0\}}+z(P_{h-1}+P_{h+1})$ and selecting the unique solution regular
+at $z=0$.  Splitting a bridge at its marked time and reversing the segment
+after that time gives
 $\sum_{m\geq0}L_{m,h}z^{2m}=P_h(z)^2$.  Therefore, if $T_m$ is the total
 absolute area over all $\binom{2m}{m}$ bridges, then
 \begin{align*}
@@ -863,7 +895,8 @@ $1\leq m\leq n$ with \eqref{eq:M-law} therefore proves
 \end{proof}
 
 \begin{lemma}[Concentration and expansions]\label{lem:finite-size-input}
-For the variable $M$ in \eqref{eq:M-law}, with $\mu=n/2$,
+For the variable $M$ in \eqref{eq:M-law}, with $\mu=n/2$ and
+$A_n:=\{|M-\mu|\leq n/4\}$,
 for every $t\geq0$,
 \begin{equation}\label{eq:M-concentration}
  \Pp(|M-\mu|\geq t)\leq2e^{-2t^2/n}.
@@ -876,21 +909,21 @@ Moreover, as $m\to\infty$,
 \end{align}
 and, as $n\to\infty$,
 \begin{align}
- \E\left[\sqrt M\,;\,|M-\mu|\leq n/4\right]
+ \E\left[\sqrt M\,;\,A_n\right]
  &=\sqrt{\frac n2}\left(1-\frac1{16n}+O(n^{-2})\right),
  \label{eq:sqrt-M-expansion}\\
- \E\left[M^{-1/2}\,;\,|M-\mu|\leq n/4\right]
+ \E\left[M^{-1/2}\,;\,A_n\right]
  &=\sqrt{\frac2n}\left(1+O(n^{-1})\right).
  \label{eq:inverse-sqrt-M-expansion}
 \end{align}
-In the restricted expectation in
-\eqref{eq:inverse-sqrt-M-expansion}, set $M^{-1/2}=0$ on the event $M=0$;
-the displayed truncation event excludes that value.
+Here $\E[M^{-1/2};A_n]$ denotes integration of $M^{-1/2}$ over $A_n$; it is
+well-defined because $M\geq n/4>0$ on $A_n$.
 \end{lemma}
 
 \begin{proof}
 The law of $M$ is sampling without replacement from a population of $n$ zeros
-and $n$ ones.  Hoeffding's convex comparison, stated as Theorem~3.1 by
+and $n$ ones.  Hoeffding's convex comparison
+\cite[Theorem~4]{Hoeffding}, stated as Theorem~3.1 by
 Ros\'en~\cite[p.~386]{Rosen}, bounds its centered moment generating function
 by the one for $n$ independent Bernoulli$(1/2)$ variables:
 \[
@@ -915,7 +948,7 @@ sample size $n$, and $n$ marked sites, gives
 \begin{equation}\label{eq:M-variance}
  \Var(M)=\frac{n^2}{4(2n-1)}.
 \end{equation}
-On $|M-\mu|\leq n/4$, Taylor's formula for $x^{1/2}$ through degree three
+On $A_n$, Taylor's formula for $x^{1/2}$ through degree three
 has a remainder bounded by a constant multiple of
 $\mu^{-7/2}|M-\mu|^4$.  Symmetry of both the law and the truncation event
 cancels the degree-one and degree-three terms.  By
@@ -923,7 +956,7 @@ cancels the degree-one and degree-three terms.  By
 $\Var(M)$ by an exponentially small quantity, while the expected remainder
 is $O(\mu^{-7/2}n^2)=O(n^{-3/2})$.  Hence
 \[
- \E\left[\sqrt M\,;\,|M-\mu|\leq n/4\right]
+ \E\left[\sqrt M\,;\,A_n\right]
  =\sqrt\mu-\frac{\Var(M)}{8\mu^{3/2}}+O(n^{-3/2})
  =\sqrt{\frac n2}\left(1-\frac1{16n}+O(n^{-2})\right).
 \]
@@ -941,7 +974,7 @@ Symmetry cancels the linear term, the truncated second moment differs from
 $\Var(M)$ by an exponentially small quantity, and the integrated tail bound
 gives $\E|X|^3=O(n^{3/2})$.  Hence
 \[
- \E\left[M^{-1/2};\,|M-\mu|\leq n/4\right]
+ \E\left[M^{-1/2};\,A_n\right]
  =\mu^{-1/2}+\frac{3\Var(M)}{8\mu^{5/2}}+O(n^{-2})
  =\sqrt{\frac2n}\left(1+O(n^{-1})\right),
 \]
@@ -1073,9 +1106,8 @@ quantity without an additional dynamical law.
 
 \section*{AI-use disclosure}
 
-OpenAI GPT-5.6 Sol assisted with developing the proof architecture at max
-reasoning effort; its model identifier was \texttt{gpt-5.6-sol}.  It served as
-an interactive research assistant for developing and stress-testing arguments,
+OpenAI GPT-5.6 Sol (model identifier \texttt{gpt-5.6-sol}) served as an
+interactive research assistant for developing and stress-testing arguments,
 auditing citations and calculations, preparing exact verification code, and
 revising the manuscript.  The author directed the research, selected and
 checked the final arguments, and takes responsibility for all mathematical
@@ -1086,14 +1118,17 @@ claims, citations, computations, and wording.
 The source archive accompanying this manuscript contains the checker and its
 recorded output under \texttt{code/} and \texttt{results/}, together with the
 \texttt{Makefile}.  The versioned source package is available at
-\url{https://github.com/skypher/matchgate}.  It is built and run, for example,
-with
+\url{https://github.com/skypher/matchgate}.  The manuscript version is archived
+by the immutable Git tag \texttt{paper-2026-08-31} at
+\url{https://github.com/skypher/matchgate/tree/paper-2026-08-31}.  It is built
+and run, for example, with
 \begin{gather*}
- \texttt{make exact-mean},\qquad
+ \texttt{make paper},\qquad \texttt{make exact-mean},\\
  \texttt{./build/exact\_mean 100 400 800 1600},\\
  \texttt{make check-exact-mean}.
 \end{gather*}
-The build requires a C++20 compiler with OpenMP support.  The values in
+The manuscript build requires pdf\LaTeX.  The numerical build requires a C++20
+compiler with OpenMP support, and the checker requires Python~3.  The values in
 Table~\ref{tab:numerics} were produced with GCC~13.3.0.  The implementation
 uses \texttt{long double}, \texttt{lgammal}, and normalized exponential
 weights to evaluate the exact finite-sum identities numerically.  The
@@ -1104,8 +1139,15 @@ and Proposition~\ref{prop:central-exact} for $n\leq5$.  It then replays every
 recorded floating-point row and fails if an output leaves its stated numerical
 tolerance.
 
-\begin{thebibliography}{10}
+\begin{thebibliography}{99}
 \small
+
+\bibitem{AudenaertEtAl}
+K. M. R. Audenaert, C. Godsil, G. Royle, and T. Rudolph,
+\emph{Symmetric squares of graphs},
+Journal of Combinatorial Theory, Series B \textbf{97} (2007), 74--90.
+\href{https://doi.org/10.1016/j.jctb.2006.04.002}%
+{doi:10.1016/j.jctb.2006.04.002}.
 
 \bibitem{DeAngelisGray}
 M. De Angelis and A. Gray,
@@ -1120,6 +1162,21 @@ and the true distributions},
 Annals of Probability \textbf{27} (1999), 1009--1071.
 \href{https://doi.org/10.1214/aop/1022677394}{doi:10.1214/aop/1022677394}.
 
+\bibitem{FabilaMonroy}
+R. Fabila-Monroy, D. Flores-Pe\~naloza, C. Huemer, F. Hurtado, J. Urrutia,
+and D. R. Wood,
+\emph{Token graphs},
+Graphs and Combinatorics \textbf{28} (2012), 365--380.
+\href{https://doi.org/10.1007/s00373-011-1055-9}%
+{doi:10.1007/s00373-011-1055-9}.
+
+\bibitem{Hoeffding}
+W. Hoeffding,
+\emph{Probability inequalities for sums of bounded random variables},
+Journal of the American Statistical Association \textbf{58} (1963), 13--30.
+\href{https://doi.org/10.1080/01621459.1963.10500830}%
+{doi:10.1080/01621459.1963.10500830}.
+
 \bibitem{IbarraRivera}
 S. Ibarra and L. M. Rivera,
 \emph{The automorphism groups of some token graphs},
@@ -1133,6 +1190,13 @@ S. Janson,
 other Brownian areas},
 Probability Surveys \textbf{4} (2007), 80--145.
 \href{https://doi.org/10.1214/07-PS104}{doi:10.1214/07-PS104}.
+
+\bibitem{ParkerEtAl}
+D. E. Parker, X. Cao, A. Avdoshkin, T. Scaffidi, and E. Altman,
+\emph{A universal operator growth hypothesis},
+Physical Review X \textbf{9} (2019), 041017.
+\href{https://doi.org/10.1103/PhysRevX.9.041017}%
+{doi:10.1103/PhysRevX.9.041017}.
 
 \bibitem{Rosen}
 B. Ros\'en,

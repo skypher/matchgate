@@ -1,4 +1,4 @@
-# Brownian-bridge scaling for vertex-averaged matchgate graph complexity
+# Brownian-bridge scaling of distances in matchgate commutator graphs
 
 This repository develops a paper proof of the Brownian-bridge area law for
 average distances in matchgate commutator-graph components and its consequence
@@ -14,7 +14,7 @@ its first n¹ᐟ² correction. The Haar-averaged graph-complexity consequence is
 stated separately from the Hamiltonian-dependent pointwise inequality between
 graph and Krylov complexity.
 
-Build the manuscript with:
+Build the manuscript with pdfLaTeX:
 
 ```sh
 make paper
@@ -28,11 +28,14 @@ make exact-mean
 ```
 
 Run exact rational small-case checks and replay every recorded floating-point
-acceptance row with tolerance checks using:
+acceptance row with tolerance checks using Python 3:
 
 ```sh
 make check-exact-mean
 ```
+
+The archived manuscript revision is tagged
+[`paper-2026-08-31`](https://github.com/skypher/matchgate/tree/paper-2026-08-31).
 
 The recorded table was generated with GCC 13.3.0 using C++20 and OpenMP. The
 program evaluates exact finite-sum identities with `long double`, `lgammal`,
