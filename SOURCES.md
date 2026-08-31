@@ -124,7 +124,7 @@ area limit laws for lattice paths and polygons,” European Journal of
 Combinatorics 36 (2014), 608–640,
 [doi:10.1016/j.ejc.2013.10.004](https://doi.org/10.1016/j.ejc.2013.10.004).
 
-- Section 14.2 derives absolute-area moments for Bernoulli walks and proves
+- Section 12.2 derives absolute-area moments for Bernoulli walks and proves
   joint moment convergence with the endpoint after the m³ᐟ² and m¹ᐟ²
   rescalings.
 - This is prior literature for the discrete bridge-area mechanism. The

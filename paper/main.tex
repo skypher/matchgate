@@ -24,7 +24,7 @@
   urlcolor={purple},
   citecolor={blue!80!black},
   pdfauthor={Leslie P. Polzer},
-  pdftitle={Brownian-Bridge Scaling of Vertex-Averaged Graph Complexity in Matchgate Dynamics},
+  pdftitle={Brownian-Bridge Scaling of Distances in Matchgate Commutator Graphs},
   pdfsubject={Average pairwise distance and complexity in matchgate commutator-graph components},
   pdfkeywords={matchgate commutator graph, token graph, Brownian bridge, Wasserstein distance, graph complexity, Krylov complexity}
 }
@@ -126,10 +126,11 @@ matchgate commutator graphs}
 \maketitle
 
 \begin{abstract}
-We determine the distributional asymptotics and mean of the uniform pairwise
-distance along every sequence of matchgate commutator-graph components
-satisfying $\kappa_n/(2n)\to\rho\in(0,1)$.  If $S$ and $T$ are independent
-uniform $\kappa_n$-subsets of $[2n]$, the graph distance is
+We determine the distributional asymptotics and mean of the distance between
+two independent uniformly sampled vertices, for every sequence of matchgate
+commutator-graph components satisfying
+$\kappa_n/(2n)\to\rho\in(0,1)$.  If $S$ and $T$ are the corresponding uniform
+$\kappa_n$-subsets of $[2n]$, the graph distance is
 $D_n=\sum_i|s_i-t_i|$ and
 \[
  \frac{D_n}{n^{3/2}}
@@ -152,16 +153,17 @@ and, in the central component, an exact finite sum with expansion
  -\frac{5\sqrt{2\pi}}{64}n^{1/2}+O(n^{-1/2}).
 \]
 After averaging jointly over a uniform initial Pauli vertex and an independent
-Haar matchgate unitary, the graph-complexity mean has the same asymptotic.  We
-also prove that graph complexity is a pointwise lower bound for Krylov
-complexity under a specified Hamiltonian evolution.
+Haar matchgate unitary, the graph-complexity mean is
+$\frac{\sqrt{2\pi}}2\sqrt{\rho(1-\rho)}\,n^{3/2}+o(n^{3/2})$.  We also prove
+that graph complexity is a pointwise lower bound for Krylov complexity under a
+specified Hamiltonian evolution.
 
 \vskip5pt
 \noindent\textbf{Keywords.}\enspace Matchgate commutator graph; token graph;
 Brownian bridge; Wasserstein distance; graph complexity; Krylov complexity.
 
 \vskip5pt
-\noindent\textbf{MSC2020 Classification.}\enspace
+\noindent\textbf{2020 Mathematics Subject Classification.}\enspace
 60F17; 05C12; 60J65; 81P68.
 \end{abstract}
 
@@ -198,18 +200,18 @@ path~\cite{FabilaMonroy}, also called a symmetric power of a
 path~\cite{AudenaertEtAl}.  This terminology predates the matchgate
 application, and the ordered-coordinate distance formula appears, for example,
 in Ibarra and Rivera~\cite[Lemma~5.2]{IbarraRivera}.  The transport
-identity below is the discrete one-dimensional $1$-Wasserstein identity: in one
-dimension, $W_1$ is the area between cumulative distribution functions
-\cite{Vallender,DeAngelisGray}.  Brownian-bridge limits for $L^1$ empirical-process and
-Wasserstein functionals likewise have a substantial literature; see, for
-example, del Barrio, Gin\'e, and Matr\'an~\cite{delBarrioGineMatran}.
+identity below is the discrete one-dimensional $1$-Wasserstein identity.  In
+one dimension, $W_1$ is the area between cumulative distribution functions
+\cite{Vallender,DeAngelisGray}.  Brownian-bridge limits for $L^1$
+empirical-process and Wasserstein functionals are classical; see, for example,
+del Barrio, Gin\'e, and Matr\'an~\cite{delBarrioGineMatran}.
 
 The sampling law here is different from the usual independent empirical-sample
 setting: each sample is a fixed-size subset of a finite population and occupies
 a nonvanishing fraction of that population.  Ros\'en's finite-population
 invariance principle supplies the resulting density-dependent bridge factor.
 Janson~\cite[Section~20]{Janson} surveys the Brownian-bridge area and its
-moments, while Schwerdtfeger~\cite[Section~14.2]{Schwerdtfeger} proves joint
+moments, while Schwerdtfeger~\cite[Section~12.2]{Schwerdtfeger} proves joint
 moment convergence for the absolute area and endpoint of a Bernoulli walk.
 Thus the token-graph name and metric, the one-dimensional transport identity,
 and the Brownian-area functional are prior frameworks rather than contributions
@@ -322,8 +324,8 @@ copy formed from $T_N$, then
 
 \begin{proof}
 Apply Ros\'en~\cite[Theorem~13.1, pp.~407--410]{Rosen} to the population
-containing $k_N$ ones and $N-k_N$ zeros, sampled by a uniform random
-permutation through its full size $N$.  Its mean is $p_N$, its population
+containing $k_N$ ones and $N-k_N$ zeros, exposed in uniformly random order
+through all $N$ positions.  Its mean is $p_N$, its population
 variance in Ros\'en's normalization is
 \[
  \sigma_N^2=\frac{N}{N-1}p_N(1-p_N)
@@ -351,7 +353,7 @@ bridges has the law of $\sqrt2B$.  This proves
 \eqref{eq:difference-bridge}.
 \end{proof}
 
-\begin{proposition}[Moment bounds]\label{prop:second-moment}
+\begin{proposition}[Second- and fourth-moment bounds]\label{prop:second-moment}
 For independent uniform $S,T\in\Omega_{N,k}$,
 \begin{equation}\label{eq:second-moment-bound}
  \E D_{N,k}(S,T)^2
@@ -635,9 +637,9 @@ More generally, the canonical anticommutation relations give
  &=\sin(2\theta)c_a+\cos(2\theta)c_{a+1}.
 \end{align*}
 Thus conjugation by $\mathcal M_n$ preserves each degree-$k$ Majorana span.
-Moreover, products of the adjacent exchanges above act transitively, up to
-phases of modulus one, on the degree-$k$ Majorana monomials, which are the
-Pauli strings in $\mathcal C_k$.  This transitivity is the only
+Moreover, products of the adjacent exchanges above act transitively on the
+degree-$k$ Majorana monomials.  Up to phases of modulus one, these monomials
+are the Pauli strings in $\mathcal C_k$.  This transitivity is the only
 representation-theoretic input below.  In particular, the argument does not
 assume that the degree-$k$ Majorana representation is irreducible; this matters
 for the middle component $k=n$.
@@ -652,7 +654,8 @@ inner product and right invariance of Haar measure, with $W=UV^\dagger$,
 give
 \begin{align*}
  a_R
- &=\E_U\left|\langle V^\dagger QV,U^\dagger P U\rangle_{\mathrm{HS}}\right|^2\\
+ &=\E_U\left|\langle V^\dagger QV,U^\dagger P U\rangle_{\mathrm{HS}}\right|^2
+   \qquad (|\zeta|=1)\\
  &=\E_U\left|\langle Q,VU^\dagger PUV^\dagger\rangle_{\mathrm{HS}}\right|^2
  =\E_W\left|\langle Q,W^\dagger P W\rangle_{\mathrm{HS}}\right|^2
  =a_Q.
@@ -696,8 +699,8 @@ $\E_U|c_Q(U)|^2=|\mathcal C_{k_n}|^{-1}$.  Substitution in
  =\frac{1}{|\mathcal C_{k_n}|}
    \sum_{Q\in\mathcal C_{k_n}}d_{\mathcal C_{k_n}}(P_n,Q).
 \]
-Averaging also over $P_n$ gives exactly $\E D_{2n,k_n}$.  Apply
-Theorem~\ref{thm:main}.
+Averaging also over $P_n$ gives exactly $\E D_{2n,k_n}$, so
+Theorem~\ref{thm:main} gives the stated asymptotic.
 \end{proof}
 
 We use the operator-Krylov/Lanczos convention of Parker et
@@ -916,8 +919,8 @@ and, as $n\to\infty$,
  &=\sqrt{\frac2n}\left(1+O(n^{-1})\right).
  \label{eq:inverse-sqrt-M-expansion}
 \end{align}
-Here $\E[M^{-1/2};A_n]$ denotes integration of $M^{-1/2}$ over $A_n$; it is
-well-defined because $M\geq n/4>0$ on $A_n$.
+Here $\E[M^{-1/2};A_n]=\E[M^{-1/2}\1_{A_n}]$; it is well-defined because
+$M\geq n/4>0$ on $A_n$.
 \end{lemma}
 
 \begin{proof}
@@ -1118,10 +1121,10 @@ claims, citations, computations, and wording.
 The source archive accompanying this manuscript contains the checker and its
 recorded output under \texttt{code/} and \texttt{results/}, together with the
 \texttt{Makefile}.  The versioned source package is available at
-\url{https://github.com/skypher/matchgate}.  The manuscript version is archived
-by the immutable Git tag \texttt{paper-2026-08-31} at
-\url{https://github.com/skypher/matchgate/tree/paper-2026-08-31}.  It is built
-and run, for example, with
+\url{https://github.com/skypher/matchgate}.  This revised manuscript is
+identified by the Git tag \texttt{paper-2026-08-31-r1} at
+\url{https://github.com/skypher/matchgate/tree/paper-2026-08-31-r1}.  It is
+built and run, for example, with
 \begin{gather*}
  \texttt{make paper},\qquad \texttt{make exact-mean},\\
  \texttt{./build/exact\_mean 100 400 800 1600},\\
