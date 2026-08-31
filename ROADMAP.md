@@ -11,11 +11,12 @@ credit outlines, interfaces, or manuscript polish.
 | 20% | Matchgate/complexity integration | Conjecture 14 and the Haar graph asymptotic are proved; the Krylov implication is proved separately by the graph/Krylov filtration comparison for an explicitly specified Hamiltonian, Liouvillian, time, and Lanczos basis; reproducible checks agree | Closed in Corollary 4.2, Lemma 5.1, Corollaries 5.2 and 5.3, Proposition 6.2, Theorem 6.4, `SOURCES.md`, and `results/exact_mean.tsv` |
 
 Overall hard-target meter: **100% theorem-slot closure** (15% + 45% + 20% +
-20%). Acceptance basis: the current two-pass build from 2026-08-27 exits
+20%). Acceptance basis: the current two-pass build from 2026-08-31 exits
 successfully, and its final pass and `build/main.log` contain no LaTeX warnings
-or unresolved references; all 47 labels and all 88 reference/citation uses
-resolve; `make check-exact-mean` passes all 14 recorded rows, the two
-independent finite-sum evaluations agree on the central cases, and the
-ρ=1/2, 1/4, and 1/10 rows approach their stated constants. The novelty-search
-boundary, including the token-graph and one-dimensional Wasserstein
-literature, is the qualified statement in `SOURCES.md`.
+or unresolved references. `make check-exact-mean` passes the exact rational
+metric, transport, hypergeometric, bridge-area, and central-mean checks and all
+14 recorded floating-point rows; the two independent finite-sum evaluations
+agree on the central cases, and the ρ=1/2, 1/4, and 1/10 rows approach their
+stated constants. The novelty-search boundary, including the token-graph and
+one-dimensional Wasserstein literature, is the qualified statement in
+`SOURCES.md`.

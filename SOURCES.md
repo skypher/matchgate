@@ -1,6 +1,6 @@
 # Source audit
 
-Checked on 2026-08-25 against the linked primary sources.
+Checked through 2026-08-31 against the linked primary sources.
 
 ## Matchgate commutator graph
 
@@ -107,6 +107,15 @@ Combinatorics 36 (2014), 608–640,
   factor, exact central formula, and finite-size correction.
 
 ## One-dimensional Wasserstein and empirical-process context
+
+S. S. Vallender, “Calculation of the Wasserstein Distance Between Probability
+Distributions on the Line,” Theory of Probability and Its Applications 18
+(1974), 784–786,
+[doi:10.1137/1118101](https://doi.org/10.1137/1118101).
+
+- This is the classical source for the one-dimensional Wasserstein formula.
+  The manuscript uses its equal-mass lattice specialization and also gives a
+  self-contained proof in Lemma 2.2.
 
 Marco De Angelis and Ander Gray, “Why the 1-Wasserstein distance is the area
 between the two marginal CDFs,” arXiv:2111.03570 (2021),

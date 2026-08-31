@@ -1,9 +1,11 @@
-# Brownian-bridge scaling for matchgate commutator graphs
+# Brownian-bridge scaling for vertex-averaged matchgate graph complexity
 
 This repository develops a paper proof of the Brownian-bridge area law for
-average distances in matchgate commutator-graph components.  The main source is
-[`paper/main.tex`](paper/main.tex).  Exact finite-size expectation checks are
-implemented in [`code/exact_mean.cpp`](code/exact_mean.cpp).
+average distances in matchgate commutator-graph components and its consequence
+for graph complexity averaged over both the initial vertex and a Haar matchgate
+unitary.  The main source is [`paper/main.tex`](paper/main.tex).  Exact
+finite-size expectation checks are implemented in
+[`code/exact_mean.cpp`](code/exact_mean.cpp).
 
 For κₙ/(2n)→ρ∈(0,1), the manuscript gives the distributional limit, the mean
 constant, and
@@ -25,7 +27,8 @@ make exact-mean
 ./build/exact_mean 100 200 400 800
 ```
 
-Replay every recorded acceptance row with tolerance checks using:
+Run exact rational small-case checks and replay every recorded floating-point
+acceptance row with tolerance checks using:
 
 ```sh
 make check-exact-mean

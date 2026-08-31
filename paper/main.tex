@@ -24,7 +24,7 @@
   urlcolor={purple},
   citecolor={blue!80!black},
   pdfauthor={Leslie P. Polzer},
-  pdftitle={Brownian-Bridge Scaling of Graph Complexity in Matchgate Dynamics},
+  pdftitle={Brownian-Bridge Scaling of Vertex-Averaged Graph Complexity in Matchgate Dynamics},
   pdfsubject={Average pairwise distance and complexity in matchgate commutator-graph components},
   pdfkeywords={matchgate commutator graph, token graph, Brownian bridge, Wasserstein distance, graph complexity, Krylov complexity}
 }
@@ -63,12 +63,12 @@
 \newcommand{\1}{\mathbf{1}}
 \newcommand{\N}{\mathbb{N}}
 
-\title{Brownian-bridge scaling of graph complexity\\
-in matchgate dynamics}
+\title{Brownian-bridge scaling of vertex-averaged\\
+graph complexity in matchgate dynamics}
 \author{Leslie P. Polzer}
 \newcommand{\authoraffiliation}{Independent Researcher}
 \newcommand{\authoremail}{polzer@fastmail.com}
-\date{August 27, 2026}
+\date{August 31, 2026}
 
 \makeatletter
 \renewcommand{\section}{%
@@ -84,7 +84,7 @@ in matchgate dynamics}
 \renewcommand{\eqref}[1]{%
   \textup{{\normalfont(\oldstylenums{\ref{#1}}}\normalfont)}}
 
-\newcommand{\shorttitle}{BROWNIAN-BRIDGE SCALING IN MATCHGATE GRAPHS}
+\newcommand{\shorttitle}{VERTEX-AVERAGED COMPLEXITY IN MATCHGATE GRAPHS}
 \newcommand{\shortauthors}{LESLIE P. POLZER}
 \newcommand{\ps@bookheader}{%
   \renewcommand\@oddfoot{\hfil}%
@@ -178,7 +178,10 @@ $S=(s_1<\cdots<s_\kappa)$ and $T=(t_1<\cdots<t_\kappa)$ as
 Theorem~13 of that paper gives a finite sum for the average of
 \eqref{eq:matching-distance}, and Conjecture~14 asserts that the central value
 is superlinear and subquadratic in $n$.  The purpose of this paper is to give
-the limiting law and its expectation constant.
+the limiting law and its expectation constant, and then to transfer the result
+to graph complexity.  That transfer averages first over a Haar matchgate
+unitary and then over the initial Pauli vertex; it is not a pointwise-in-vertex
+scaling statement.
 
 The probabilistic mechanism is one-dimensional transport.  The matching
 distance is the area between two cumulative counting functions, and each
@@ -194,7 +197,7 @@ matchgate application, and the ordered-coordinate distance formula appears,
 for example, in Ibarra and Rivera~\cite[Lemma~5.2]{IbarraRivera}.  The transport
 identity below is the discrete one-dimensional $1$-Wasserstein identity: in one
 dimension, $W_1$ is the area between cumulative distribution functions
-\cite{DeAngelisGray}.  Brownian-bridge limits for $L^1$ empirical-process and
+\cite{Vallender,DeAngelisGray}.  Brownian-bridge limits for $L^1$ empirical-process and
 Wasserstein functionals likewise have a substantial literature; see, for
 example, del Barrio, Gin\'e, and Matr\'an~\cite{delBarrioGineMatran}.
 
@@ -205,10 +208,13 @@ invariance principle supplies the resulting density-dependent bridge factor.
 Janson~\cite[Section~20]{Janson} surveys the Brownian-bridge area and its
 moments, while Schwerdtfeger~\cite[Section~14.2]{Schwerdtfeger} proves joint
 moment convergence for the absolute area and endpoint of a Bernoulli walk.
-The contributions established here are the application to the matchgate
-component and Conjecture~14, the fixed-density finite-population law and
-variance, and the exact central-component formula and finite-size correction in
-Section~6.
+Thus the token-graph name and metric, the one-dimensional transport identity,
+and the Brownian-area functional are prior frameworks rather than contributions
+of this paper.  The results established here are their matchgate application
+resolving Conjecture~14, the explicit positive-density finite-population limit
+and variance, the exact central-component formula and finite-size correction in
+Section~6, and the separately formulated graph-complexity and
+Hamiltonian-dependent Krylov consequences.
 
 \section{The matchgate metric and discrete transport}
 
@@ -261,7 +267,8 @@ For the empirical measures
 one has
 $D_{N,k}(S,T)=kW_1(\mu_S,\mu_T)$.  Lemma~\ref{lem:transport} is therefore the
 lattice form of the one-dimensional identity expressing $W_1$ as the area
-between the two cumulative distribution functions~\cite{DeAngelisGray}.
+between the two cumulative distribution functions
+\cite{Vallender,DeAngelisGray}.
 
 \begin{lemma}[Discrete transport identity]\label{lem:transport}
 For all $S,T\in\Omega_{N,k}$,
@@ -605,7 +612,10 @@ $V_a:=e^{-i\pi g_a/4}$ satisfies
 \]
 Thus products of these adjacent exchanges act transitively, up to unit
 phases, on the degree-$k$ Majorana monomials, which are the Pauli strings in
-$\mathcal C_k$.
+$\mathcal C_k$.  This transitivity is the only representation-theoretic input
+below.  In particular, the argument does not assume that the degree-$k$
+Majorana representation is irreducible; this matters for the middle component
+$k=n$.
 
 For fixed $P$ and $Q\in\mathcal C_k$, put
 \[
@@ -1087,10 +1097,15 @@ The build requires a C++20 compiler with OpenMP support.  The values in
 Table~\ref{tab:numerics} were produced with GCC~13.3.0.  The implementation
 uses \texttt{long double}, \texttt{lgammal}, and normalized exponential
 weights to evaluate the exact finite-sum identities numerically.  The
-\texttt{check-exact-mean} target replays every recorded row and fails if an
-output leaves its stated numerical tolerance.
+\texttt{check-exact-mean} target first checks Propositions~\ref{prop:graph-metric}
+and~\ref{prop:exact-computation} and Lemma~\ref{lem:transport} by exact rational
+enumeration for $N\leq8$, Lemma~\ref{lem:discrete-bridge-area} for $m\leq6$,
+and Proposition~\ref{prop:central-exact} for $n\leq5$.  It then replays every
+recorded floating-point row and fails if an output leaves its stated numerical
+tolerance.
 
-\begin{thebibliography}{9}
+\begin{thebibliography}{10}
+\small
 
 \bibitem{DeAngelisGray}
 M. De Angelis and A. Gray,
@@ -1131,6 +1146,13 @@ U. Schwerdtfeger,
 laws for lattice paths and polygons},
 European Journal of Combinatorics \textbf{36} (2014), 608--640.
 \href{https://doi.org/10.1016/j.ejc.2013.10.004}{doi:10.1016/j.ejc.2013.10.004}.
+
+\bibitem{Vallender}
+S. S. Vallender,
+\emph{Calculation of the Wasserstein distance between probability
+distributions on the line},
+Theory of Probability and Its Applications \textbf{18} (1974), 784--786.
+\href{https://doi.org/10.1137/1118101}{doi:10.1137/1118101}.
 
 \bibitem{WestEtAl}
 M. West, N. Dowling, A. Southwell, M. Sevior, M. Usman, K. Modi, and T. Quella,

@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
-"""Replay the exact-mean acceptance table with explicit numerical tolerances."""
+"""Check exact identities, then replay floating-point acceptance rows."""
 
 from __future__ import annotations
 
 import argparse
+from collections import deque
 import csv
+from fractions import Fraction
+from itertools import combinations
 import math
 import os
 from pathlib import Path
@@ -19,6 +22,175 @@ CHECKED_FIELDS = (
     "limit_constant",
     "observed_sqrt_correction",
 )
+
+
+Subset = tuple[int, ...]
+
+
+def subset_distance(left: Subset, right: Subset) -> int:
+    return sum(abs(a - b) for a, b in zip(left, right, strict=True))
+
+
+def cumulative_area(left: Subset, right: Subset, population_size: int) -> int:
+    return sum(
+        abs(
+            sum(value <= level for value in left)
+            - sum(value <= level for value in right)
+        )
+        for level in range(1, population_size)
+    )
+
+
+def token_neighbors(subset: Subset, population_size: int) -> list[Subset]:
+    occupied = set(subset)
+    neighbors: list[Subset] = []
+    for value in subset:
+        for moved in (value - 1, value + 1):
+            if 1 <= moved <= population_size and moved not in occupied:
+                neighbors.append(tuple(sorted(occupied - {value} | {moved})))
+    return neighbors
+
+
+def exact_pairwise_mean(population_size: int, subset_size: int) -> Fraction:
+    vertices = list(combinations(range(1, population_size + 1), subset_size))
+    distance_sum = 0
+    for source in vertices:
+        graph_distances = {source: 0}
+        queue = deque([source])
+        while queue:
+            current = queue.popleft()
+            for neighbor in token_neighbors(current, population_size):
+                if neighbor not in graph_distances:
+                    graph_distances[neighbor] = graph_distances[current] + 1
+                    queue.append(neighbor)
+        if len(graph_distances) != len(vertices):
+            raise ValueError(
+                f"token graph N={population_size} k={subset_size} is disconnected"
+            )
+        for target in vertices:
+            coordinate_distance = subset_distance(source, target)
+            transport_area = cumulative_area(source, target, population_size)
+            if graph_distances[target] != coordinate_distance:
+                raise ValueError(
+                    "configuration metric mismatch: "
+                    f"N={population_size} k={subset_size} "
+                    f"source={source} target={target} "
+                    f"graph={graph_distances[target]} coordinate={coordinate_distance}"
+                )
+            if transport_area != coordinate_distance:
+                raise ValueError(
+                    "transport identity mismatch: "
+                    f"N={population_size} k={subset_size} "
+                    f"source={source} target={target} "
+                    f"area={transport_area} coordinate={coordinate_distance}"
+                )
+            distance_sum += coordinate_distance
+    return Fraction(distance_sum, len(vertices) ** 2)
+
+
+def exact_hypergeometric_mean(population_size: int, subset_size: int) -> Fraction:
+    denominator = math.comb(population_size, subset_size)
+    total = Fraction(0)
+    for marked_size in range(1, population_size):
+        lo = max(0, subset_size - population_size + marked_size)
+        hi = min(subset_size, marked_size)
+        weights = {
+            value: math.comb(marked_size, value)
+            * math.comb(population_size - marked_size, subset_size - value)
+            for value in range(lo, hi + 1)
+        }
+        if sum(weights.values()) != denominator:
+            raise ValueError(
+                f"hypergeometric normalization mismatch at "
+                f"N={population_size} k={subset_size} r={marked_size}"
+            )
+        numerator = sum(
+            abs(left - right) * left_weight * right_weight
+            for left, left_weight in weights.items()
+            for right, right_weight in weights.items()
+        )
+        total += Fraction(numerator, denominator**2)
+    return total
+
+
+def exact_walk_bridge_area(half_length: int) -> Fraction:
+    total_area = 0
+    for up_steps_tuple in combinations(range(2 * half_length), half_length):
+        up_steps = set(up_steps_tuple)
+        height = 0
+        for step in range(2 * half_length):
+            height += 1 if step in up_steps else -1
+            if step < 2 * half_length - 1:
+                total_area += abs(height)
+    return Fraction(total_area, math.comb(2 * half_length, half_length))
+
+
+def bridge_area_formula(half_length: int) -> Fraction:
+    return Fraction(
+        half_length * 4**half_length,
+        2 * math.comb(2 * half_length, half_length),
+    )
+
+
+def central_mean_formula(site_count: int) -> Fraction:
+    mixture = sum(
+        (
+            Fraction(math.comb(site_count, m) ** 2, 1)
+            * Fraction(
+                m * 4**m,
+                (2 * m + 1) * math.comb(2 * m, m),
+            )
+        )
+        for m in range(1, site_count + 1)
+    )
+    return Fraction(
+        2 * site_count + 1,
+        2 * math.comb(2 * site_count, site_count),
+    ) * mixture
+
+
+def run_exact_identity_checks() -> None:
+    central_means: dict[int, Fraction] = {}
+    for population_size in range(2, 9):
+        for subset_size in range(1, population_size):
+            pairwise_mean = exact_pairwise_mean(population_size, subset_size)
+            hypergeometric_mean = exact_hypergeometric_mean(
+                population_size, subset_size
+            )
+            if pairwise_mean != hypergeometric_mean:
+                raise ValueError(
+                    "exact hypergeometric mean mismatch: "
+                    f"N={population_size} k={subset_size} "
+                    f"pairwise={pairwise_mean} hypergeometric={hypergeometric_mean}"
+                )
+            if population_size % 2 == 0 and subset_size == population_size // 2:
+                central_means[population_size // 2] = pairwise_mean
+        print(
+            f"exact metric/transport/hypergeometric N={population_size}/8 pass",
+            flush=True,
+        )
+
+    for half_length in range(1, 7):
+        enumerated = exact_walk_bridge_area(half_length)
+        formula = bridge_area_formula(half_length)
+        if enumerated != formula:
+            raise ValueError(
+                "walk-bridge area mismatch: "
+                f"m={half_length} enumerated={enumerated} formula={formula}"
+            )
+    print("exact walk-bridge areas m=1..6 pass", flush=True)
+
+    for site_count in range(1, 6):
+        pairwise_mean = central_means.get(site_count)
+        if pairwise_mean is None:
+            pairwise_mean = exact_pairwise_mean(2 * site_count, site_count)
+        formula = central_mean_formula(site_count)
+        if pairwise_mean != formula:
+            raise ValueError(
+                "central exact mean mismatch: "
+                f"n={site_count} pairwise={pairwise_mean} formula={formula}"
+            )
+    print("exact central means n=1..5 pass", flush=True)
 
 
 def parse_args() -> argparse.Namespace:
@@ -147,6 +319,7 @@ def check_row(
 
 def main() -> int:
     arguments = parse_args()
+    run_exact_identity_checks()
     rows = read_rows(arguments.results)
 
     grouped: dict[str, list[dict[str, str]]] = {}
