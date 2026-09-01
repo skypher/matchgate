@@ -68,7 +68,7 @@ Brownian-bridge distances and complexity}
 \author{Leslie P. Polzer}
 \newcommand{\authoraffiliation}{Independent Researcher}
 \newcommand{\authoremail}{polzer@fastmail.com}
-\date{August 31, 2026}
+\date{September 1, 2026}
 
 \makeatletter
 \renewcommand{\section}{%
@@ -147,8 +147,8 @@ $D_n:=D_{2n,\kappa_n}(S,T)=\sum_i|s_i-t_i|$.  Then
 where $B$ is a standard Brownian bridge.  In the central component this
 becomes $D_n/n^{3/2}\Rightarrow2\int_0^1|B(t)|\,dt$ and
 $\E D_n\sim\sqrt{2\pi}\,n^{3/2}/4$, which resolves Conjecture~14 of West et
-al. after the matchgate--minuscule-lattice identification.  Moment convergence
-also gives
+al. after the matchgate--minuscule-lattice identification.  Convergence of the
+first two moments also gives
 \[
  \Var(D_n)\sim\rho(1-\rho)
  \left(\frac{28}{15}-\frac\pi2\right)n^3.
@@ -162,8 +162,9 @@ component; the published closed form yields the expansion
 After averaging jointly over a uniform initial Pauli vertex and an independent
 Haar matchgate unitary, the graph-complexity mean is
 $\frac{\sqrt{2\pi}}2\sqrt{\rho(1-\rho)}\,n^{3/2}+o(n^{3/2})$.  We also prove
-that graph complexity is a pointwise lower bound for Krylov complexity under a
-specified Hamiltonian evolution.
+that graph complexity is a pointwise lower bound for Krylov complexity under
+every time-independent Hamiltonian in the real span of the matchgate
+generators.
 
 \vskip5pt
 \noindent\textbf{Keywords.}\enspace Matchgate commutator graph; rectangular
@@ -204,9 +205,11 @@ steps, then $p_r=2C_S(r)-r$; hence the path-area distance used for rectangular
 minuscule lattices is exactly \eqref{eq:matching-distance}.  Defant, F\'eray,
 Nadeau, and Williams~\cite[Corollary~3 and Proposition~5]{DefantEtAl} give a
 closed formula for its Wiener index and prove the fixed-aspect-ratio
-Brownian-bridge limit in distribution and in moments.  Under the standard
-unordered-pair convention for the Wiener index $W(G)$, the average used by
-West et al. is $2W(G)/|V(G)|^2$.
+Brownian-bridge limit in distribution and in moments.  Defant et al. write
+$d(G)$ for the distance sum over all ordered vertex pairs.  Under the standard
+unordered-pair convention for the Wiener index $W(G)$, symmetry and the zero
+diagonal give $d(G)=2W(G)$; hence the average used by West et al. is
+$d(G)/|V(G)|^2=2W(G)/|V(G)|^2$.
 
 For rectangles with a fixed aspect ratio, taking
 $\alpha=\rho/(1-\rho)$ in the result of Defant et al. gives the same limiting
@@ -216,17 +219,17 @@ identification of West et al., already implies Conjecture~14.  The purpose of
 the present paper is to make this implication explicit, give an independent
 finite-population proof valid for every sequence $k_n/(2n)\to\rho$, and
 formulate the exact matchgate graph- and Krylov-complexity consequences.  The
-Haar transfer averages first over a Haar
-matchgate unitary and then over the initial Pauli vertex; it is not a
-pointwise-in-vertex scaling statement.
+Haar statement is a joint expectation over an independent uniform initial
+Pauli vertex and Haar matchgate unitary; it is not a pointwise-in-vertex
+scaling statement.
 
 The alternative probabilistic proof uses one-dimensional transport.  The
 matching distance is the area between two cumulative counting functions, and
 each centered counting function is a finite-population bridge.  Ros\'en's
 finite-population invariance principle~\cite[Theorem~13.1]{Rosen} supplies
 convergence in $C[0,1]$.  Proposition~\ref{prop:second-moment} proves the
-uniform integrability needed for moment convergence directly from
-hypergeometric moment bounds.
+uniform integrability needed for convergence of the first two moments directly
+from hypergeometric moment bounds.
 
 The token-graph terminology is due to Fabila-Monroy et
 al.~\cite{FabilaMonroy}; the same graph is also called a symmetric power of a
@@ -234,7 +237,10 @@ path~\cite{AudenaertEtAl}.  The ordered-coordinate distance formula appears,
 for example, in Ibarra and Rivera~\cite[Lemma~5.2]{IbarraRivera}.  The transport
 identity below is the discrete one-dimensional $1$-Wasserstein identity.  In
 one dimension, $W_1$ is the area between cumulative distribution functions
-\cite{Vallender,DeAngelisGray}.  Expected one-dimensional earth mover distance
+\cite{Vallender,DeAngelisGray}.  Vallender's later addendum corrects Remark~1
+and formula~(3) of the original note; it does not alter the CDF-area identity
+used here~\cite{VallenderAddendum}.  Expected one-dimensional earth mover
+distance
 under a different, simplex-based sampling law is studied by Bourn and
 Willenbring~\cite{BournWillenbring}.  Brownian-bridge limits for $L^1$
 empirical-process and Wasserstein functionals are classical; see del Barrio,
@@ -362,7 +368,7 @@ copy formed from $T_N$, then
 \end{lemma}
 
 \begin{proof}
-Apply Ros\'en~\cite[Theorem~13.1, pp.~407--410]{Rosen} to the population
+Apply Ros\'en~\cite[Theorem~13.1, pp.~408--411]{Rosen} to the population
 containing $k_N$ ones and $N-k_N$ zeros, exposed in uniformly random order
 through all $N$ positions.  Its mean is $p_N$, its population
 variance in Ros\'en's normalization is
@@ -599,7 +605,7 @@ This proves \eqref{eq:variance-main}; setting $\rho=1/2$ gives
 \eqref{eq:central-variance}.
 \end{proof}
 
-\begin{corollary}[Resolution of Conjecture 14]\label{cor:conjecture}
+\begin{corollary}[Conjecture 14 as a corollary]\label{cor:conjecture}
 Let $A(n,n)$ be the central-component average in Theorem~13 of
 West et al.~\cite{WestEtAl}.  Then
 \[
@@ -836,10 +842,24 @@ onto $\mathcal F_{j-1}$ leaves a residual of no greater norm than projection
 onto $\mathcal K_{j-1}$.  Comparing
 \eqref{eq:graph-tail-projections} and
 \eqref{eq:krylov-tail-projections} term by term proves the pointwise
-inequality.  This also supplies a projection proof of the statement recorded
-as Lemma~9 by West et al.~\cite{WestEtAl}.  Integrating the pointwise
-inequality proves the expectation statement.
+inequality.  Thus the argument supplies a self-contained projection proof of
+the statement recorded as Lemma~9 by West et al.~\cite{WestEtAl}.  Integrating
+the pointwise inequality proves the expectation statement.
 \end{proof}
+
+\begin{remark}[Relation to Lemma~9 of West et al.]
+The passage from Eq.~(A81) to Eq.~(A82) in the appendix proof of Lemma~9 in
+West et al. does not follow from the stated support condition alone.  The
+summands there contain cross terms in Lanczos coefficients and Pauli
+amplitudes, which need not be nonnegative real numbers, so the bound
+$\ell(p,q)\leq\min\{n,n'\}$ cannot be applied to each summand as an order
+inequality.  Equations~\eqref{eq:graph-tail-projections} and
+\eqref{eq:krylov-tail-projections} instead express both complexities as sums
+of squared tail norms.  Those summands are nonnegative, and
+$\mathcal K_{j-1}\subseteq\mathcal F_{j-1}$ gives their term-by-term
+comparison.  The preceding proof therefore establishes the cited inequality
+without the cross-term step.
+\end{remark}
 
 \begin{remark}[Why the Haar and Krylov statements are separate]
 The Haar-distributed endpoint $U^\dagger P U$ in
@@ -993,7 +1013,10 @@ The central-component mean has the expansion
 \end{theorem}
 
 \begin{proof}
-The Stirling expansion with remainder
+The Stirling series and its positive-real remainder bound, applied to
+$\log(m!)=\log m+\log\Gamma(m)$,
+\cite[\href{https://dlmf.nist.gov/5.11.E1}{Eq.~(5.11.1)} and
+\href{https://dlmf.nist.gov/5.11.ii}{Section~5.11(ii)}]{NISTDLMF} give
 \[
  \log(m!)=\left(m+\frac12\right)\log m-m+\frac12\log(2\pi)
  +\frac1{12m}-\frac1{360m^3}+O(m^{-5})
@@ -1065,7 +1088,8 @@ Proposition~\ref{prop:exact-computation} with normalized log-binomial weights.
 It reports $\E D_{2n,k}/n^{3/2}$ together with the constant in
 Theorem~\ref{thm:main} and the finite-size residuals.  In the central case it
 also evaluates Proposition~\ref{prop:central-exact} independently.
-Table~\ref{tab:numerics} shows representative outputs; the predicted
+Tables~\ref{tab:numerics} and~\ref{tab:noncentral} show representative
+outputs; the predicted
 coefficient of $n^{1/2}$ in Theorem~\ref{thm:finite-size} is
 $-5\sqrt{2\pi}/64=-0.195830333955547\ldots$.
 Here and in Table~\ref{tab:numerics},
@@ -1077,7 +1101,7 @@ $c=\sqrt{2\pi}/4=0.626657068657750\ldots$.
 \begin{tabular}{rccc}
 $n$ & $\E D_{2n,n}/n^{3/2}$
 & $(\E D_{2n,n}-cn^{3/2})/\sqrt n$
-& independent-formula difference\\
+& \shortstack{absolute formula\\difference}\\
 \hline
 25   & 0.618994383468 & -0.191567129755 & $<10^{-13}$\\
 100  & 0.624709598771 & -0.194746988669 & $7\times10^{-14}$\\
@@ -1085,12 +1109,33 @@ $n$ & $\E D_{2n,n}/n^{3/2}$
 800  & 0.626412450827 & -0.195694264208 & $2\times10^{-11}$\\
 1600 & 0.626534717235 & -0.195762275705 & $4\times10^{-11}$
 \end{tabular}
-\caption{Floating-point evaluations of the exact finite sums in
-Propositions~\ref{prop:exact-computation} and~\ref{prop:central-exact}.}
+\caption{Central-component floating-point evaluations.  The last column is
+the absolute difference between the symmetric-difference sum in
+Proposition~\ref{prop:central-exact} and the hypergeometric sum in
+Proposition~\ref{prop:exact-computation}.}
 \label{tab:numerics}
 \end{table}
-The values are deterministic floating-point evaluations of finite sums, not
-Monte Carlo estimates or certified interval bounds.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{cccr@{\qquad}r}
+$\rho$ & $n$ & $\kappa$ & $\E D_{2n,\kappa}/n^{3/2}$
+& limiting constant\\
+\hline
+$1/4$  & 100 & 50  & 0.539679867710 & 0.542700940919\\
+$1/4$  & 800 & 400 & 0.542319852915 & 0.542700940919\\
+$1/10$ & 100 & 20  & 0.369966929897 & 0.375994241195\\
+$1/10$ & 800 & 160 & 0.375223283732 & 0.375994241195
+\end{tabular}
+\caption{Noncentral evaluations of the hypergeometric sum in
+Proposition~\ref{prop:exact-computation}.  The last column is the corresponding
+constant $\frac{\sqrt{2\pi}}2\sqrt{\rho(1-\rho)}$ from
+Theorem~\ref{thm:main}.}
+\label{tab:noncentral}
+\end{table}
+The values in both tables are deterministic floating-point evaluations of
+finite sums, not Monte Carlo estimates or certified interval bounds.
 
 \section{Conclusion}
 
@@ -1099,7 +1144,8 @@ the distance law and moment convergence of Defant et al. imply the
 $n^{3/2}$ central growth in Conjecture~14.  The cumulative-count argument gives
 an independent finite-population proof, including arbitrary density sequences
 and explicit moment bounds.  The published Wiener-index formula supplies the
-closed finite-size mean and its leading $n^{1/2}$ correction, while the central
+closed-form finite-size mean and its leading $n^{1/2}$ correction, while the
+central
 symmetric-difference decomposition gives an independent finite-sum identity.
 For complexity, the distance asymptotic implies
 Corollary~\ref{cor:complexity} only after averaging both the initial Pauli
@@ -1123,8 +1169,8 @@ The source archive accompanying this manuscript contains the checker and its
 recorded output under \texttt{code/} and \texttt{results/}, together with the
 \texttt{Makefile}.  The versioned source package is available at
 \url{https://github.com/skypher/matchgate}.  This revised manuscript is
-identified by the Git tag \texttt{paper-2026-08-31-r2} at
-\url{https://github.com/skypher/matchgate/tree/paper-2026-08-31-r2}.  It is
+identified by the Git tag \texttt{paper-2026-09-01} at
+\url{https://github.com/skypher/matchgate/tree/paper-2026-09-01}.  It is
 built and run, for example, with
 \begin{gather*}
  \texttt{make paper},\qquad \texttt{make exact-mean},\\
@@ -1133,7 +1179,8 @@ built and run, for example, with
 \end{gather*}
 The manuscript build requires pdf\LaTeX.  The numerical build requires a C++20
 compiler with OpenMP support, and the checker requires Python~3.  The values in
-Table~\ref{tab:numerics} were produced with GCC~13.3.0.  The implementation
+Tables~\ref{tab:numerics} and~\ref{tab:noncentral} were produced with
+GCC~13.3.0.  The implementation
 uses \texttt{long double}, \texttt{lgammal}, and normalized exponential
 weights to evaluate the exact finite-sum identities numerically.  The
 \texttt{check-exact-mean} target first checks
@@ -1216,6 +1263,13 @@ other Brownian areas},
 Probability Surveys \textbf{4} (2007), 80--145.
 \href{https://doi.org/10.1214/07-PS104}{doi:10.1214/07-PS104}.
 
+\bibitem{NISTDLMF}
+\emph{NIST Digital Library of Mathematical Functions},
+\url{https://dlmf.nist.gov/}, Release 1.2.7 of June 15, 2026.
+F. W. J. Olver, A. B. Olde Daalhuis, D. W. Lozier, B. I. Schneider,
+R. F. Boisvert, C. W. Clark, B. R. Miller, B. V. Saunders, H. S. Cohl,
+and M. A. McClain, eds.
+
 \bibitem{ParkerEtAl}
 D. E. Parker, X. Cao, A. Avdoshkin, T. Scaffidi, and E. Altman,
 \emph{A universal operator growth hypothesis},
@@ -1242,6 +1296,13 @@ S. S. Vallender,
 distributions on the line},
 Theory of Probability and Its Applications \textbf{18} (1974), 784--786.
 \href{https://doi.org/10.1137/1118101}{doi:10.1137/1118101}.
+
+\bibitem{VallenderAddendum}
+S. S. Vallender,
+\emph{Addendum: Calculation of the Wasserstein distance between probability
+distributions on the line},
+Theory of Probability and Its Applications \textbf{26} (1982), 435.
+\href{https://doi.org/10.1137/1126051}{doi:10.1137/1126051}.
 
 \bibitem{WestEtAl}
 M. West, N. Dowling, A. Southwell, M. Sevior, M. Usman, K. Modi, and T. Quella,

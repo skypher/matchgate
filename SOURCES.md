@@ -1,6 +1,6 @@
 # Source audit
 
-Checked through 2026-08-31 against the linked primary sources.
+Checked through 2026-09-01 against the linked primary sources.
 
 ## Matchgate commutator graph
 
@@ -143,7 +143,7 @@ Matematik 5 (1965), 383–424,
   σ²(min(s,t)−st), so W(1,1) is the standard Brownian bridge.
 - Page 406, Remark 1 to Theorem 12.1: Noether’s condition is
   maxᵢ|aᵢ−μ|/(∑ᵢ(aᵢ−μ)²)¹ᐟ²→0.
-- Theorem 13.1, pages 407–410: under Noether’s condition the linearly
+- Theorem 13.1, pages 408–411: under Noether’s condition the linearly
   interpolated, standardized partial-sum process converges weakly in C[0,1]
   to W(1,1) when the full population is sampled.
 - Theorem 3.1, page 386: convex functions of a sum sampled without
@@ -204,6 +204,14 @@ Distributions on the Line,” Theory of Probability and Its Applications 18
   The manuscript uses its equal-mass lattice specialization and also gives a
   self-contained proof in Lemma 2.2.
 
+S. S. Vallender, “Addendum: Calculation of the Wasserstein Distance Between
+Probability Distributions on the Line,” Theory of Probability and Its
+Applications 26 (1982), 435,
+[doi:10.1137/1126051](https://doi.org/10.1137/1126051).
+
+- The addendum corrects Remark 1 and formula (3) of the original note. It does
+  not change the one-dimensional CDF-area identity used in the manuscript.
+
 Marco De Angelis and Ander Gray, “Why the 1-Wasserstein distance is the area
 between the two marginal CDFs,” arXiv:2111.03570 (2021),
 [doi:10.48550/arXiv.2111.03570](https://doi.org/10.48550/arXiv.2111.03570).
@@ -237,6 +245,17 @@ distributions,” Annals of Probability 27 (1999), 1009–1071,
   [doi:10.1214/aop/1048516548](https://doi.org/10.1214/aop/1048516548). The
   correction concerns Proposition 6.4 and later heavy-tail results; those
   statements are not used in the manuscript.
+
+## Stirling remainder
+
+*NIST Digital Library of Mathematical Functions*, Release 1.2.7 of
+2026-06-15, [Section 5.11](https://dlmf.nist.gov/5.11).
+
+- Equation (5.11.1) gives the logarithmic Stirling series. Section 5.11(ii)
+  states that for positive real arguments its remainder has the sign of and is
+  bounded in magnitude by the first neglected term. Applied to
+  log(m!)=log m+log Γ(m), this supplies the O(m⁻⁵) remainder used for the
+  finite-size expansion.
 
 ## Novelty-search boundary
 

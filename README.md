@@ -38,7 +38,7 @@ make check-exact-mean
 ```
 
 The archived manuscript revision is tagged
-[`paper-2026-08-31-r2`](https://github.com/skypher/matchgate/tree/paper-2026-08-31-r2).
+[`paper-2026-09-01`](https://github.com/skypher/matchgate/tree/paper-2026-09-01).
 
 The recorded table was generated with GCC 13.3.0 using C++20 and OpenMP. The
 program evaluates exact finite-sum identities with `long double`, `lgammal`,
