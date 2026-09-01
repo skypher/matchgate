@@ -47,6 +47,7 @@ approximations rather than certified intervals.
 
 Each command-line argument is the number of matchgate sites \(n\); the checker
 uses the central component \(\kappa=n\) unless `--rho` is supplied.
+Run `./build/exact_mean --help` (or `-h`) for the complete command-line usage.
 
 For the central component, the program evaluates the mean in two independent
 ways: the cumulative hypergeometric formula and the symmetric-difference

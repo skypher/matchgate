@@ -1,5 +1,4 @@
 #include <algorithm>
-#include <atomic>
 #include <cerrno>
 #include <cmath>
 #include <cstdlib>
@@ -13,6 +12,18 @@
 #include <omp.h>
 
 namespace {
+
+void print_usage(std::ostream& output, const char* program_name) {
+  output << "Usage: " << program_name << " [--rho DENSITY] [N ...]\n"
+         << "Numerically evaluate the exact finite-sum mean distance for "
+            "matchgate components.\n\n"
+         << "Arguments:\n"
+         << "  N              Positive matchgate site counts (default: "
+            "25 50 100 200 400 800).\n\n"
+         << "Options:\n"
+         << "  --rho DENSITY  Requested subset density in (0,1) (default: 0.5).\n"
+         << "  -h, --help     Show this help message and exit.\n";
+}
 
 long double log_choose(int n, int k) {
   if (k < 0 || k > n) {
@@ -117,6 +128,14 @@ long double parse_density(const std::string& text) {
 
 int main(int argc, char** argv) {
   try {
+    for (int index = 1; index < argc; ++index) {
+      const std::string argument(argv[index]);
+      if (argument == "-h" || argument == "--help") {
+        print_usage(std::cout, argv[0]);
+        return 0;
+      }
+    }
+
     long double requested_density = 0.5L;
     std::vector<int> site_counts;
     for (int index = 1; index < argc; ++index) {
@@ -134,9 +153,9 @@ int main(int argc, char** argv) {
       site_counts = {25, 50, 100, 200, 400, 800};
     }
 
-    std::cout << std::setprecision(15);
+    std::cout << std::setprecision(std::numeric_limits<long double>::max_digits10);
     std::cout << "threads=" << omp_get_max_threads()
-              << " requested_density=" << static_cast<double>(requested_density)
+              << " requested_density=" << requested_density
               << '\n';
 
     const long double pi = std::acos(-1.0L);
@@ -183,17 +202,16 @@ int main(int argc, char** argv) {
 
       std::cout << "result n=" << n
                 << " k=" << k
-                << " rho=" << static_cast<double>(rho)
-                << " expectation=" << static_cast<double>(expectation)
-                << " normalized=" << static_cast<double>(normalized)
-                << " limit_constant=" << static_cast<double>(predicted_constant)
-                << " correction_over_n=" << static_cast<double>(correction_over_n)
-                << " mixture_expectation=" << static_cast<double>(mixture_expectation)
-                << " mixture_difference=" << static_cast<double>(mixture_difference)
-                << " observed_sqrt_correction="
-                << static_cast<double>(observed_sqrt_correction)
+                << " rho=" << rho
+                << " expectation=" << expectation
+                << " normalized=" << normalized
+                << " limit_constant=" << predicted_constant
+                << " correction_over_n=" << correction_over_n
+                << " mixture_expectation=" << mixture_expectation
+                << " mixture_difference=" << mixture_difference
+                << " observed_sqrt_correction=" << observed_sqrt_correction
                 << " two_term_residual_times_sqrt_n="
-                << static_cast<double>(two_term_residual_times_sqrt_n)
+                << two_term_residual_times_sqrt_n
                 << " elapsed_seconds=" << elapsed << '\n';
       std::cout.flush();
     }

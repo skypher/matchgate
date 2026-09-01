@@ -131,40 +131,28 @@ Matchgate commutator-graph components are Hasse graphs of rectangular
 minuscule lattices.  Defant, F\'eray, Nadeau, and Williams previously proved
 the fixed-aspect-ratio Brownian-bridge distance law for these lattices, with
 moment convergence, and obtained a closed Wiener-index
-formula~\cite{DefantEtAl}.  We give an
-independent finite-population derivation valid for every sequence of matchgate
-components satisfying $\kappa_n/(2n)\to\rho\in(0,1)$ and translate the result
-to matchgate complexity.  If $S$ and $T$ are independent uniform
-$\kappa_n$-subsets of $[2n]$, set
-$D_n:=D_{2n,\kappa_n}(S,T)=\sum_i|s_i-t_i|$.  Then
+formula~\cite{DefantEtAl}.  We make the resulting matchgate implication
+explicit, give an independent finite-population derivation valid for every
+sequence $\kappa_n/(2n)\to\rho\in(0,1)$, and translate the result to matchgate
+complexity.  If $S$ and $T$ are independent uniform $\kappa_n$-subsets of
+$[2n]$, write
+$D_{2n,\kappa_n}(S,T)=\sum_i|s_i-t_i|$.  Then
 \[
- \frac{D_n}{n^{3/2}}
+ \frac{D_{2n,\kappa_n}}{n^{3/2}}
  \Rightarrow 4\sqrt{\rho(1-\rho)}\int_0^1|B(t)|\,dt,
  \qquad
- \E D_n\sim
+ \E D_{2n,\kappa_n}\sim
  \frac{\sqrt{2\pi}}2\sqrt{\rho(1-\rho)}\,n^{3/2},
 \]
-where $B$ is a standard Brownian bridge.  In the central component this
-becomes $D_n/n^{3/2}\Rightarrow2\int_0^1|B(t)|\,dt$ and
-$\E D_n\sim\sqrt{2\pi}\,n^{3/2}/4$, which resolves Conjecture~14 of West et
-al. after the matchgate--minuscule-lattice identification.  Convergence of the
-first two moments also gives
-\[
- \Var(D_n)\sim\rho(1-\rho)
- \left(\frac{28}{15}-\frac\pi2\right)n^3.
-\]
-We give an independent symmetric-difference finite sum in the central
-component; the published closed form yields the expansion
-\[
- \E D_n=\frac{\sqrt{2\pi}}4n^{3/2}
- -\frac{5\sqrt{2\pi}}{64}n^{1/2}+O(n^{-1/2}).
-\]
-After averaging jointly over a uniform initial Pauli vertex and an independent
-Haar matchgate unitary, the graph-complexity mean is
-$\frac{\sqrt{2\pi}}2\sqrt{\rho(1-\rho)}\,n^{3/2}+o(n^{3/2})$.  We also prove
-that graph complexity is a pointwise lower bound for Krylov complexity under
-every time-independent Hamiltonian in the real span of the matchgate
-generators.
+where $B$ is the standard Brownian bridge with covariance
+$\min\{s,t\}-st$.  In the central component the limiting coefficient is $2$
+and the mean constant is $\sqrt{2\pi}/4$, resolving Conjecture~14 of West et
+al. after the matchgate--minuscule-lattice identification.  We also obtain the
+variance asymptotic and leading finite-size correction, give a finite sum
+obtained by conditioning on the symmetric-difference size, derive the jointly
+vertex--Haar-averaged graph-complexity mean, and prove the pointwise bound from
+graph complexity to Krylov complexity for generator-supported time-independent
+Hamiltonians.
 
 \vskip5pt
 \noindent\textbf{Keywords.}\enspace Matchgate commutator graph; rectangular
@@ -215,13 +203,15 @@ For rectangles with a fixed aspect ratio, taking
 $\alpha=\rho/(1-\rho)$ in the result of Defant et al. gives the same limiting
 law, mean, and variance constants as those stated below; at $\alpha=1$ it gives
 the central case.  Thus their theorem, combined with the matchgate component
-identification of West et al., already implies Conjecture~14.  The purpose of
-the present paper is to make this implication explicit, give an independent
-finite-population proof valid for every sequence $k_n/(2n)\to\rho$, and
-formulate the exact matchgate graph- and Krylov-complexity consequences.  The
-Haar statement is a joint expectation over an independent uniform initial
-Pauli vertex and Haar matchgate unitary; it is not a pointwise-in-vertex
-scaling statement.
+identification of West et al., already implies Conjecture~14.  The
+contributions specific to the present paper are: (i) making this matchgate
+implication explicit; (ii) giving an independent finite-population proof for
+every sequence $k_n/(2n)\to\rho$, with direct moment bounds; (iii) deriving the
+Haar matchgate specialization and a projection proof of the graph--Krylov
+comparison; and (iv) giving a central finite sum obtained by conditioning on
+the symmetric-difference size.  The Haar statement is a joint expectation
+over an independent uniform initial Pauli vertex and Haar matchgate unitary;
+it is not a pointwise-in-vertex scaling statement.
 
 The alternative probabilistic proof uses one-dimensional transport.  The
 matching distance is the area between two cumulative counting functions, and
@@ -239,20 +229,29 @@ identity below is the discrete one-dimensional $1$-Wasserstein identity.  In
 one dimension, $W_1$ is the area between cumulative distribution functions
 \cite{Vallender,DeAngelisGray}.  Vallender's later addendum corrects Remark~1
 and formula~(3) of the original note; it does not alter the CDF-area identity
-used here~\cite{VallenderAddendum}.  Expected one-dimensional earth mover
-distance
-under a different, simplex-based sampling law is studied by Bourn and
-Willenbring~\cite{BournWillenbring}.  Brownian-bridge limits for $L^1$
-empirical-process and Wasserstein functionals are classical; see del Barrio,
-Gin\'e, and Matr\'an~\cite{delBarrioGineMatran} and their correction to separate
-heavy-tail statements~\cite{delBarrioCorrection}.  Those corrected statements
-are not used here.
+used here~\cite{VallenderAddendum}.  Bourn and
+Willenbring~\cite{BournWillenbring} study expected one-dimensional earth mover
+distance for uniform weak compositions and its probability-simplex limit.  A
+stars-and-bars word identifies a uniform $k$-subset of $[N]$ with a uniform
+weak composition of $k$ into $N-k+1$ parts, and Lemma~\ref{lem:transport}
+identifies the corresponding earth mover distance with $D_{N,k}$.  Bourn and
+Erickson~\cite[Theorem~4.3]{BournErickson} use the Type~A minuscule-lattice
+Wiener formula of Defant et al. to close the discrete expected-distance
+formula; the substitutions $s=k$ and $b=N-k+1$ give exactly
+Proposition~\ref{prop:closed-form}.  They also interpret the distance through
+symmetric differences of Young diagrams.  Proposition~\ref{prop:central-exact}
+below instead conditions on $|S\setminus T|$ and decomposes the distance into a
+simple-walk bridge area and exchangeable gaps.  Brownian-bridge limits for
+$L^1$ empirical-process and Wasserstein functionals are classical; see del
+Barrio, Gin\'e, and Matr\'an~\cite{delBarrioGineMatran} and their correction to
+separate heavy-tail statements~\cite{delBarrioCorrection}.  Those corrected
+statements are not used here.
 
 Janson~\cite[Section~20]{Janson} surveys the Brownian-bridge area and its
 moments, while Schwerdtfeger~\cite[Section~12.2]{Schwerdtfeger} proves joint
 moment convergence for the absolute area and endpoint of a Bernoulli walk.
 Section~6 records the published rectangular-lattice closed form, gives an
-independent symmetric-difference identity for its central specialization, and
+independent bridge-and-gap identity for its central specialization, and
 extracts the leading $n^{1/2}$ finite-size correction.  Section~5 supplies the
 explicit Haar specialization and a projection proof of the
 Hamiltonian-dependent graph--Krylov comparison.
@@ -359,8 +358,9 @@ If $p_N\to\rho\in(0,1)$, then in $C[0,1]$ with the uniform norm,
 \[
  G_N^S\Rightarrow\sqrt{\rho(1-\rho)}B,
 \]
-where $B$ is a standard Brownian bridge.  If $G_N^T$ is the independent
-copy formed from $T_N$, then
+where $B$ is the standard Brownian bridge with
+$\operatorname{Cov}(B(s),B(t))=\min\{s,t\}-st$.  If $G_N^T$ is the
+independent copy formed from $T_N$, then
 \begin{equation}\label{eq:difference-bridge}
  H_N:=G_N^S-G_N^T
  \Rightarrow \sqrt{2\rho(1-\rho)}B.
@@ -873,7 +873,9 @@ Haar-averaged Krylov quantity is asserted without such a joint dynamical law.
 \section{Exact finite-size evaluation}
 
 The rectangular-minuscule-lattice Wiener index gives a closed form for every
-component.
+component.  In discrete earth-mover notation, the same expression is
+Theorem~4.3 of Bourn and Erickson~\cite{BournErickson}: setting their total
+mass to $s=k$ and their number of bins to $b=N-k+1$ gives the formula below.
 
 \begin{proposition}[Published rectangular-lattice mean]\label{prop:closed-form}
 For independent uniform $S,T\in\Omega_{N,k}$,
@@ -903,8 +905,10 @@ Division by $\binom Nk^2$ proves \eqref{eq:closed-form}; setting $N=2n$ and
 $k=n$ gives \eqref{eq:central-closed-form}.
 \end{proof}
 
-The central component also has an independent symmetric-difference
-decomposition.  Let $W^{(m)}$ be a
+The Young-diagram interpretation of Bourn and Erickson expresses the distance
+as a symmetric difference.  The central component also has the following
+independent conditional decomposition, obtained from the symmetric-difference
+size $M=|S\setminus T|$.  Let $W^{(m)}$ be a
 uniform simple random-walk bridge of length $2m$, with increments $+1$ and
 $-1$ occurring $m$ times each, and put
 \[
@@ -1021,7 +1025,7 @@ $\log(m!)=\log m+\log\Gamma(m)$,
  \log(m!)=\left(m+\frac12\right)\log m-m+\frac12\log(2\pi)
  +\frac1{12m}-\frac1{360m^3}+O(m^{-5})
 \]
-gives, as $m\to\infty$,
+and hence, as $m\to\infty$,
 \[
  \binom{2m}{m}
  =\frac{4^m}{\sqrt{\pi m}}
@@ -1083,8 +1087,9 @@ split the double sum $\sum_{h,j}|j-h|p_jp_h$ into the two regions $h<j$ and
 $h>j$ and use symmetry.
 \end{proof}
 
-The OpenMP program \texttt{code/exact\_mean.cpp} evaluates
-Proposition~\ref{prop:exact-computation} with normalized log-binomial weights.
+The OpenMP program \texttt{code/exact\_mean.cpp} numerically evaluates the
+exact finite sum in Proposition~\ref{prop:exact-computation} with normalized
+log-binomial weights.
 It reports $\E D_{2n,k}/n^{3/2}$ together with the constant in
 Theorem~\ref{thm:main} and the finite-size residuals.  In the central case it
 also evaluates Proposition~\ref{prop:central-exact} independently.
@@ -1143,10 +1148,11 @@ The matchgate components of West et al. are rectangular minuscule lattices, so
 the distance law and moment convergence of Defant et al. imply the
 $n^{3/2}$ central growth in Conjecture~14.  The cumulative-count argument gives
 an independent finite-population proof, including arbitrary density sequences
-and explicit moment bounds.  The published Wiener-index formula supplies the
-closed-form finite-size mean and its leading $n^{1/2}$ correction, while the
-central
-symmetric-difference decomposition gives an independent finite-sum identity.
+and explicit moment bounds.  The minuscule-lattice Wiener formula of Defant et
+al., also recorded in discrete earth-mover notation by Bourn and Erickson,
+supplies the closed-form finite-size mean and its leading $n^{1/2}$ correction.
+The central conditional-on-$|S\setminus T|$ decomposition gives a different
+finite-sum identity.
 For complexity, the distance asymptotic implies
 Corollary~\ref{cor:complexity} only after averaging both the initial Pauli
 vertex and the Haar matchgate unitary.  Corollary~\ref{cor:krylov} is a separate
@@ -1182,8 +1188,9 @@ compiler with OpenMP support, and the checker requires Python~3.  The values in
 Tables~\ref{tab:numerics} and~\ref{tab:noncentral} were produced with
 GCC~13.3.0.  The implementation
 uses \texttt{long double}, \texttt{lgammal}, and normalized exponential
-weights to evaluate the exact finite-sum identities numerically.  The
-\texttt{check-exact-mean} target first checks
+weights to evaluate the exact finite-sum identities numerically; reported
+quantities are printed directly at \texttt{long double} round-trip precision.
+The \texttt{check-exact-mean} target first checks
 Propositions~\ref{prop:graph-metric}, \ref{prop:closed-form}, and
 \ref{prop:exact-computation} and Lemma~\ref{lem:transport} by exact rational
 enumeration for $N\leq8$, Lemma~\ref{lem:discrete-bridge-area} for $m\leq6$,
@@ -1200,6 +1207,13 @@ K. M. R. Audenaert, C. Godsil, G. Royle, and T. Rudolph,
 Journal of Combinatorial Theory, Series B \textbf{97} (2007), 74--90.
 \href{https://doi.org/10.1016/j.jctb.2006.04.002}%
 {doi:10.1016/j.jctb.2006.04.002}.
+
+\bibitem{BournErickson}
+R. Bourn and W. Q. Erickson,
+\emph{Palindromicity of the numerator of a statistical generating function},
+Discrete Mathematics \textbf{348} (2025), 114336.
+\href{https://doi.org/10.1016/j.disc.2024.114336}%
+{doi:10.1016/j.disc.2024.114336}.
 
 \bibitem{BournWillenbring}
 R. Bourn and J. F. Willenbring,
@@ -1232,7 +1246,8 @@ E. del Barrio, E. Gin\'e, and C. Matr\'an,
 \emph{Correction: Central limit theorems for the Wasserstein distance between
 the empirical and the true distributions},
 Annals of Probability \textbf{31} (2003), 1142--1143.
-\href{https://doi.org/10.1214/aop/1048516548}{doi:10.1214/aop/1048516548}.
+\href{https://projecteuclid.org/journals/annals-of-probability/volume-31/issue-2/Correction--Central-limit-theorems-for-the-Wasserstein-distance-between/aop/1048516548.pdf}%
+{Project Euclid: aop/1048516548}.
 
 \bibitem{FabilaMonroy}
 R. Fabila-Monroy, D. Flores-Pe\~naloza, C. Huemer, F. Hurtado, J. Urrutia,

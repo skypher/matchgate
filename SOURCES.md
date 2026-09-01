@@ -224,10 +224,41 @@ Rebecca Bourn and Jeb F. Willenbring, “Expected Value of the One-Dimensional
 Earth Mover’s Distance,” Algebraic Statistics 11 (2020), 53–78,
 [doi:10.2140/astat.2020.11.53](https://doi.org/10.2140/astat.2020.11.53).
 
-- This paper studies expected one-dimensional earth mover distance under a
-  uniform probability-simplex law and gives a generating-function evaluation.
-  Its sampling law differs from the fixed-cardinality subset law in the
-  matchgate manuscript, but it is directly relevant combinatorial EMD context.
+- This paper first studies one-dimensional earth mover distance for uniform
+  weak compositions of a fixed integer and then passes to a uniform
+  probability-simplex law.
+- A stars-and-bars word is simultaneously a weak composition of `k` into
+  `N-k+1` parts and a `k`-subset of `[N]`. Under this bijection the cumulative
+  histogram discrepancy is exactly the subset distance `D_{N,k}` by the
+  discrete transport identity. Thus the discrete sampling laws are the same
+  after the parameter change, not different laws.
+
+Rebecca Bourn and William Q. Erickson, “Palindromicity of the Numerator of a
+Statistical Generating Function,” Discrete Mathematics 348 (2025), 114336,
+[doi:10.1016/j.disc.2024.114336](https://doi.org/10.1016/j.disc.2024.114336)
+([arXiv version](https://arxiv.org/pdf/2307.02652)).
+
+- Section 3 interprets the discrete earth mover distance through symmetric
+  differences of Young diagrams.
+- Theorem 4.3 uses the Type A minuscule-lattice Wiener formula of Defant et al.
+  to give
+  \[
+  \mathbb E\operatorname{EMD}
+  =\frac{s(b-1)}{4s+4b-2}
+   \frac{\binom{2s+2b}{2s+1}}{\binom{s+b-1}{s}^2}
+  \]
+  for uniform weak compositions of `s` into `b` parts. Setting `s=k` and
+  `b=N-k+1` gives exactly
+  \[
+  \mathbb E D_{N,k}
+  =\frac{k(N-k)}{4N+2}
+   \frac{\binom{2N+2}{2k+1}}{\binom Nk^2}.
+  \]
+- The manuscript therefore does not claim the discrete EMD closed form or the
+  Young-diagram symmetric-difference viewpoint as new. Its Proposition 6.3 is
+  a different conditional identity: it conditions on `M=|S\setminus T|` and
+  factors the expectation into a simple-walk bridge area and exchangeable
+  active-site gaps.
 
 Eustasio del Barrio, Evarist Giné, and Carlos Matrán, “Central limit theorems
 for the Wasserstein distance between the empirical and the true
@@ -242,9 +273,10 @@ distributions,” Annals of Probability 27 (1999), 1009–1071,
   density; Rosén's finite-population bridge theorem supplies the different
   covariance factor.
 - The article has a correction in Annals of Probability 31 (2003), 1142–1143,
-  [doi:10.1214/aop/1048516548](https://doi.org/10.1214/aop/1048516548). The
-  correction concerns Proposition 6.4 and later heavy-tail results; those
-  statements are not used in the manuscript.
+  [Project Euclid: aop/1048516548](https://projecteuclid.org/journals/annals-of-probability/volume-31/issue-2/Correction--Central-limit-theorems-for-the-Wasserstein-distance-between/aop/1048516548.pdf).
+  The correction concerns Proposition 6.4 and later heavy-tail results; those
+  statements are not used in the manuscript. The Project Euclid identifier is
+  not a registered DOI.
 
 ## Stirling remainder
 
@@ -265,7 +297,10 @@ missed the rectangular-minuscule-lattice formulation.  A referee audit on
 Wiener indices, lattice-path distance, and expected one-dimensional earth
 mover distance.  Those searches located Defant et al., whose Corollary 3 and
 Proposition 5 are the direct prior exact-mean and Brownian-bridge results for
-the same graphs.
+the same graphs.  A further audit on 2026-09-01 located Bourn and Erickson,
+whose Theorem 4.3 records the same closed mean in discrete EMD notation and
+whose Section 3 supplies the prior Young-diagram symmetric-difference
+interpretation.
 
 Accordingly, the manuscript does not claim priority for the fixed-aspect-ratio
 Brownian-bridge law, its moment limits, the closed pairwise mean, or the
@@ -273,6 +308,7 @@ central correction obtained from that closed form.  Its distinct claims are
 the explicit matchgate/minuscule-lattice identification and resulting
 application to Conjecture 14; an independent finite-population proof valid for
 every density sequence; the Haar matchgate specialization; the projection
-proof of the graph--Krylov comparison; and the central symmetric-difference
-identity as an independent exact formula.  This records the scope of the
-search rather than a guarantee that no other overlapping work exists.
+proof of the graph--Krylov comparison; and the central conditional-on-
+`|S\setminus T|` bridge-and-gap identity as a distinct exact formula.  This
+records the scope of the search rather than a guarantee that no other
+overlapping work exists.
