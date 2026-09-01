@@ -4,6 +4,7 @@
 \usepackage{lmodern}
 \usepackage{amsmath,amsthm,amssymb,amsfonts}
 \usepackage{mathtools}
+\usepackage{array}
 \usepackage[small,labelfont=bf,labelsep=period]{caption}
 \usepackage{float}
 \usepackage[
@@ -127,31 +128,33 @@ Brownian-bridge distances and complexity}
 \maketitle
 
 \begin{abstract}
-Matchgate commutator-graph components are Hasse graphs of rectangular
-minuscule lattices.  Defant, F\'eray, Nadeau, and Williams previously proved
+Matchgate commutator-graph components are isomorphic, as unweighted graphs, to
+the cover graphs of rectangular minuscule lattices.  Defant, F\'eray, Nadeau,
+and Williams previously proved
 the fixed-aspect-ratio Brownian-bridge distance law for these lattices, with
 moment convergence, and obtained a closed Wiener-index
 formula~\cite{DefantEtAl}.  We make the resulting matchgate implication
 explicit, give an independent finite-population derivation valid for every
-sequence $\kappa_n/(2n)\to\rho\in(0,1)$, and translate the result to matchgate
-complexity.  If $S$ and $T$ are independent uniform $\kappa_n$-subsets of
+sequence $k_n/(2n)\to\rho\in(0,1)$, and translate the result to matchgate
+complexity.  If $S$ and $T$ are independent uniform $k_n$-subsets of
 $[2n]$, write
-$D_{2n,\kappa_n}(S,T)=\sum_i|s_i-t_i|$.  Then
+$D_{2n,k_n}(S,T)=\sum_i|s_i-t_i|$.  Then
 \[
- \frac{D_{2n,\kappa_n}}{n^{3/2}}
+ \frac{D_{2n,k_n}}{n^{3/2}}
  \Rightarrow 4\sqrt{\rho(1-\rho)}\int_0^1|B(t)|\,dt,
  \qquad
- \E D_{2n,\kappa_n}\sim
+ \E D_{2n,k_n}\sim
  \frac{\sqrt{2\pi}}2\sqrt{\rho(1-\rho)}\,n^{3/2},
 \]
 where $B$ is the standard Brownian bridge with covariance
-$\min\{s,t\}-st$.  In the central component the limiting coefficient is $2$
-and the mean constant is $\sqrt{2\pi}/4$, resolving Conjecture~14 of West et
-al. after the matchgate--minuscule-lattice identification.  We also obtain the
-variance asymptotic and leading finite-size correction, give a finite sum
-obtained by conditioning on the symmetric-difference size, derive the jointly
-vertex--Haar-averaged graph-complexity mean, and prove the pointwise bound from
-graph complexity to Krylov complexity for generator-supported time-independent
+$\min\{s,t\}-st$.  In the central component $k_n=n$, the limiting coefficient
+is $2$ and the mean constant is $\sqrt{2\pi}/4$, resolving Conjecture~14 of
+West et al. after the matchgate--minuscule-lattice identification.  We also
+record the variance asymptotic, extract the leading finite-size correction
+from the published closed form, and give a finite sum obtained by conditioning
+on the symmetric-difference size.  For complexity, we derive the joint
+vertex-and-Haar graph-complexity mean and prove the pointwise bound from graph
+complexity to Krylov complexity for generator-supported time-independent
 Hamiltonians.
 
 \vskip5pt
@@ -169,8 +172,10 @@ distance; graph complexity; Krylov complexity.
 
 \section{Introduction}
 
-West et al.~\cite{WestEtAl} describe the component $\mathcal C_\kappa$ of the
-matchgate commutator graph by the $\kappa$-element subsets of $[2n]$.  Their
+The commutator graph was introduced by Diaz et al.~\cite{DiazEtAl}.
+West et al.~\cite[Section~IV and Appendix~C]{WestEtAl} describe the component
+$\mathcal C_\kappa$ of the matchgate commutator graph by the $\kappa$-element
+subsets of $[2n]$.  Their
 Appendix~C, Eq.~(C2), identifies the graph distance between
 $S=(s_1<\cdots<s_\kappa)$ and $T=(t_1<\cdots<t_\kappa)$ as
 \begin{equation}\label{eq:matching-distance}
@@ -199,19 +204,55 @@ unordered-pair convention for the Wiener index $W(G)$, symmetry and the zero
 diagonal give $d(G)=2W(G)$; hence the average used by West et al. is
 $d(G)/|V(G)|^2=2W(G)/|V(G)|^2$.
 
-For rectangles with a fixed aspect ratio, taking
-$\alpha=\rho/(1-\rho)$ in the result of Defant et al. gives the same limiting
-law, mean, and variance constants as those stated below; at $\alpha=1$ it gives
-the central case.  Thus their theorem, combined with the matchgate component
-identification of West et al., already implies Conjecture~14.  The
-contributions specific to the present paper are: (i) making this matchgate
-implication explicit; (ii) giving an independent finite-population proof for
-every sequence $k_n/(2n)\to\rho$, with direct moment bounds; (iii) deriving the
-Haar matchgate specialization and a projection proof of the graph--Krylov
-comparison; and (iv) giving a central finite sum obtained by conditioning on
-the symmetric-difference size.  The Haar statement is a joint expectation
-over an independent uniform initial Pauli vertex and Haar matchgate unitary;
-it is not a pointwise-in-vertex scaling statement.
+Defant et al.~\cite[Proposition~5]{DefantEtAl} state the result for rectangles
+$\mathcal P_{\lfloor\alpha\ell\rfloor,\ell}$ along a fixed ray, with
+$\alpha>0$ fixed.  Taking $\alpha=\rho/(1-\rho)$ gives the same limiting law,
+mean, and variance constants as those stated below; at $\alpha=1$ it gives the
+central case.  Thus their theorem, combined with the matchgate component
+identification of West et al., already implies Conjecture~14.  The present
+finite-population proof treats the triangular-array extension in which the two
+rectangle dimensions may vary arbitrarily subject only to
+$k_n/(2n)\to\rho$, equivalently $k_n/(2n-k_n)\to\alpha$, and supplies direct
+moment bounds.  It also derives the Haar matchgate specialization, gives a
+projection proof of the graph--Krylov comparison, and obtains a central finite
+sum by conditioning on the symmetric-difference size.  The Haar statement is
+a joint expectation over an independent uniform initial Pauli vertex and Haar
+matchgate unitary; it is not a pointwise-in-vertex scaling statement.
+
+Table~\ref{tab:provenance} separates the published suppliers from the
+deductions and alternative arguments given here.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.34\linewidth}
+                >{\raggedright\arraybackslash}p{0.58\linewidth}}
+Result & Source and role in this paper\\
+\hline
+Central Brownian-area law and moments
+& Proposition~5 of Defant et al.~\cite[Proposition~5]{DefantEtAl}, combined
+with the matchgate-component identification of West et
+al.~\cite[Section~IV and Appendix~C]{WestEtAl}; recorded here as a matchgate
+consequence.\\
+Arbitrary density sequences
+& Finite-population proof here for every $k_n/(2n)\to\rho$, extending the
+fixed-ray formulation and giving direct second- and fourth-moment bounds.\\
+Exact finite mean
+& Corollary~3 of Defant et al.~\cite[Corollary~3]{DefantEtAl}; equivalently
+Theorem~4.3 of Bourn and Erickson~\cite[Theorem~4.3]{BournErickson}.\\
+Central finite-size formulas
+& The $n^{1/2}$ correction is extracted here from the published mean; the
+conditional bridge-and-gap sum is derived here.\\
+Graph and Krylov complexity
+& Matchgate specialization of Proposition~7 of West et
+al.~\cite[Proposition~7 and Lemma~9]{WestEtAl}; the statement of their
+Lemma~9 is proved here by a tail-projection argument that avoids its
+cross-term step.\\
+\end{tabular}
+\caption{Provenance of the principal results and the role of the present
+arguments.}
+\label{tab:provenance}
+\end{table}
 
 The alternative probabilistic proof uses one-dimensional transport.  The
 matching distance is the area between two cumulative counting functions, and
@@ -388,8 +429,10 @@ $Q_N^2=\sum_{i=1}^N(a_i-p_N)^2=Np_N(1-p_N)$,
  \frac{\max_i|a_i-p_N|}{Q_N}
  \leq\frac{1}{\sqrt{Np_N(1-p_N)}}\longrightarrow0.
 \]
-The cited theorem therefore applies to exactly this polygon and gives
-$G_N^S/\sigma_N\Rightarrow B$ in $C[0,1]$.  Since
+The sample size and population size are both $N$, so the sampling fraction in
+Ros\'en's theorem is $\lambda=1$ and his limiting process $W(1,1)$ is the
+standard Brownian bridge.  The cited theorem therefore applies to exactly this
+polygon and gives $G_N^S/\sigma_N\Rightarrow B$ in $C[0,1]$.  Since
 $\sigma_N\to\sqrt{\rho(1-\rho)}$, Slutsky's theorem proves the first assertion.
 Independence makes the joint law of $(G_N^S,G_N^T)$ the product of its
 marginal laws, so it converges to two independent bridges.  Subtraction is
@@ -477,13 +520,18 @@ Independence therefore gives, with $q_r=\min(r,N-r)$,
 \]
 For $r>N/2$ this uses
 $\Delta_r=-[(k-C_S(r))-(k-C_T(r))]$ and samples the complementary block of
-size $N-r$.  Chernoff's bound and integration of the tail give
+size $N-r$.  For $x>0$, minimizing
+$-\lambda x+q_r\lambda^2/4$ at $\lambda=2x/q_r$, and then applying the same
+bound to $-\Delta_r$, gives
 \[
- \Pp(|\Delta_r|\geq x)\leq2e^{-x^2/q_r},
- \qquad
+ \Pp(|\Delta_r|\geq x)\leq2e^{-x^2/q_r}.
+\]
+Integration of this tail gives
+\[
  \E|\Delta_r|^4
  =4\int_0^\infty x^3\Pp(|\Delta_r|>x)\,dx
- \leq4q_r^2.
+ \leq8\int_0^\infty x^3e^{-x^2/q_r}\,dx
+ =4q_r^2.
 \]
 H\"older's inequality and $\sum_{r=1}^{N-1}q_r^2\leq N^3/4$ now yield
 \[
@@ -607,7 +655,7 @@ This proves \eqref{eq:variance-main}; setting $\rho=1/2$ gives
 
 \begin{corollary}[Conjecture 14 as a corollary]\label{cor:conjecture}
 Let $A(n,n)$ be the central-component average in Theorem~13 of
-West et al.~\cite{WestEtAl}.  Then
+West et al.~\cite[Theorem~13 and Conjecture~14]{WestEtAl}.  Then
 \[
  A(n,n)=\frac{\sqrt{2\pi}}4n^{3/2}+o(n^{3/2}).
 \]
@@ -675,8 +723,8 @@ $\{c_a,c_b\}=2\delta_{ab}I$.  In this basis,
  \qquad
  X_jX_{j+1}=-i c_{2j}c_{2j+1}.
 \]
-For each $1\leq a<2n$, the operator
-$g_a:=-ic_ac_{a+1}$ is therefore in $\Gamma_n$, and
+For each $1\leq a<2n$, put $g_a:=-ic_ac_{a+1}$.  The displayed identities give
+$g_{2j-1}=Z_j$ and $g_{2j}=X_jX_{j+1}$, so $g_a\in\Gamma_n$.  Moreover,
 $V_a:=e^{-i\pi g_a/4}$ satisfies
 \[
  V_a^\dagger c_aV_a=-c_{a+1},\qquad
@@ -691,8 +739,9 @@ More generally, the canonical anticommutation relations give
  &=\sin(2\theta)c_a+\cos(2\theta)c_{a+1}.
 \end{align*}
 Thus conjugation by $\mathcal M_n$ preserves each degree-$k$ Majorana span.
-The adjacent transpositions generate the full symmetric group on the $2n$
-Majorana labels.  Given two $k$-element supports, choose a permutation carrying
+The induced actions of the $V_a$ on supports are the adjacent transpositions,
+which generate the full symmetric group on the $2n$ Majorana labels.  Given
+two $k$-element supports, choose a permutation carrying
 the first support to the second and express it as a product of adjacent
 transpositions.  The corresponding product of the $V_a$ maps the first
 degree-$k$ Majorana monomial to the second up to a phase of modulus one.
@@ -728,10 +777,11 @@ the degree-$k$ Majorana span, and Parseval's identity gives, for every $U$,
 Taking expectations proves $|\mathcal C_k|a_Q=1$.  The component size is
 $|\mathcal C_k|=\binom{2n}{k}$ by the Majorana-subset identification.
 This is the matchgate specialization of Proposition~7 of West et
-al.~\cite{WestEtAl}, with the normalized pairing made explicit.
+al.~\cite[Proposition~7 and Eq.~(36)]{WestEtAl}, with the normalized pairing
+made explicit.
 \end{proof}
 
-\begin{corollary}[Haar-averaged matchgate graph complexity]\label{cor:complexity}
+\begin{corollary}[Joint vertex-and-Haar matchgate graph complexity]\label{cor:complexity}
 Let $k_n/(2n)\to\rho\in(0,1)$, let $P_n$ be uniform in the matchgate component
 $\mathcal C_{k_n}$, and let $U_n$ be independently Haar distributed in the
 group $\mathcal M_n$.  Then
@@ -751,13 +801,15 @@ coefficient as
 \]
 Lemma~\ref{lem:haar-coefficient} gives
 $\E_U|c_Q(U)|^2=|\mathcal C_{k_n}|^{-1}$.  Substitution in
-\eqref{eq:graph-complexity-definition} gives Eq.~(38) of West et al.:
+\eqref{eq:graph-complexity-definition} gives Eq.~(38) of West et
+al.~\cite[Eq.~(38)]{WestEtAl}:
 \[
  \E_U\mathsf G_{P_n}(U^\dagger P_nU)
  =\frac{1}{|\mathcal C_{k_n}|}
    \sum_{Q\in\mathcal C_{k_n}}d_{\mathcal C_{k_n}}(P_n,Q).
 \]
-Averaging also over $P_n$ gives exactly $\E D_{2n,k_n}$, so
+This fixed-vertex mean can depend on $P_n$.  Averaging also over $P_n$ gives
+exactly $\E D_{2n,k_n}$, so
 Theorem~\ref{thm:main} gives the stated asymptotic.
 \end{proof}
 
@@ -778,9 +830,14 @@ Put
 \[
  P_t=e^{iHt}Pe^{-iHt},
 \]
-and construct the orthonormal Lanczos basis $O_0=P,O_1,\ldots,O_{d_K-1}$
-from the Liouvillian $\mathcal L_H=[H,\,\cdot\,]$ using
-\eqref{eq:normalized-HS}.  If
+and apply the Lanczos construction to the Liouvillian
+$\mathcal L_H=[H,\,\cdot\,]$ using \eqref{eq:normalized-HS}, terminating at
+the first zero residual.  Write
+\[
+ d_K:=\dim\operatorname{span}\{\mathcal L_H^\ell P:\ell\geq0\}
+\]
+and denote the resulting orthonormal basis by
+$O_0=P,O_1,\ldots,O_{d_K-1}$.  If
 \[
  P_t=\sum_{j=0}^{d_K-1}d_j(t)O_j,
  \qquad
@@ -812,8 +869,11 @@ For $j\geq0$, let
  \mathcal K_j:=\operatorname{span}
  \{O_0,\ldots,O_{\min\{j,d_K-1\}}\}.
 \]
-Every $g\in\Gamma_n$ either commutes with a Pauli string or maps it, under
-commutation, to a scalar multiple of an adjacent Pauli string.  Consequently
+For Pauli strings $g$ and $Q$, one has $[g,Q]=0$ when they commute and
+$[g,Q]=2gQ$ when they anticommute.  If $g\in\Gamma_n$, the latter product is,
+up to phase, the Pauli string obtained by moving one occupied Majorana label
+across the adjacent pair defining $g$, and hence is adjacent to $Q$ in the
+commutator graph.  Consequently
 \[
  \mathcal L_H\mathcal F_j\subseteq\mathcal F_{j+1},
  \qquad \mathcal L_H^jP\in\mathcal F_j.
@@ -843,17 +903,22 @@ onto $\mathcal K_{j-1}$.  Comparing
 \eqref{eq:graph-tail-projections} and
 \eqref{eq:krylov-tail-projections} term by term proves the pointwise
 inequality.  Thus the argument supplies a self-contained projection proof of
-the statement recorded as Lemma~9 by West et al.~\cite{WestEtAl}.  Integrating
+the statement recorded as Lemma~9 by West et
+al.~\cite[Lemma~9 and Eqs.~(A78)--(A86)]{WestEtAl}.  Integrating
 the pointwise inequality proves the expectation statement.
 \end{proof}
 
 \begin{remark}[Relation to Lemma~9 of West et al.]
 The passage from Eq.~(A81) to Eq.~(A82) in the appendix proof of Lemma~9 in
-West et al. does not follow from the stated support condition alone.  The
-summands there contain cross terms in Lanczos coefficients and Pauli
+West et al.~\cite[Eqs.~(A81)--(A82)]{WestEtAl} does not follow from the stated
+support condition alone.  The summands there contain cross terms in Lanczos
+coefficients and Pauli
 amplitudes, which need not be nonnegative real numbers, so the bound
 $\ell(p,q)\leq\min\{n,n'\}$ cannot be applied to each summand as an order
-inequality.  Equations~\eqref{eq:graph-tail-projections} and
+inequality.  Already for real scalars, coordinatewise inequalities
+$a_i\leq b_i$ do not imply $\sum_i a_iz_i\leq\sum_i b_iz_i$ when the $z_i$
+have mixed signs: take $a=(1,0)$, $b=(1,1)$, and $z=(1,-2)$.  Equations~
+\eqref{eq:graph-tail-projections} and
 \eqref{eq:krylov-tail-projections} instead express both complexities as sums
 of squared tail norms.  Those summands are nonnegative, and
 $\mathcal K_{j-1}\subseteq\mathcal F_{j-1}$ gives their term-by-term
@@ -871,6 +936,8 @@ Haar-averaged Krylov quantity is asserted without such a joint dynamical law.
 \end{remark}
 
 \section{Exact finite-size evaluation}
+
+\subsection{Published rectangular mean}
 
 The rectangular-minuscule-lattice Wiener index gives a closed form for every
 component.  In discrete earth-mover notation, the same expression is
@@ -904,6 +971,8 @@ sum over all ordered vertex pairs and compute
 Division by $\binom Nk^2$ proves \eqref{eq:closed-form}; setting $N=2n$ and
 $k=n$ gives \eqref{eq:central-closed-form}.
 \end{proof}
+
+\subsection{Central bridge-and-gap identity}
 
 The Young-diagram interpretation of Bourn and Erickson expresses the distance
 as a symmetric difference.  The central component also has the following
@@ -1006,6 +1075,8 @@ $1\leq m\leq n$ with \eqref{eq:M-law} therefore proves
 \eqref{eq:central-exact}.
 \end{proof}
 
+\subsection{Central finite-size expansion}
+
 \begin{theorem}[Central finite-size correction from the closed form]\label{thm:finite-size}
 The central-component mean has the expansion
 \begin{equation}\label{eq:finite-size}
@@ -1056,6 +1127,8 @@ Substitution in the published closed form
 \]
 which is \eqref{eq:finite-size}.
 \end{proof}
+
+\subsection{Exact finite-sum evaluation}
 
 The transport identity gives an exact one-dimensional computation that avoids
 enumerating pairs of subsets.  Let $H_{N,k,r}$ count how many sites of a
@@ -1139,8 +1212,9 @@ constant $\frac{\sqrt{2\pi}}2\sqrt{\rho(1-\rho)}$ from
 Theorem~\ref{thm:main}.}
 \label{tab:noncentral}
 \end{table}
-The values in both tables are deterministic floating-point evaluations of
-finite sums, not Monte Carlo estimates or certified interval bounds.
+The values in both tables are direct floating-point evaluations of
+deterministic finite sums, not Monte Carlo estimates or certified interval
+bounds.
 
 \section{Conclusion}
 
@@ -1175,8 +1249,8 @@ The source archive accompanying this manuscript contains the checker and its
 recorded output under \texttt{code/} and \texttt{results/}, together with the
 \texttt{Makefile}.  The versioned source package is available at
 \url{https://github.com/skypher/matchgate}.  This revised manuscript is
-identified by the Git tag \texttt{paper-2026-09-01-r1} at
-\url{https://github.com/skypher/matchgate/tree/paper-2026-09-01-r1}.  It is
+identified by the Git tag \texttt{paper-2026-09-01-r2} at
+\url{https://github.com/skypher/matchgate/tree/paper-2026-09-01-r2}.  It is
 built and run, for example, with
 \begin{gather*}
  \texttt{make paper},\qquad \texttt{make exact-mean},\\
@@ -1184,7 +1258,8 @@ built and run, for example, with
  \texttt{make check-exact-mean}.
 \end{gather*}
 The manuscript build requires pdf\LaTeX.  The numerical build requires a C++20
-compiler with OpenMP support, and the checker requires Python~3.  The values in
+compiler with OpenMP support, and the checker requires Python~3.10 or later.
+The values in
 Tables~\ref{tab:numerics} and~\ref{tab:noncentral} were produced with
 GCC~13.3.0.  The implementation
 uses \texttt{long double}, \texttt{lgammal}, and normalized exponential
@@ -1199,7 +1274,7 @@ recorded floating-point row and fails if an output leaves its stated numerical
 tolerance.
 
 \begin{thebibliography}{99}
-\small
+\small\raggedright
 
 \bibitem{AudenaertEtAl}
 K. M. R. Audenaert, C. Godsil, G. Royle, and T. Rudolph,
@@ -1231,8 +1306,15 @@ CDFs}, arXiv:2111.03570 (2021).
 \bibitem{DefantEtAl}
 C. Defant, V. F\'eray, P. Nadeau, and N. Williams,
 \emph{Wiener indices of minuscule lattices},
-Electronic Journal of Combinatorics \textbf{31} (2024), Paper No.~P1.41.
+The Electronic Journal of Combinatorics \textbf{31} (2024), Paper No.~P1.41.
 \href{https://doi.org/10.37236/12002}{doi:10.37236/12002}.
+
+\bibitem{DiazEtAl}
+N. L. Diaz, D. Garc\'ia-Mart\'in, S. Kazi, M. Larocca, and M. Cerezo,
+\emph{Showcasing a barren plateau theory beyond the dynamical Lie algebra},
+arXiv:2310.11505 (2023).
+\href{https://doi.org/10.48550/arXiv.2310.11505}%
+{doi:10.48550/arXiv.2310.11505}.
 
 \bibitem{delBarrioGineMatran}
 E. del Barrio, E. Gin\'e, and C. Matr\'an,

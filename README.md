@@ -31,14 +31,14 @@ make exact-mean
 
 Run exact rational small-case checks, including the published rectangular-
 lattice closed form, and replay every recorded floating-point acceptance row
-with tolerance checks using Python 3:
+with tolerance checks using Python 3.10 or later:
 
 ```sh
 make check-exact-mean
 ```
 
 The archived manuscript revision is tagged
-[`paper-2026-09-01-r1`](https://github.com/skypher/matchgate/tree/paper-2026-09-01-r1).
+[`paper-2026-09-01-r2`](https://github.com/skypher/matchgate/tree/paper-2026-09-01-r2).
 
 The recorded table was generated with GCC 13.3.0 using C++20 and OpenMP. The
 program evaluates exact finite-sum identities with `long double`, `lgammal`,

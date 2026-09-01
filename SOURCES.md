@@ -43,6 +43,14 @@ pointwise Hamiltonian-dependent implication.
 The recent paper formulates Conjecture 14; its Section II.A attributes the
 introduction of commutator graphs to an earlier paper by Díaz et al.
 
+N. L. Diaz, Diego García-Martín, Sujay Kazi, Martin Larocca, and M. Cerezo,
+“Showcasing a Barren Plateau Theory Beyond the Dynamical Lie Algebra,”
+arXiv:2310.11505 (2023),
+[doi:10.48550/arXiv.2310.11505](https://doi.org/10.48550/arXiv.2310.11505).
+
+- West et al., Section II.A, identifies this paper as the source that
+  introduced the commutator graph for free-fermionic trainability.
+
 ## Rectangular minuscule lattices and the prior distance theorem
 
 Colin Defant, Valentin Féray, Philippe Nadeau, and Nathan Williams, “Wiener

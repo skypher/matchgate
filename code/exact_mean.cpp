@@ -14,12 +14,12 @@
 namespace {
 
 void print_usage(std::ostream& output, const char* program_name) {
-  output << "Usage: " << program_name << " [--rho DENSITY] [N ...]\n"
+  output << "Usage: " << program_name << " [--rho DENSITY] [n ...]\n"
          << "Numerically evaluate the exact finite-sum mean distance for "
             "matchgate components.\n\n"
          << "Arguments:\n"
-         << "  N              Positive matchgate site counts (default: "
-            "25 50 100 200 400 800).\n\n"
+         << "  n              Positive qubit counts; the Majorana population "
+            "has size 2n (default: 25 50 100 200 400 800).\n\n"
          << "Options:\n"
          << "  --rho DENSITY  Requested subset density in (0,1) (default: 0.5).\n"
          << "  -h, --help     Show this help message and exit.\n";
