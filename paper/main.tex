@@ -25,7 +25,7 @@
   urlcolor={purple},
   citecolor={blue!80!black},
   pdfauthor={Leslie P. Polzer},
-  pdftitle={Matchgate Commutator Graphs as Rectangular Minuscule Lattices: Brownian-Bridge Distances and Complexity},
+  pdftitle={Matchgate Commutator Graphs as Rectangular Minuscule Lattices: Brownian-Bridge Distances, Graph Complexity, and a Krylov Bound},
   pdfsubject={Brownian-bridge distances and complexity in matchgate commutator-graph components},
   pdfkeywords={matchgate commutator graph, rectangular minuscule lattice, token graph, Wiener index, Brownian bridge, Wasserstein distance, graph complexity, Krylov complexity}
 }
@@ -133,11 +133,14 @@ the cover graphs of rectangular minuscule lattices.  Defant, F\'eray, Nadeau,
 and Williams previously proved
 the fixed-aspect-ratio Brownian-bridge distance law for these lattices, with
 moment convergence, and obtained a closed Wiener-index
-formula~\cite{DefantEtAl}.  We make the resulting matchgate implication
-explicit, give an independent finite-population derivation valid for every
-sequence $k_n/(2n)\to\rho\in(0,1)$, derive a joint vertex-and-Haar
-graph-complexity asymptotic, and prove a separate pointwise graph--Krylov
-comparison.  If $S$ and $T$ are independent uniform $k_n$-subsets of
+formula~\cite{DefantEtAl}.  Combining that result with the
+matchgate--minuscule-lattice identification shows that Conjecture~14 of West
+et al.~\cite[Conjecture~14]{WestEtAl} holds.  We make this implication
+explicit and give an independent finite-population derivation valid for every
+sequence $k_n/(2n)\to\rho\in(0,1)$.  We also derive a graph-complexity asymptotic after
+averaging jointly over a uniform initial vertex and an independent Haar
+matchgate unitary, and prove a separate pointwise graph--Krylov comparison.
+If $S$ and $T$ are independent uniform $k_n$-subsets of
 $[2n]$, write
 $D_{2n,k_n}(S,T)=\sum_i|s_i-t_i|$.  Then
 \[
@@ -150,13 +153,11 @@ $D_{2n,k_n}(S,T)=\sum_i|s_i-t_i|$.  Then
 where $B$ is the standard Brownian bridge with covariance
 $\min\{s,t\}-st$.  In the central (half-filled) component $k_n=n$, the
 coefficient multiplying the Brownian area is $2$ and the mean constant is
-$\sqrt{2\pi}/4$, resolving Conjecture~14 of
-West et al. after the matchgate--minuscule-lattice identification.  We also
-record the variance asymptotic, extract the leading finite-size correction
-from the published closed form, and give a finite sum obtained by conditioning
-on the symmetric-difference size.  The Krylov comparison is for
-generator-supported time-independent Hamiltonians; no Haar-averaged Krylov
-asymptotic is asserted.
+$\sqrt{2\pi}/4$.  We also record the variance asymptotic, extract the leading
+finite-size correction from the published closed form, and give a finite sum
+obtained by conditioning on the symmetric-difference size.  The Krylov
+comparison is for generator-supported time-independent Hamiltonians; no
+Haar-averaged Krylov asymptotic is asserted.
 
 \vskip5pt
 \noindent\textbf{Keywords.}\enspace Matchgate commutator graph; rectangular
@@ -198,10 +199,18 @@ lattices.  Let
 be the distributive lattice of order ideals of an $m\times\ell$ rectangle.
 Reading the membership word of a $k$-subset of $[N]$ as an up--down path
 identifies the token graph with the Hasse graph of
-$\mathcal P_{k,N-k}$.  If $p_r$ is the height of the path for $S$ after $r$
-steps, then $p_r=2C_S(r)-r$; hence the path-area distance used for rectangular
-minuscule lattices is exactly \eqref{eq:matching-distance}.  Defant, F\'eray,
-Nadeau, and Williams~\cite[Corollary~3 and Proposition~5]{DefantEtAl} give a
+$\mathcal P_{k,N-k}$.  Put $C_S(r):=|S\cap[r]|$ and define $C_T(r)$
+similarly.  If $p_r$ and $q_r$ are the heights of the paths for $S$ and $T$
+after $r$ steps, then $p_r=2C_S(r)-r$ and $q_r=2C_T(r)-r$.  Consequently,
+the path-area distance in Eq.~(2) of Defant et al. is
+\[
+ \frac12\sum_{r=1}^{N-1}|p_r-q_r|
+ =\sum_{r=1}^{N-1}|C_S(r)-C_T(r)|
+ =D_{N,k}(S,T),
+\]
+where the last equality is also proved directly in
+Lemma~\ref{lem:transport}.  Defant, F\'eray, Nadeau, and
+Williams~\cite[Corollary~3 and Proposition~5]{DefantEtAl} give a
 closed formula for its Wiener index and prove the fixed-aspect-ratio
 Brownian-bridge limit in distribution and in moments.  Defant et al. write
 $d(G)$ for the distance sum over all ordered vertex pairs.  Under the standard
@@ -235,8 +244,8 @@ sum by conditioning on the symmetric-difference size.  The Haar statement is
 a joint expectation over an independent uniform initial Pauli vertex and Haar
 matchgate unitary; it is not a pointwise-in-vertex scaling statement.
 
-Table~\ref{tab:provenance} separates the published suppliers from the
-deductions and alternative arguments given here.
+Table~\ref{tab:provenance} separates the prior results used here from the
+deductions and alternative arguments given in this paper.
 
 \begin{table}[H]
 \centering
@@ -286,10 +295,11 @@ identity below is the discrete one-dimensional $1$-Wasserstein identity.  In
 one dimension, $W_1$ is the area between cumulative distribution functions
 \cite{Vallender,DeAngelisGray}.  Vallender's later addendum corrects Remark~1
 and formula~(3) of the original note; it does not alter the CDF-area identity
-used here~\cite{VallenderAddendum}.  Bourn and
-Willenbring~\cite{BournWillenbring} study expected one-dimensional earth mover
-distance for uniform weak compositions and its probability-simplex limit.  A
-stars-and-bars word identifies a uniform $k$-subset of $[N]$ with a uniform
+used here~\cite{VallenderAddendum}.
+
+Bourn and Willenbring~\cite{BournWillenbring} study expected one-dimensional
+earth mover distance for uniform weak compositions and its probability-simplex
+limit.  A stars-and-bars word identifies a uniform $k$-subset of $[N]$ with a uniform
 weak composition of $k$ into $N-k+1$ parts, and Lemma~\ref{lem:transport}
 identifies the corresponding earth mover distance with $D_{N,k}$.  Bourn and
 Erickson~\cite[Theorem~4.3]{BournErickson} use the Type~A minuscule-lattice
@@ -298,8 +308,10 @@ formula; the substitutions $s=k$ and $b=N-k+1$ give exactly
 Proposition~\ref{prop:closed-form}.  They also interpret the distance through
 symmetric differences of Young diagrams.  Proposition~\ref{prop:central-exact}
 below instead conditions on $|S\setminus T|$ and decomposes the distance into a
-simple-walk bridge area and exchangeable gaps.  Brownian-bridge limits for
-$L^1$ empirical-process and Wasserstein functionals are classical; see del
+simple-walk bridge area and exchangeable gaps.
+
+Brownian-bridge limits for $L^1$ empirical-process and Wasserstein functionals
+are classical; see del
 Barrio, Gin\'e, and Matr\'an~\cite{delBarrioGineMatran} and their correction to
 separate heavy-tail statements~\cite{delBarrioCorrection}.  Those corrected
 statements are not used here.
@@ -698,10 +710,11 @@ Multiplication by $4\sqrt{\rho(1-\rho)}$ proves
 Put $X_n=D_{2n,k_n}/n^{3/2}$ and
 $X=4\sqrt{\rho(1-\rho)}\,\mathcal A$.  The fourth-moment bound in
 Proposition~\ref{prop:second-moment} makes $\{X_n^2\}$ uniformly integrable,
-while \eqref{eq:distribution-main} gives $X_n\Rightarrow X$.  Consequently
-$\E X_n^2\to\E X^2$.  Together with the already proved convergence
-$\E X_n\to\E X$, this gives $\Var(X_n)\to\Var(X)$.  The Brownian-bridge area
-has
+while \eqref{eq:distribution-main} gives $X_n\Rightarrow X$.  The continuous
+mapping theorem therefore gives $X_n^2\Rightarrow X^2$, and uniform
+integrability yields $\E X_n^2\to\E X^2$.  Together with the already proved
+convergence $\E X_n\to\E X$, this gives $\Var(X_n)\to\Var(X)$.  The
+Brownian-bridge area has
 \begin{equation}\label{eq:brownian-area-second-moment}
  \E\mathcal A^2=\frac7{60};
 \end{equation}
@@ -798,8 +811,8 @@ which generate the full symmetric group on the $2n$ Majorana labels.  Given
 two $k$-element supports, choose a permutation carrying
 the first support to the second and express it as a product of adjacent
 transpositions.  The corresponding product of the $V_a$ maps the canonical
-Pauli representative of the first support to that of the second up to a phase
-of modulus one.  Thus the action is transitive on the Pauli basis
+Pauli representative of the first support to that of the second up to a sign.
+Thus the action is transitive on the Pauli basis
 $\mathcal C_k$.  This transitivity is the only
 representation-theoretic input below.  In particular, the argument does not
 assume that the degree-$k$ Majorana representation is irreducible; this matters
@@ -809,14 +822,15 @@ For fixed $P$ and $Q\in\mathcal C_k$, put
 \[
  a_Q:=\E_U\left|\langle Q,U^\dagger P U\rangle_{\mathrm{HS}}\right|^2.
 \]
-Given $Q,R\in\mathcal C_k$, choose $V\in\mathcal M_n$ and $|\zeta|=1$ such
-that $V^\dagger QV=\zeta R$.  Unitary invariance of the Hilbert--Schmidt
+Given $Q,R\in\mathcal C_k$, choose $V\in\mathcal M_n$ and
+$\varepsilon\in\{-1,1\}$ such that $V^\dagger QV=\varepsilon R$.  Unitary
+invariance of the Hilbert--Schmidt
 inner product and right invariance of Haar measure, with $W=UV^\dagger$,
 give
 \begin{align*}
  a_R
  &=\E_U\left|\langle V^\dagger QV,U^\dagger P U\rangle_{\mathrm{HS}}\right|^2
-   \qquad (|\zeta|=1)\\
+   \qquad (\varepsilon=\pm1)\\
  &=\E_U\left|\langle Q,VU^\dagger PUV^\dagger\rangle_{\mathrm{HS}}\right|^2
  =\E_W\left|\langle Q,W^\dagger P W\rangle_{\mathrm{HS}}\right|^2
  =a_Q.
@@ -835,7 +849,8 @@ al.~\cite[Proposition~7 and Eq.~(36)]{WestEtAl}, with the normalized pairing
 made explicit.
 \end{proof}
 
-\begin{corollary}[Joint vertex-and-Haar matchgate graph complexity]\label{cor:complexity}
+\begin{corollary}[Matchgate graph complexity under vertex and Haar averaging]
+\label{cor:complexity}
 Let $k_n/(2n)\to\rho\in(0,1)$, let $P_n$ be uniform in the matchgate component
 $\mathcal C_{k_n}$, and let $U_n$ be independently Haar distributed in the
 group $\mathcal M_n$.  Then
@@ -862,8 +877,8 @@ al.~\cite[Eq.~(38)]{WestEtAl}:
  =\frac{1}{|\mathcal C_{k_n}|}
    \sum_{Q\in\mathcal C_{k_n}}d_{\mathcal C_{k_n}}(P_n,Q).
 \]
-This fixed-vertex mean can depend on $P_n$.  Averaging also over $P_n$ gives
-exactly $\E D_{2n,k_n}$, so
+This fixed-vertex mean need not be constant in $P_n$.  Averaging also over
+$P_n$ gives exactly $\E D_{2n,k_n}$, so
 Theorem~\ref{thm:main} gives the stated asymptotic.
 \end{proof}
 
@@ -871,8 +886,7 @@ We use the operator-Krylov/Lanczos convention of Parker et
 al.~\cite[Section~III, Eqs.~(3)--(8), and Section~V.A,
 Eq.~(26)]{ParkerEtAl}.
 
-\begin{corollary}[Pointwise graph--Krylov comparison for generator-supported
-Hamiltonians]\label{cor:krylov}
+\begin{corollary}[Graph complexity is bounded by Krylov complexity]\label{cor:krylov}
 Fix $n$, an initial Pauli string $P\in\mathcal C_k$, and a time-independent
 Hamiltonian
 \begin{equation}\label{eq:matchgate-Hamiltonian}
@@ -951,6 +965,8 @@ The analogous tail-sum identity for the Lanczos coefficients is
  \mathsf K_{H,P}(t)
  =\sum_{j\geq1}\left\|(I-\Pi_{j-1}^{\mathcal K})P_t\right\|_{\mathrm{HS}}^2.
 \end{equation}
+Both sums have only finitely many nonzero terms: for $j\geq d_K$, one has
+$P_t\in\mathcal K_{j-1}\subseteq\mathcal F_{j-1}$.
 Because $\mathcal K_{j-1}\subseteq\mathcal F_{j-1}$, orthogonal projection
 onto $\mathcal F_{j-1}$ leaves a residual of no greater norm than projection
 onto $\mathcal K_{j-1}$.  Comparing
@@ -991,14 +1007,14 @@ Haar-averaged Krylov quantity is asserted without such a joint dynamical law.
 
 \section{Exact finite-size evaluation}
 
-\subsection{Published rectangular mean}
+\subsection{Exact rectangular-lattice mean}
 
 The rectangular-minuscule-lattice Wiener index gives a closed form for every
 component.  In discrete earth-mover notation, the same expression is
 recorded by Bourn and Erickson~\cite[Theorem~4.3]{BournErickson}: setting their total
 mass to $s=k$ and their number of bins to $b=N-k+1$ gives the formula below.
 
-\begin{proposition}[Published rectangular-lattice mean]\label{prop:closed-form}
+\begin{proposition}[Exact rectangular-lattice mean (Defant et al.)]\label{prop:closed-form}
 For independent uniform $S,T\in\Omega_{N,k}$,
 \begin{equation}\label{eq:closed-form}
  \E D_{N,k}(S,T)
@@ -1304,10 +1320,10 @@ claims, citations, computations, and wording.
 The source archive accompanying this manuscript contains the checker and its
 recorded output under \texttt{code/} and \texttt{results/}, together with the
 \texttt{Makefile}.  The versioned source package is available at
-\url{https://github.com/skypher/matchgate}.  This revised manuscript is
-archived at Git tag
-\href{https://github.com/skypher/matchgate/tree/paper-2026-09-01-r4}%
-{\texttt{paper-2026-09-01-r4}}.  It is built and run, for example, with
+\url{https://github.com/skypher/matchgate}.  The manuscript version
+corresponding to this source package is archived at Git tag
+\href{https://github.com/skypher/matchgate/tree/paper-2026-09-01-r5}%
+{\texttt{paper-2026-09-01-r5}}.  It is built and run, for example, with
 \begin{gather*}
  \texttt{make paper},\qquad \texttt{make exact-mean},\\
  \texttt{./build/exact\_mean 100 400 800 1600},\\
@@ -1331,12 +1347,12 @@ recorded floating-point row and fails if an output leaves its stated numerical
 tolerance.
 
 \begin{thebibliography}{99}
-\small\raggedright
+\footnotesize\raggedright
 
 \bibitem{AudenaertEtAl}
 K. M. R. Audenaert, C. Godsil, G. Royle, and T. Rudolph,
 \emph{Symmetric squares of graphs},
-Journal of Combinatorial Theory, Series B \textbf{97} (2007), 74--90.
+Journal of Combinatorial Theory, Series B \textbf{97} (2007), no.~1, 74--90.
 \href{https://doi.org/10.1016/j.jctb.2006.04.002}%
 {doi:10.1016/j.jctb.2006.04.002}.
 
@@ -1350,7 +1366,7 @@ Discrete Mathematics \textbf{348} (2025), 114336.
 \bibitem{BournWillenbring}
 R. Bourn and J. F. Willenbring,
 \emph{Expected value of the one-dimensional earth mover's distance},
-Algebraic Statistics \textbf{11} (2020), 53--78.
+Algebraic Statistics \textbf{11} (2020), no.~1, 53--78.
 \href{https://doi.org/10.2140/astat.2020.11.53}%
 {doi:10.2140/astat.2020.11.53}.
 
@@ -1363,7 +1379,8 @@ CDFs}, arXiv:2111.03570 (2021).
 \bibitem{DefantEtAl}
 C. Defant, V. F\'eray, P. Nadeau, and N. Williams,
 \emph{Wiener indices of minuscule lattices},
-The Electronic Journal of Combinatorics \textbf{31} (2024), Paper No.~P1.41.
+The Electronic Journal of Combinatorics \textbf{31} (2024), no.~1,
+Paper No.~P1.41.
 \href{https://doi.org/10.37236/12002}{doi:10.37236/12002}.
 
 \bibitem{delBarrioGineMatran}
@@ -1406,7 +1423,7 @@ Journal of the American Statistical Association \textbf{58} (1963), 13--30.
 \bibitem{IbarraRivera}
 S. Ibarra and L. M. Rivera,
 \emph{The automorphism groups of some token graphs},
-Proyecciones Journal of Mathematics \textbf{42} (2023), 1627--1651.
+Proyecciones Journal of Mathematics \textbf{42} (2023), no.~6, 1627--1651.
 \href{https://doi.org/10.22199/issn.0717-6279-5954}%
 {doi:10.22199/issn.0717-6279-5954}.
 
@@ -1461,7 +1478,7 @@ Theory of Probability and Its Applications \textbf{26} (1982), 435.
 \bibitem{WestEtAl}
 M. West, N. Dowling, A. Southwell, M. Sevior, M. Usman, K. Modi, and T. Quella,
 \emph{A graph-theoretic approach to chaos and complexity in quantum systems},
-SciPost Physics Core \textbf{8} (2025), 081.
+SciPost Physics Core \textbf{8} (2025), no.~4, 081.
 \href{https://doi.org/10.21468/SciPostPhysCore.8.4.081}%
 {doi:10.21468/SciPostPhysCore.8.4.081}.
 
