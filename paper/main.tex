@@ -65,7 +65,7 @@
 \newcommand{\N}{\mathbb{N}}
 
 \title{Matchgate commutator graphs as rectangular minuscule lattices:\\
-Brownian-bridge distances and complexity}
+Brownian-bridge distances, graph complexity, and a Krylov bound}
 \author{Leslie P. Polzer}
 \newcommand{\authoraffiliation}{Independent Researcher}
 \newcommand{\authoremail}{polzer@fastmail.com}
@@ -135,8 +135,9 @@ the fixed-aspect-ratio Brownian-bridge distance law for these lattices, with
 moment convergence, and obtained a closed Wiener-index
 formula~\cite{DefantEtAl}.  We make the resulting matchgate implication
 explicit, give an independent finite-population derivation valid for every
-sequence $k_n/(2n)\to\rho\in(0,1)$, and translate the result to matchgate
-complexity.  If $S$ and $T$ are independent uniform $k_n$-subsets of
+sequence $k_n/(2n)\to\rho\in(0,1)$, derive a joint vertex-and-Haar
+graph-complexity asymptotic, and prove a separate pointwise graph--Krylov
+comparison.  If $S$ and $T$ are independent uniform $k_n$-subsets of
 $[2n]$, write
 $D_{2n,k_n}(S,T)=\sum_i|s_i-t_i|$.  Then
 \[
@@ -147,15 +148,15 @@ $D_{2n,k_n}(S,T)=\sum_i|s_i-t_i|$.  Then
  \frac{\sqrt{2\pi}}2\sqrt{\rho(1-\rho)}\,n^{3/2},
 \]
 where $B$ is the standard Brownian bridge with covariance
-$\min\{s,t\}-st$.  In the central component $k_n=n$, the limiting coefficient
-is $2$ and the mean constant is $\sqrt{2\pi}/4$, resolving Conjecture~14 of
+$\min\{s,t\}-st$.  In the central (half-filled) component $k_n=n$, the
+coefficient multiplying the Brownian area is $2$ and the mean constant is
+$\sqrt{2\pi}/4$, resolving Conjecture~14 of
 West et al. after the matchgate--minuscule-lattice identification.  We also
 record the variance asymptotic, extract the leading finite-size correction
 from the published closed form, and give a finite sum obtained by conditioning
-on the symmetric-difference size.  For complexity, we derive the joint
-vertex-and-Haar graph-complexity mean and prove the pointwise bound from graph
-complexity to Krylov complexity for generator-supported time-independent
-Hamiltonians.
+on the symmetric-difference size.  The Krylov comparison is for
+generator-supported time-independent Hamiltonians; no Haar-averaged Krylov
+asymptotic is asserted.
 
 \vskip5pt
 \noindent\textbf{Keywords.}\enspace Matchgate commutator graph; rectangular
@@ -172,7 +173,8 @@ distance; graph complexity; Krylov complexity.
 
 \section{Introduction}
 
-The commutator graph was introduced by Diaz et al.~\cite{DiazEtAl}.
+The commutator graph was introduced by Diaz et
+al.~\cite[Supplemental Definition~6]{DiazEtAl}.
 West et al.~\cite[Section~IV and Appendix~C]{WestEtAl} describe the component
 $\mathcal C_\kappa$ of the matchgate commutator graph by the $\kappa$-element
 subsets of $[2n]$.  Their
@@ -209,10 +211,12 @@ $d(G)/|V(G)|^2=2W(G)/|V(G)|^2$.
 
 Defant et al.~\cite[Proposition~5]{DefantEtAl} state the result for rectangles
 $\mathcal P_{\lfloor\alpha\ell\rfloor,\ell}$ along a fixed ray, with
-$\alpha>0$ fixed.  Put $\ell_n=2n-k_n$.  If
-$k_n/(2n)\to\rho$, then $\ell_n\sim2(1-\rho)n$ and
-$\alpha=\rho/(1-\rho)$.  Consequently their $\ell_n^{3/2}$-normalized limit
-has, in the present $n^{3/2}$ normalization, coefficient
+$\alpha>0$ fixed.  Along this ray, the subset density tends to
+$\rho:=\alpha/(1+\alpha)$.  Writing the total path length as
+$N=k+\ell$ gives $\ell\sim(1-\rho)N$; on the matchgate subsequence $N=2n$,
+this is $\ell\sim2(1-\rho)n$.  Thus their
+$\ell^{3/2}$-normalized limit has, in the present $n^{3/2}$ normalization,
+coefficient
 \[
  [2(1-\rho)]^{3/2}\sqrt{2\alpha(1+\alpha)}
  =4\sqrt{\rho(1-\rho)}.
@@ -223,8 +227,9 @@ matchgate component identification of West et al., already implies
 Conjecture~14.  The present finite-population proof treats the triangular-array
 extension in which the two rectangle dimensions may vary arbitrarily subject
 only to
-$k_n/(2n)\to\rho$, equivalently $k_n/(2n-k_n)\to\alpha$, and supplies direct
-moment bounds.  It also derives the Haar matchgate specialization, gives a
+$k_n/(2n)\to\rho$, equivalently
+$k_n/(2n-k_n)\to\rho/(1-\rho)$, and supplies direct moment bounds.  It also
+derives the Haar matchgate specialization, gives a
 projection proof of the graph--Krylov comparison, and obtains a central finite
 sum by conditioning on the symmetric-difference size.  The Haar statement is
 a joint expectation over an independent uniform initial Pauli vertex and Haar
@@ -310,8 +315,11 @@ Hamiltonian-dependent graph--Krylov comparison.
 
 \section{The matchgate metric and discrete transport}
 
-For integers $1\leq k<N$, let $\Omega_{N,k}$ be the set of $k$-subsets of
-$[N]=\{1,\ldots,N\}$.  Write each $S\in\Omega_{N,k}$ as
+For $N\geq1$, write $[N]=\{1,\ldots,N\}$ and $[0]=\varnothing$, and let
+$P_N$ be the path graph with vertex set $[N]$ and edges
+$\{r,r+1\}$ for $1\leq r<N$.  For integers $1\leq k<N$, let
+$\Omega_{N,k}$ be the set of $k$-subsets of $[N]$.  Write each
+$S\in\Omega_{N,k}$ as
 $S=(s_1<\cdots<s_k)$ and define
 \[
  D_{N,k}(S,T):=\sum_{i=1}^k|s_i-t_i|,
@@ -319,13 +327,28 @@ $S=(s_1<\cdots<s_k)$ and define
  C_S(r):=|S\cap[r]|.
 \]
 
+When $N=2n$, define the Jordan--Wigner Majorana operators
+\[
+ c_{2j-1}=Z_1\cdots Z_{j-1}X_j,\qquad
+ c_{2j}=Z_1\cdots Z_{j-1}Y_j\qquad(1\leq j\leq n),
+\]
+and put
+\begin{equation}\label{eq:majorana-support-convention}
+ g_a:=-ic_ac_{a+1}\quad(1\leq a<2n),
+ \qquad
+ P_S:=i^{k(k-1)/2}c_{s_1}\cdots c_{s_k}
+ \quad(S\in\Omega_{2n,k}).
+\end{equation}
+
 \begin{proposition}[Configuration-graph distance]\label{prop:graph-metric}
 Consider the graph on $\Omega_{N,k}$ in which one particle may move by one
 lattice step to an unoccupied neighboring site.  This is the $k$-token graph
 $F_k(P_N)$ and the Hasse graph of the rectangular minuscule lattice
-$\mathcal P_{k,N-k}$, and its graph distance is $D_{N,k}$.  When $N=2n$, it is
-the matchgate component $\mathcal C_k$ with the metric in
-\eqref{eq:matching-distance}.
+$\mathcal P_{k,N-k}$, and its graph distance is $D_{N,k}$.  When $N=2n$, the
+map $S\mapsto P_S$ in \eqref{eq:majorana-support-convention} identifies this
+graph with the degree-$k$ matchgate commutator-graph component
+$\mathcal C_k$ generated by $\{g_a:1\leq a<2n\}$.  In particular, its metric
+is \eqref{eq:matching-distance}.
 \end{proposition}
 
 \begin{proof}
@@ -356,8 +379,36 @@ al.~\cite[Section~1.3 and Eq.~(2)]{DefantEtAl}.  The token-graph terminology
 is introduced by Fabila-Monroy et al.~\cite{FabilaMonroy}; the definition and
 the same distance formula are also recorded by Ibarra and
 Rivera~\cite[Definition in Section~1 and Lemma~5.2]{IbarraRivera}.  For
-$N=2n$, the matchgate identification and adjacency rule are Eq.~(50) and
-Eq.~(51) of West et al.~\cite[Section~IV and Appendix~C]{WestEtAl}.
+$N=2n$, the Majoranas satisfy $c_a^\dagger=c_a$ and
+$\{c_a,c_b\}=2\delta_{ab}I$.  Direct multiplication gives
+\[
+ g_{2j-1}=Z_j\quad(1\leq j\leq n),\qquad
+ g_{2j}=X_jX_{j+1}\quad(1\leq j<n),
+\]
+so the $g_a$ are precisely the matchgate generator family.  Reversing the
+ordered Majorana product introduces the sign
+$(-1)^{k(k-1)/2}$.  If $e=k(k-1)/2$, then
+\[
+ P_S^\dagger=(-i)^e(-1)^e c_{s_1}\cdots c_{s_k}=P_S,
+\]
+so the chosen phase makes every $P_S$ a Hermitian Pauli string.  If
+$A_a=\{a,a+1\}$, the canonical anticommutation
+relations give the sign below: commuting the two Majorana factors indexed by
+$A_a$ through the $k$ factors indexed by $S$ requires
+$2k-|A_a\cap S|$ anticommutations.
+\[
+ g_aP_S=(-1)^{|A_a\cap S|}P_Sg_a.
+\]
+Thus $[g_a,P_S]\neq0$ precisely when $S$ contains exactly one of $a,a+1$.
+In that case $g_aP_S$ is a nonzero scalar multiple of
+$P_{S\mathbin{\triangle}A_a}$.  On supports this replaces the occupied member
+of the adjacent pair by the unoccupied member, which is exactly one token
+move.  For example, when $n=2$ and $k=2$, the support $\{1,3\}$ is joined
+through $g_1$ to $\{2,3\}$ and through $g_3$ to $\{1,4\}$.  The graph is
+connected by the distance-decreasing construction above, so these Pauli
+strings form the component $\mathcal C_k$.  This recovers Eqs.~(50)--(51) and
+the adjacency rule of West et
+al.~\cite[Section~IV and Appendix~C]{WestEtAl}.
 \end{proof}
 
 For the empirical measures
@@ -607,8 +658,10 @@ Lemma~\ref{lem:transport} gives
  \frac{D_{N,k_n}}{N^{3/2}}
  =\frac1N\sum_{r=1}^{N-1}|H_N(r/N)|.
 \end{equation}
-On each grid interval, $H_N$ is linear and its endpoint values differ by at
-most $N^{-1/2}$.  Since the absolute-value map is one-Lipschitz,
+The missing right-endpoint term is zero because
+$C_{S_n}(N)=C_{T_n}(N)=k_n$.  On each grid interval, $H_N$ is linear and its
+endpoint values differ by at most $N^{-1/2}$.  Since the absolute-value map is
+one-Lipschitz,
 \begin{equation}\label{eq:riemann-error}
  \left|
  \frac1N\sum_{r=1}^{N-1}|H_N(r/N)|
@@ -678,7 +731,7 @@ Conjecture~14.
 The average $A(n,n)$ is $\E D_{2n,n}$ by Proposition~\ref{prop:graph-metric}
 and the definition preceding Theorem~13 of West et al.  The conclusion is
 the central case of Theorem~\ref{thm:main}.  It also follows from
-Proposition~5 of Defant et al.~\cite{DefantEtAl} at rectangle aspect ratio one;
+Defant et al.~\cite[Proposition~5]{DefantEtAl} at rectangle aspect ratio one;
 the present corollary records that published lattice result in the matchgate
 notation of West et al.
 \end{proof}
@@ -687,13 +740,15 @@ notation of West et al.
 
 Let
 \begin{equation}\label{eq:matchgate-generators}
- \Gamma_n:=\{Z_j:1\leq j\leq n\}
+ \Gamma_n:=\{g_a:1\leq a<2n\}
+ =\{Z_j:1\leq j\leq n\}
  \cup\{X_jX_{j+1}:1\leq j<n\},
 \end{equation}
 and let $\mathcal M_n$ be the closed subgroup of the unitary group generated
-by $e^{-i\theta g}$ with $g\in\Gamma_n$ and $\theta\in\mathbb R$.  It is
-compact and is the matchgate group used by West et
-al.~\cite[Table~1 and the discussion following Eq.~(44)]{WestEtAl}; its
+by $e^{-i\theta g}$ with $g\in\Gamma_n$ and $\theta\in\mathbb R$.  As a
+closed subgroup of the finite-dimensional unitary group, $\mathcal M_n$ is
+compact.  It is the matchgate group used by West et
+al.~\cite[Table~I and the discussion following Eq.~(44)]{WestEtAl}; its
 dynamical Lie algebra is isomorphic to $\mathfrak{so}(2n)$, and its commutator
 graph has the components $\mathcal C_k$ identified in
 Proposition~\ref{prop:graph-metric}.
@@ -722,20 +777,8 @@ $U\in\mathcal M_n$,
 \end{lemma}
 
 \begin{proof}
-Define the Jordan--Wigner Majorana operators by
-\[
- c_{2j-1}=Z_1\cdots Z_{j-1}X_j,\qquad
- c_{2j}=Z_1\cdots Z_{j-1}Y_j\qquad(1\leq j\leq n).
-\]
-They satisfy $c_a^\dagger=c_a$ and
-$\{c_a,c_b\}=2\delta_{ab}I$.  In this basis,
-\[
- Z_j=-i c_{2j-1}c_{2j},
- \qquad
- X_jX_{j+1}=-i c_{2j}c_{2j+1}.
-\]
-For each $1\leq a<2n$, put $g_a:=-ic_ac_{a+1}$.  The displayed identities give
-$g_{2j-1}=Z_j$ and $g_{2j}=X_jX_{j+1}$, so $g_a\in\Gamma_n$.  Moreover,
+Use the Majorana operators, generators, and canonical Pauli representatives
+from \eqref{eq:majorana-support-convention}.  For $1\leq a<2n$,
 $V_a:=e^{-i\pi g_a/4}$ satisfies
 \[
  V_a^\dagger c_aV_a=-c_{a+1},\qquad
@@ -754,10 +797,10 @@ The induced actions of the $V_a$ on supports are the adjacent transpositions,
 which generate the full symmetric group on the $2n$ Majorana labels.  Given
 two $k$-element supports, choose a permutation carrying
 the first support to the second and express it as a product of adjacent
-transpositions.  The corresponding product of the $V_a$ maps the first
-degree-$k$ Majorana monomial to the second up to a phase of modulus one.
-These monomials are, up to such phases, the Pauli strings in $\mathcal C_k$.
-This transitivity is the only
+transpositions.  The corresponding product of the $V_a$ maps the canonical
+Pauli representative of the first support to that of the second up to a phase
+of modulus one.  Thus the action is transitive on the Pauli basis
+$\mathcal C_k$.  This transitivity is the only
 representation-theoretic input below.  In particular, the argument does not
 assume that the degree-$k$ Majorana representation is irreducible; this matters
 for the middle component $k=n$.
@@ -952,7 +995,7 @@ Haar-averaged Krylov quantity is asserted without such a joint dynamical law.
 
 The rectangular-minuscule-lattice Wiener index gives a closed form for every
 component.  In discrete earth-mover notation, the same expression is
-Theorem~4.3 of Bourn and Erickson~\cite{BournErickson}: setting their total
+recorded by Bourn and Erickson~\cite[Theorem~4.3]{BournErickson}: setting their total
 mass to $s=k$ and their number of bins to $b=N-k+1$ gives the formula below.
 
 \begin{proposition}[Published rectangular-lattice mean]\label{prop:closed-form}
@@ -1263,8 +1306,8 @@ recorded output under \texttt{code/} and \texttt{results/}, together with the
 \texttt{Makefile}.  The versioned source package is available at
 \url{https://github.com/skypher/matchgate}.  This revised manuscript is
 archived at Git tag
-\href{https://github.com/skypher/matchgate/tree/paper-2026-09-01-r3}%
-{\texttt{paper-2026-09-01-r3}}.  It is built and run, for example, with
+\href{https://github.com/skypher/matchgate/tree/paper-2026-09-01-r4}%
+{\texttt{paper-2026-09-01-r4}}.  It is built and run, for example, with
 \begin{gather*}
  \texttt{make paper},\qquad \texttt{make exact-mean},\\
  \texttt{./build/exact\_mean 100 400 800 1600},\\
