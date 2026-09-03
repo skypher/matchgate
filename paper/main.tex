@@ -25,7 +25,7 @@
   urlcolor={purple},
   citecolor={blue!80!black},
   pdfauthor={Leslie P. Polzer},
-  pdftitle={Matchgate Commutator Graphs as Rectangular Minuscule Lattices},
+  pdftitle={Matchgate Commutator Graphs as Rectangular Minuscule Lattices: Brownian-Bridge Distances and Complexity},
   pdfsubject={Brownian-bridge distances and complexity in matchgate commutator-graph components},
   pdfkeywords={matchgate commutator graph, rectangular minuscule lattice, token graph, Wiener index, Brownian bridge, Wasserstein distance, graph complexity, Krylov complexity}
 }
@@ -184,6 +184,9 @@ $S=(s_1<\cdots<s_\kappa)$ and $T=(t_1<\cdots<t_\kappa)$ as
 Theorem~13 of West et al. gives a finite sum for the average of
 \eqref{eq:matching-distance}, and Conjecture~14 asserts that the central value
 is superlinear and subquadratic in $n$.
+We retain $\kappa$ for the matchgate component label when discussing West et
+al.; elsewhere $k$ denotes the same subset cardinality, so $\kappa=k$ when
+$N=2n$.
 
 The same graph and distance were studied earlier in the language of minuscule
 lattices.  Let
@@ -206,12 +209,20 @@ $d(G)/|V(G)|^2=2W(G)/|V(G)|^2$.
 
 Defant et al.~\cite[Proposition~5]{DefantEtAl} state the result for rectangles
 $\mathcal P_{\lfloor\alpha\ell\rfloor,\ell}$ along a fixed ray, with
-$\alpha>0$ fixed.  Taking $\alpha=\rho/(1-\rho)$ gives the same limiting law,
-mean, and variance constants as those stated below; at $\alpha=1$ it gives the
-central case.  Thus their theorem, combined with the matchgate component
-identification of West et al., already implies Conjecture~14.  The present
-finite-population proof treats the triangular-array extension in which the two
-rectangle dimensions may vary arbitrarily subject only to
+$\alpha>0$ fixed.  Put $\ell_n=2n-k_n$.  If
+$k_n/(2n)\to\rho$, then $\ell_n\sim2(1-\rho)n$ and
+$\alpha=\rho/(1-\rho)$.  Consequently their $\ell_n^{3/2}$-normalized limit
+has, in the present $n^{3/2}$ normalization, coefficient
+\[
+ [2(1-\rho)]^{3/2}\sqrt{2\alpha(1+\alpha)}
+ =4\sqrt{\rho(1-\rho)}.
+\]
+Their moment convergence gives the same mean and variance constants; at
+$\alpha=1$ it gives the central case.  Thus their theorem, combined with the
+matchgate component identification of West et al., already implies
+Conjecture~14.  The present finite-population proof treats the triangular-array
+extension in which the two rectangle dimensions may vary arbitrarily subject
+only to
 $k_n/(2n)\to\rho$, equivalently $k_n/(2n-k_n)\to\alpha$, and supplies direct
 moment bounds.  It also derives the Haar matchgate specialization, gives a
 projection proof of the graph--Krylov comparison, and obtains a central finite
@@ -1009,6 +1020,8 @@ its marked time and reversing the segment
 after that time gives
 $\sum_{m\geq0}L_{m,h}z^{2m}=P_h(z)^2$.  Therefore, if $T_m$ is the total
 absolute area over all $\binom{2m}{m}$ bridges, then
+the marked times $j=0$ and $j=2m$ contribute zero, so their inclusion in
+$L_{m,h}$ agrees with the interior-time sum defining $\mathcal A_m$.  Hence
 \begin{align*}
  \sum_{m\geq0}T_mz^{2m}
  &=\sum_{h\in\mathbb Z}|h|P_h(z)^2
@@ -1249,9 +1262,9 @@ The source archive accompanying this manuscript contains the checker and its
 recorded output under \texttt{code/} and \texttt{results/}, together with the
 \texttt{Makefile}.  The versioned source package is available at
 \url{https://github.com/skypher/matchgate}.  This revised manuscript is
-identified by the Git tag \texttt{paper-2026-09-01-r2} at
-\url{https://github.com/skypher/matchgate/tree/paper-2026-09-01-r2}.  It is
-built and run, for example, with
+archived at Git tag
+\href{https://github.com/skypher/matchgate/tree/paper-2026-09-01-r3}%
+{\texttt{paper-2026-09-01-r3}}.  It is built and run, for example, with
 \begin{gather*}
  \texttt{make paper},\qquad \texttt{make exact-mean},\\
  \texttt{./build/exact\_mean 100 400 800 1600},\\
@@ -1265,11 +1278,12 @@ GCC~13.3.0.  The implementation
 uses \texttt{long double}, \texttt{lgammal}, and normalized exponential
 weights to evaluate the exact finite-sum identities numerically; reported
 quantities are printed directly at \texttt{long double} round-trip precision.
-The \texttt{check-exact-mean} target first checks
-Propositions~\ref{prop:graph-metric}, \ref{prop:closed-form}, and
-\ref{prop:exact-computation} and Lemma~\ref{lem:transport} by exact rational
-enumeration for $N\leq8$, Lemma~\ref{lem:discrete-bridge-area} for $m\leq6$,
-and Proposition~\ref{prop:central-exact} for $n\leq5$.  It then replays every
+The \texttt{check-exact-mean} target first checks the token-graph metric
+assertion in Proposition~\ref{prop:graph-metric}, Propositions
+\ref{prop:closed-form} and \ref{prop:exact-computation}, and
+Lemma~\ref{lem:transport} by exact rational enumeration for $N\leq8$,
+Lemma~\ref{lem:discrete-bridge-area} for $m\leq6$, and
+Proposition~\ref{prop:central-exact} for $n\leq5$.  It then replays every
 recorded floating-point row and fails if an output leaves its stated numerical
 tolerance.
 
@@ -1309,13 +1323,6 @@ C. Defant, V. F\'eray, P. Nadeau, and N. Williams,
 The Electronic Journal of Combinatorics \textbf{31} (2024), Paper No.~P1.41.
 \href{https://doi.org/10.37236/12002}{doi:10.37236/12002}.
 
-\bibitem{DiazEtAl}
-N. L. Diaz, D. Garc\'ia-Mart\'in, S. Kazi, M. Larocca, and M. Cerezo,
-\emph{Showcasing a barren plateau theory beyond the dynamical Lie algebra},
-arXiv:2310.11505 (2023).
-\href{https://doi.org/10.48550/arXiv.2310.11505}%
-{doi:10.48550/arXiv.2310.11505}.
-
 \bibitem{delBarrioGineMatran}
 E. del Barrio, E. Gin\'e, and C. Matr\'an,
 \emph{Central limit theorems for the Wasserstein distance between the empirical
@@ -1330,6 +1337,13 @@ the empirical and the true distributions},
 Annals of Probability \textbf{31} (2003), 1142--1143.
 \href{https://projecteuclid.org/journals/annals-of-probability/volume-31/issue-2/Correction--Central-limit-theorems-for-the-Wasserstein-distance-between/aop/1048516548.pdf}%
 {Project Euclid: aop/1048516548}.
+
+\bibitem{DiazEtAl}
+N. L. Diaz, D. Garc\'ia-Mart\'in, S. Kazi, M. Larocca, and M. Cerezo,
+\emph{Showcasing a barren plateau theory beyond the dynamical Lie algebra},
+arXiv:2310.11505 (2023).
+\href{https://doi.org/10.48550/arXiv.2310.11505}%
+{doi:10.48550/arXiv.2310.11505}.
 
 \bibitem{FabilaMonroy}
 R. Fabila-Monroy, D. Flores-Pe\~naloza, C. Huemer, F. Hurtado, J. Urrutia,
