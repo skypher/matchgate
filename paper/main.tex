@@ -6,7 +6,6 @@
 \usepackage{mathtools}
 \usepackage{array}
 \usepackage[small,labelfont=bf,labelsep=period]{caption}
-\usepackage{float}
 \usepackage[
   letterpaper,
   total={5.5in,8in},
@@ -25,7 +24,7 @@
   urlcolor={purple},
   citecolor={blue!80!black},
   pdfauthor={Leslie P. Polzer},
-  pdftitle={Matchgate Commutator Graphs as Rectangular Minuscule Lattices: Brownian-Bridge Distances, Graph Complexity, and a Krylov Bound},
+  pdftitle={Matchgate Commutator Graphs as Cover Graphs of Rectangular Minuscule Lattices: Brownian-Bridge Distances, Graph Complexity, and a Krylov Bound},
   pdfsubject={Brownian-bridge distances and complexity in matchgate commutator-graph components},
   pdfkeywords={matchgate commutator graph, rectangular minuscule lattice, token graph, Wiener index, Brownian bridge, Wasserstein distance, graph complexity, Krylov complexity}
 }
@@ -64,12 +63,12 @@
 \newcommand{\1}{\mathbf{1}}
 \newcommand{\N}{\mathbb{N}}
 
-\title{Matchgate commutator graphs as rectangular minuscule lattices:\\
+\title{Matchgate commutator graphs as cover graphs of rectangular minuscule lattices:\\
 Brownian-bridge distances, graph complexity, and a Krylov bound}
 \author{Leslie P. Polzer}
 \newcommand{\authoraffiliation}{Independent Researcher}
 \newcommand{\authoremail}{polzer@fastmail.com}
-\date{September 1, 2026}
+\date{September 4, 2026}
 
 \makeatletter
 \renewcommand{\section}{%
@@ -198,7 +197,7 @@ lattices.  Let
 \]
 be the distributive lattice of order ideals of an $m\times\ell$ rectangle.
 Reading the membership word of a $k$-subset of $[N]$ as an up--down path
-identifies the token graph with the Hasse graph of
+identifies the token graph with the undirected cover graph (Hasse graph) of
 $\mathcal P_{k,N-k}$.  Put $C_S(r):=|S\cap[r]|$ and define $C_T(r)$
 similarly.  If $p_r$ and $q_r$ are the heights of the paths for $S$ and $T$
 after $r$ steps, then $p_r=2C_S(r)-r$ and $q_r=2C_T(r)-r$.  Consequently,
@@ -233,8 +232,8 @@ coefficient
 Their moment convergence gives the same mean and variance constants; at
 $\alpha=1$ it gives the central case.  Thus their theorem, combined with the
 matchgate component identification of West et al., already implies
-Conjecture~14.  The present finite-population proof treats the triangular-array
-extension in which the two rectangle dimensions may vary arbitrarily subject
+Conjecture~14.  The present finite-population proof gives a triangular-array
+formulation in which the two rectangle dimensions may vary arbitrarily subject
 only to
 $k_n/(2n)\to\rho$, equivalently
 $k_n/(2n-k_n)\to\rho/(1-\rho)$, and supplies direct moment bounds.  It also
@@ -247,7 +246,7 @@ matchgate unitary; it is not a pointwise-in-vertex scaling statement.
 Table~\ref{tab:provenance} separates the prior results used here from the
 deductions and alternative arguments given in this paper.
 
-\begin{table}[H]
+\begin{table}[hbp]
 \centering
 \small
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.34\linewidth}
@@ -260,8 +259,8 @@ with the matchgate-component identification of West et
 al.~\cite[Section~IV and Appendix~C]{WestEtAl}; recorded here as a matchgate
 consequence.\\
 Arbitrary density sequences
-& Finite-population proof here for every $k_n/(2n)\to\rho$, extending the
-fixed-ray formulation and giving direct second- and fourth-moment bounds.\\
+& Finite-population proof here for every $k_n/(2n)\to\rho$, giving a
+density-sequence formulation and direct second- and fourth-moment bounds.\\
 Exact finite mean
 & Corollary~3 of Defant et al.~\cite[Corollary~3]{DefantEtAl}; equivalently
 Theorem~4.3 of Bourn and Erickson~\cite[Theorem~4.3]{BournErickson}.\\
@@ -288,7 +287,7 @@ uniform integrability needed for convergence of the first two moments directly
 from hypergeometric moment bounds.
 
 The token-graph terminology is due to Fabila-Monroy et
-al.~\cite{FabilaMonroy}; the same graph is also called a symmetric power of a
+al.~\cite{FabilaMonroy}; the same graph is also called the $k$th symmetric power of a
 path~\cite{AudenaertEtAl}.  The ordered-coordinate distance formula appears,
 for example, in Ibarra and Rivera~\cite[Lemma~5.2]{IbarraRivera}.  The transport
 identity below is the discrete one-dimensional $1$-Wasserstein identity.  In
@@ -299,11 +298,12 @@ used here~\cite{VallenderAddendum}.
 
 Bourn and Willenbring~\cite{BournWillenbring} study expected one-dimensional
 earth mover distance for uniform weak compositions and its probability-simplex
-limit.  A stars-and-bars word identifies a uniform $k$-subset of $[N]$ with a uniform
+limit.  The stars-and-bars encoding identifies a uniform $k$-subset of $[N]$
+with a uniform
 weak composition of $k$ into $N-k+1$ parts, and Lemma~\ref{lem:transport}
 identifies the corresponding earth mover distance with $D_{N,k}$.  Bourn and
 Erickson~\cite[Theorem~4.3]{BournErickson} use the Type~A minuscule-lattice
-Wiener formula of Defant et al. to close the discrete expected-distance
+Wiener formula of Defant et al. to obtain the discrete expected-distance
 formula; the substitutions $s=k$ and $b=N-k+1$ give exactly
 Proposition~\ref{prop:closed-form}.  They also interpret the distance through
 symmetric differences of Young diagrams.  Proposition~\ref{prop:central-exact}
@@ -812,11 +812,11 @@ two $k$-element supports, choose a permutation carrying
 the first support to the second and express it as a product of adjacent
 transpositions.  The corresponding product of the $V_a$ maps the canonical
 Pauli representative of the first support to that of the second up to a sign.
-Thus the action is transitive on the Pauli basis
-$\mathcal C_k$.  This transitivity is the only
-representation-theoretic input below.  In particular, the argument does not
-assume that the degree-$k$ Majorana representation is irreducible; this matters
-for the middle component $k=n$.
+Thus the action is transitive on the one-dimensional basis subspaces
+$\mathbb R P_S$, equivalently on the support labels, although conjugation may
+introduce a sign.  This transitivity is the only representation-theoretic
+input below; the argument does not assume that the degree-$k$ Majorana
+representation is irreducible.
 
 For fixed $P$ and $Q\in\mathcal C_k$, put
 \[
@@ -979,8 +979,8 @@ the pointwise inequality proves the expectation statement.
 \end{proof}
 
 \begin{remark}[Relation to Lemma~9 of West et al.]
-The passage from Eq.~(A81) to Eq.~(A82) in the appendix proof of Lemma~9 in
-West et al.~\cite[Eqs.~(A81)--(A82)]{WestEtAl} does not follow from the stated
+The inference from Eq.~(A81) to Eq.~(A82) in the appendix proof of Lemma~9 in
+West et al.~\cite[Eqs.~(A81)--(A82)]{WestEtAl} is not justified by the stated
 support condition alone.  The summands there contain cross terms in Lanczos
 coefficients and Pauli
 amplitudes, which need not be nonnegative real numbers, so the bound
@@ -992,8 +992,10 @@ have mixed signs: take $a=(1,0)$, $b=(1,1)$, and $z=(1,-2)$.  Equations~
 \eqref{eq:krylov-tail-projections} instead express both complexities as sums
 of squared tail norms.  Those summands are nonnegative, and
 $\mathcal K_{j-1}\subseteq\mathcal F_{j-1}$ gives their term-by-term
-comparison.  The preceding proof therefore establishes the cited inequality
-without the cross-term step.
+comparison.  Under the generator-supported hypothesis
+$H\in\operatorname{span}_{\mathbb R}\Gamma_n$ in
+\eqref{eq:matchgate-Hamiltonian}, the preceding proof therefore establishes
+the cited inequality without the cross-term step.
 \end{remark}
 
 \begin{remark}[Why the Haar and Krylov statements are separate]
@@ -1046,7 +1048,7 @@ $k=n$ gives \eqref{eq:central-closed-form}.
 
 The Young-diagram interpretation of Bourn and Erickson expresses the distance
 as a symmetric difference.  The central component also has the following
-independent conditional decomposition, obtained from the symmetric-difference
+separate conditional decomposition, obtained from the symmetric-difference
 size $M=|S\setminus T|$.  Let $W^{(m)}$ be a
 uniform simple random-walk bridge of length $2m$, with increments $+1$ and
 $-1$ occurring $m$ times each, and put
@@ -1200,7 +1202,7 @@ Substitution in the published closed form
 which is \eqref{eq:finite-size}.
 \end{proof}
 
-\subsection{Exact finite-sum evaluation}
+\subsection{Exact finite-sum formula and numerical evaluation}
 
 The transport identity gives an exact one-dimensional computation that avoids
 enumerating pairs of subsets.  Let $H_{N,k,r}$ count how many sites of a
@@ -1245,7 +1247,7 @@ $-5\sqrt{2\pi}/64=-0.195830333955547\ldots$.
 Here and in Table~\ref{tab:numerics},
 $c=\sqrt{2\pi}/4=0.626657068657750\ldots$.
 
-\begin{table}[H]
+\begin{table}[hbp]
 \centering
 \small
 \begin{tabular}{rccc}
@@ -1253,11 +1255,11 @@ $n$ & $\E D_{2n,n}/n^{3/2}$
 & $(\E D_{2n,n}-cn^{3/2})/\sqrt n$
 & \shortstack{absolute formula\\difference}\\
 \hline
-25   & 0.618994383468 & -0.191567129755 & $<10^{-13}$\\
-100  & 0.624709598771 & -0.194746988669 & $7\times10^{-14}$\\
-400  & 0.626168172704 & -0.195558381301 & $9\times10^{-13}$\\
-800  & 0.626412450827 & -0.195694264208 & $2\times10^{-11}$\\
-1600 & 0.626534717235 & -0.195762275705 & $4\times10^{-11}$
+25   & 0.618994383 & -0.191567130 & $<10^{-13}$\\
+100  & 0.624709599 & -0.194746989 & $7\times10^{-14}$\\
+400  & 0.626168173 & -0.195558381 & $9\times10^{-13}$\\
+800  & 0.626412451 & -0.195694264 & $2\times10^{-11}$\\
+1600 & 0.626534717 & -0.195762276 & $4\times10^{-11}$
 \end{tabular}
 \caption{Central-component floating-point evaluations.  The last column is
 the absolute difference between the symmetric-difference sum in
@@ -1266,17 +1268,17 @@ Proposition~\ref{prop:exact-computation}.}
 \label{tab:numerics}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[hbp]
 \centering
 \small
 \begin{tabular}{cccr@{\qquad}r}
 $\rho$ & $n$ & $\kappa$ & $\E D_{2n,\kappa}/n^{3/2}$
 & limiting constant\\
 \hline
-$1/4$  & 100 & 50  & 0.539679867710 & 0.542700940919\\
-$1/4$  & 800 & 400 & 0.542319852915 & 0.542700940919\\
-$1/10$ & 100 & 20  & 0.369966929897 & 0.375994241195\\
-$1/10$ & 800 & 160 & 0.375223283732 & 0.375994241195
+$1/4$  & 100 & 50  & 0.539679868 & 0.542700941\\
+$1/4$  & 800 & 400 & 0.542319853 & 0.542700941\\
+$1/10$ & 100 & 20  & 0.369966930 & 0.375994241\\
+$1/10$ & 800 & 160 & 0.375223284 & 0.375994241
 \end{tabular}
 \caption{Noncentral evaluations of the hypergeometric sum in
 Proposition~\ref{prop:exact-computation}.  The last column is the corresponding
@@ -1290,7 +1292,8 @@ bounds.
 
 \section{Conclusion}
 
-The matchgate components of West et al. are rectangular minuscule lattices, so
+The matchgate components of West et al. are cover graphs of rectangular
+minuscule lattices, so
 the distance law and moment convergence of Defant et al. imply the
 $n^{3/2}$ central growth in Conjecture~14.  The cumulative-count argument gives
 an independent finite-population proof, including arbitrary density sequences
@@ -1322,8 +1325,8 @@ recorded output under \texttt{code/} and \texttt{results/}, together with the
 \texttt{Makefile}.  The versioned source package is available at
 \url{https://github.com/skypher/matchgate}.  The manuscript version
 corresponding to this source package is archived at Git tag
-\href{https://github.com/skypher/matchgate/tree/paper-2026-09-01-r5}%
-{\texttt{paper-2026-09-01-r5}}.  It is built and run, for example, with
+\href{https://github.com/skypher/matchgate/tree/paper-2026-09-04-r6}%
+{\texttt{paper-2026-09-04-r6}}.  It is built and run, for example, with
 \begin{gather*}
  \texttt{make paper},\qquad \texttt{make exact-mean},\\
  \texttt{./build/exact\_mean 100 400 800 1600},\\
@@ -1359,7 +1362,7 @@ Journal of Combinatorial Theory, Series B \textbf{97} (2007), no.~1, 74--90.
 \bibitem{BournErickson}
 R. Bourn and W. Q. Erickson,
 \emph{Palindromicity of the numerator of a statistical generating function},
-Discrete Mathematics \textbf{348} (2025), 114336.
+Discrete Mathematics \textbf{348} (2025), no.~3, 114336.
 \href{https://doi.org/10.1016/j.disc.2024.114336}%
 {doi:10.1016/j.disc.2024.114336}.
 
@@ -1387,14 +1390,14 @@ Paper No.~P1.41.
 E. del Barrio, E. Gin\'e, and C. Matr\'an,
 \emph{Central limit theorems for the Wasserstein distance between the empirical
 and the true distributions},
-Annals of Probability \textbf{27} (1999), 1009--1071.
+Annals of Probability \textbf{27} (1999), no.~2, 1009--1071.
 \href{https://doi.org/10.1214/aop/1022677394}{doi:10.1214/aop/1022677394}.
 
 \bibitem{delBarrioCorrection}
 E. del Barrio, E. Gin\'e, and C. Matr\'an,
 \emph{Correction: Central limit theorems for the Wasserstein distance between
 the empirical and the true distributions},
-Annals of Probability \textbf{31} (2003), 1142--1143.
+Annals of Probability \textbf{31} (2003), no.~2, 1142--1143.
 \href{https://projecteuclid.org/journals/annals-of-probability/volume-31/issue-2/Correction--Central-limit-theorems-for-the-Wasserstein-distance-between/aop/1048516548.pdf}%
 {Project Euclid: aop/1048516548}.
 
@@ -1409,14 +1412,15 @@ arXiv:2310.11505 (2023).
 R. Fabila-Monroy, D. Flores-Pe\~naloza, C. Huemer, F. Hurtado, J. Urrutia,
 and D. R. Wood,
 \emph{Token graphs},
-Graphs and Combinatorics \textbf{28} (2012), 365--380.
+Graphs and Combinatorics \textbf{28} (2012), no.~3, 365--380.
 \href{https://doi.org/10.1007/s00373-011-1055-9}%
 {doi:10.1007/s00373-011-1055-9}.
 
 \bibitem{Hoeffding}
 W. Hoeffding,
 \emph{Probability inequalities for sums of bounded random variables},
-Journal of the American Statistical Association \textbf{58} (1963), 13--30.
+Journal of the American Statistical Association \textbf{58} (1963), no.~301,
+13--30.
 \href{https://doi.org/10.1080/01621459.1963.10500830}%
 {doi:10.1080/01621459.1963.10500830}.
 
@@ -1444,14 +1448,14 @@ and M. A. McClain, eds.
 \bibitem{ParkerEtAl}
 D. E. Parker, X. Cao, A. Avdoshkin, T. Scaffidi, and E. Altman,
 \emph{A universal operator growth hypothesis},
-Physical Review X \textbf{9} (2019), 041017.
+Physical Review X \textbf{9} (2019), no.~4, 041017.
 \href{https://doi.org/10.1103/PhysRevX.9.041017}%
 {doi:10.1103/PhysRevX.9.041017}.
 
 \bibitem{Rosen}
 B. Ros\'en,
 \emph{Limit theorems for sampling from finite populations},
-Arkiv f\"or Matematik \textbf{5} (1965), 383--424.
+Arkiv f\"or Matematik \textbf{5} (1965), no.~5, 383--424.
 \href{https://doi.org/10.1007/BF02591138}{doi:10.1007/BF02591138}.
 
 \bibitem{Schwerdtfeger}
@@ -1465,14 +1469,15 @@ European Journal of Combinatorics \textbf{36} (2014), 608--640.
 S. S. Vallender,
 \emph{Calculation of the Wasserstein distance between probability
 distributions on the line},
-Theory of Probability and Its Applications \textbf{18} (1974), 784--786.
+Theory of Probability and Its Applications \textbf{18} (1974), no.~4,
+784--786.
 \href{https://doi.org/10.1137/1118101}{doi:10.1137/1118101}.
 
 \bibitem{VallenderAddendum}
 S. S. Vallender,
 \emph{Addendum: Calculation of the Wasserstein distance between probability
 distributions on the line},
-Theory of Probability and Its Applications \textbf{26} (1982), 435.
+Theory of Probability and Its Applications \textbf{26} (1982), no.~2, 435.
 \href{https://doi.org/10.1137/1126051}{doi:10.1137/1126051}.
 
 \bibitem{WestEtAl}

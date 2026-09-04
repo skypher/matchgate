@@ -1,11 +1,12 @@
-# Matchgate commutator graphs as rectangular minuscule lattices
+# Matchgate commutator graphs as cover graphs of rectangular minuscule lattices
 
-This repository identifies matchgate commutator-graph components with
-rectangular minuscule lattices, gives an independent finite-population proof of
-their Brownian-bridge distance law, and derives the matchgate graph- and
-Krylov-complexity consequences.  The manuscript explicitly incorporates the
-prior fixed-aspect-ratio theorem and Wiener-index formula of Defant, Féray,
-Nadeau, and Williams.  The main source is [`paper/main.tex`](paper/main.tex).
+This repository identifies matchgate commutator-graph components with the
+cover graphs of rectangular minuscule lattices, gives an independent
+finite-population proof of their Brownian-bridge distance law, and derives the
+matchgate graph- and Krylov-complexity consequences.  The manuscript explicitly
+incorporates the prior fixed-aspect-ratio theorem and Wiener-index formula of
+Defant, Féray, Nadeau, and Williams.  The main source is
+[`paper/main.tex`](paper/main.tex).
 Exact finite-size expectation checks are implemented in
 [`code/exact_mean.cpp`](code/exact_mean.cpp).
 
@@ -38,7 +39,7 @@ make check-exact-mean
 ```
 
 The archived manuscript revision is tagged
-[`paper-2026-09-01-r5`](https://github.com/skypher/matchgate/tree/paper-2026-09-01-r5).
+[`paper-2026-09-04-r6`](https://github.com/skypher/matchgate/tree/paper-2026-09-04-r6).
 
 The recorded table was generated with GCC 13.3.0 using C++20 and OpenMP. The
 program evaluates exact finite-sum identities with `long double`, `lgammal`,
