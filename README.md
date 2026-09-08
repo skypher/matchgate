@@ -38,13 +38,20 @@ with tolerance checks using Python 3.10 or later:
 make check-exact-mean
 ```
 
-The archived manuscript revision is tagged
+The earlier manuscript revision and numerical source archive are tagged
 [`paper-2026-09-04-r6`](https://github.com/skypher/matchgate/tree/paper-2026-09-04-r6).
 
 The recorded table was generated with GCC 13.3.0 using C++20 and OpenMP. The
 program evaluates exact finite-sum identities with `long double`, `lgammal`,
 and normalized exponential weights; its decimal outputs are floating-point
 approximations rather than certified intervals.
+
+The numerical build requires a C++20 compiler with OpenMP support. The checker
+first tests the token-graph metric, transport identity, closed mean, and
+hypergeometric sum by exact rational enumeration for N ≤ 8. It checks the
+simple-walk bridge area for m ≤ 6 and the central symmetric-difference identity
+for n ≤ 5, then replays every recorded floating-point row against its stated
+tolerance. Numerical outputs are printed at `long double` round-trip precision.
 
 Each command-line argument is the number of matchgate sites \(n\); the checker
 uses the central component \(\kappa=n\) unless `--rho` is supplied.

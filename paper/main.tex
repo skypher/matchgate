@@ -136,9 +136,7 @@ formula~\cite{DefantEtAl}.  Combining that result with the
 matchgate--minuscule-lattice identification shows that Conjecture~14 of West
 et al.~\cite[Conjecture~14]{WestEtAl} holds.  We make this implication
 explicit and give an independent finite-population derivation valid for every
-sequence $k_n/(2n)\to\rho\in(0,1)$.  We also derive a graph-complexity asymptotic after
-averaging jointly over a uniform initial vertex and an independent Haar
-matchgate unitary, and prove a separate pointwise graph--Krylov comparison.
+sequence $k_n/(2n)\to\rho\in(0,1)$.
 If $S$ and $T$ are independent uniform $k_n$-subsets of
 $[2n]$, write
 $D_{2n,k_n}(S,T)=\sum_i|s_i-t_i|$.  Then
@@ -154,9 +152,11 @@ $\min\{s,t\}-st$.  In the central (half-filled) component $k_n=n$, the
 coefficient multiplying the Brownian area is $2$ and the mean constant is
 $\sqrt{2\pi}/4$.  We also record the variance asymptotic, extract the leading
 finite-size correction from the published closed form, and give a finite sum
-obtained by conditioning on the symmetric-difference size.  The Krylov
-comparison is for generator-supported time-independent Hamiltonians; no
-Haar-averaged Krylov asymptotic is asserted.
+obtained by conditioning on the symmetric-difference size.  For graph
+complexity, we derive the corresponding asymptotic under joint averaging over
+a uniform initial vertex and an independent Haar matchgate unitary.  We also
+give a pointwise graph--Krylov comparison for time-independent Hamiltonians in
+the real span of the nearest-neighbor matchgate generators.
 
 \vskip5pt
 \noindent\textbf{Keywords.}\enspace Matchgate commutator graph; rectangular
@@ -173,8 +173,18 @@ distance; graph complexity; Krylov complexity.
 
 \section{Introduction}
 
-The commutator graph was introduced by Diaz et
-al.~\cite[Supplemental Definition~6]{DiazEtAl}.
+The commutator graph describes how a chosen family of Hamiltonian generators
+connects operators.  Its vertices are Pauli strings, the tensor products of
+single-site Pauli matrices and identities.  Two vertices are adjacent when
+commutation with one of the generators maps one string to a nonzero scalar
+multiple of the other.  Graph distance therefore counts the minimum number
+of such transitions between operators.  This construction was introduced by
+Diaz et al.~\cite[Supplemental Definition~6]{DiazEtAl}.
+We study the distance between two uniformly sampled vertices in a matchgate
+component.  Its mean also determines graph complexity after averaging over
+both a uniform initial operator and an independent Haar matchgate unitary,
+as stated in Corollary~\ref{cor:complexity}.
+
 West et al.~\cite[Section~IV and Appendix~C]{WestEtAl} describe the component
 $\mathcal C_\kappa$ of the matchgate commutator graph by the $\kappa$-element
 subsets of $[2n]$.  Their
@@ -217,36 +227,19 @@ unordered-pair convention for the Wiener index $W(G)$, symmetry and the zero
 diagonal give $d(G)=2W(G)$; hence the average used by West et al. is
 $d(G)/|V(G)|^2=2W(G)/|V(G)|^2$.
 
-Defant et al.~\cite[Proposition~5]{DefantEtAl} state the result for rectangles
-$\mathcal P_{\lfloor\alpha\ell\rfloor,\ell}$ along a fixed ray, with
-$\alpha>0$ fixed.  Along this ray, the subset density tends to
-$\rho:=\alpha/(1+\alpha)$.  Writing the total path length as
-$N=k+\ell$ gives $\ell\sim(1-\rho)N$; on the matchgate subsequence $N=2n$,
-this is $\ell\sim2(1-\rho)n$.  Thus their
-$\ell^{3/2}$-normalized limit has, in the present $n^{3/2}$ normalization,
-coefficient
-\[
- [2(1-\rho)]^{3/2}\sqrt{2\alpha(1+\alpha)}
- =4\sqrt{\rho(1-\rho)}.
-\]
-Their moment convergence gives the same mean and variance constants; at
-$\alpha=1$ it gives the central case.  Thus their theorem, combined with the
-matchgate component identification of West et al., already implies
-Conjecture~14.  The present finite-population proof gives a triangular-array
-formulation in which the two rectangle dimensions may vary arbitrarily subject
-only to
-$k_n/(2n)\to\rho$, equivalently
-$k_n/(2n-k_n)\to\rho/(1-\rho)$, and supplies direct moment bounds.  It also
-derives the Haar matchgate specialization, gives a
-projection proof of the graph--Krylov comparison, and obtains a central finite
-sum by conditioning on the symmetric-difference size.  The Haar statement is
-a joint expectation over an independent uniform initial Pauli vertex and Haar
-matchgate unitary; it is not a pointwise-in-vertex scaling statement.
+The fixed-aspect-ratio theorem of Defant et al., combined with the matchgate
+component identification of West et al., already implies Conjecture~14.
+We make this implication explicit in Corollary~\ref{cor:conjecture} and give
+an independent finite-population proof for arbitrary density sequences
+$k_n/(2n)\to\rho\in(0,1)$ in Theorem~\ref{thm:main}, including direct moment
+bounds.  We also derive the matchgate graph-complexity consequence and give a
+projection proof of the graph--Krylov comparison
+(Corollaries~\ref{cor:complexity} and~\ref{cor:krylov}).
 
 Table~\ref{tab:provenance} separates the prior results used here from the
 deductions and alternative arguments given in this paper.
 
-\begin{table}[hbp]
+\begin{table}[htbp]
 \centering
 \small
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.34\linewidth}
@@ -270,8 +263,7 @@ conditional bridge-and-gap sum is derived here.\\
 Graph and Krylov complexity
 & Matchgate specialization of Proposition~7 of West et
 al.~\cite[Proposition~7 and Lemma~9]{WestEtAl}; the statement of their
-Lemma~9 is proved here by a tail-projection argument that avoids its
-cross-term step.\\
+Lemma~9 is given an independent tail-projection proof here.\\
 \end{tabular}
 \caption{Provenance of the principal results and the role of the present
 arguments.}
@@ -292,9 +284,9 @@ path~\cite{AudenaertEtAl}.  The ordered-coordinate distance formula appears,
 for example, in Ibarra and Rivera~\cite[Lemma~5.2]{IbarraRivera}.  The transport
 identity below is the discrete one-dimensional $1$-Wasserstein identity.  In
 one dimension, $W_1$ is the area between cumulative distribution functions
-\cite{Vallender,DeAngelisGray}.  Vallender's later addendum corrects Remark~1
-and formula~(3) of the original note; it does not alter the CDF-area identity
-used here~\cite{VallenderAddendum}.
+\cite{Vallender,DeAngelisGray}.\footnote{Vallender's addendum corrects
+Remark~1 and formula~(3) of the original note; it does not alter the CDF-area
+identity used here~\cite{VallenderAddendum}.}
 
 Bourn and Willenbring~\cite{BournWillenbring} study expected one-dimensional
 earth mover distance for uniform weak compositions and its probability-simplex
@@ -312,18 +304,22 @@ simple-walk bridge area and exchangeable gaps.
 
 Brownian-bridge limits for $L^1$ empirical-process and Wasserstein functionals
 are classical; see del
-Barrio, Gin\'e, and Matr\'an~\cite{delBarrioGineMatran} and their correction to
-separate heavy-tail statements~\cite{delBarrioCorrection}.  Those corrected
-statements are not used here.
+Barrio, Gin\'e, and Matr\'an~\cite{delBarrioGineMatran}.\footnote{Their
+correction~\cite{delBarrioCorrection} concerns separate heavy-tail statements,
+which are not used here.}
 
 Janson~\cite[Section~20]{Janson} surveys the Brownian-bridge area and its
 moments, while Schwerdtfeger~\cite[Section~12.2]{Schwerdtfeger} proves joint
 moment convergence for the absolute area and endpoint of a Bernoulli walk.
-Section~6 records the published rectangular-lattice closed form, gives an
-independent bridge-and-gap identity for its central specialization, and
-extracts the leading $n^{1/2}$ finite-size correction.  Section~5 supplies the
-explicit Haar specialization and a projection proof of the
-Hamiltonian-dependent graph--Krylov comparison.
+
+Section~2 establishes the graph identification and transport identity.
+Section~3 supplies the bridge limit and moment bounds used in the distance
+theorem of Section~4.  Section~5 derives the graph- and Krylov-complexity
+consequences.  Section~6 records the published exact mean
+(Proposition~\ref{prop:closed-form}), derives the central bridge-and-gap
+identity (Proposition~\ref{prop:central-exact}), and extracts the leading
+finite-size correction (Theorem~\ref{thm:finite-size}) before presenting
+numerical evaluations.
 
 \section{The matchgate metric and discrete transport}
 
@@ -339,7 +335,9 @@ $S=(s_1<\cdots<s_k)$ and define
  C_S(r):=|S\cap[r]|.
 \]
 
-When $N=2n$, define the Jordan--Wigner Majorana operators
+When $N=2n$, let $X_j,Y_j,Z_j$ denote the Pauli matrices acting on site $j$
+and the identity on every other site of the $n$-qubit system.  Define the
+Jordan--Wigner Majorana operators
 \[
  c_{2j-1}=Z_1\cdots Z_{j-1}X_j,\qquad
  c_{2j}=Z_1\cdots Z_{j-1}Y_j\qquad(1\leq j\leq n),
@@ -748,6 +746,24 @@ Defant et al.~\cite[Proposition~5]{DefantEtAl} at rectangle aspect ratio one;
 the present corollary records that published lattice result in the matchgate
 notation of West et al.
 \end{proof}
+
+\begin{remark}[Comparison of normalizations]
+Defant et al.~\cite[Proposition~5]{DefantEtAl} state their limit for rectangles
+$\mathcal P_{\lfloor\alpha\ell\rfloor,\ell}$ along a fixed ray, with
+$\alpha>0$ fixed.  Along this ray, the subset density tends to
+$\rho=\alpha/(1+\alpha)$.  Writing $N=k+\ell$ gives
+$\ell\sim(1-\rho)N$; on the matchgate subsequence $N=2n$, this becomes
+$\ell\sim2(1-\rho)n$.  Converting their $\ell^{3/2}$ normalization to the
+present $n^{3/2}$ normalization therefore gives the coefficient
+\[
+ [2(1-\rho)]^{3/2}\sqrt{2\alpha(1+\alpha)}
+ =4\sqrt{\rho(1-\rho)}.
+\]
+Their moment convergence gives the same mean and variance constants along
+these rays; $\alpha=1$ gives the central case.  Theorem~\ref{thm:main}
+allows both rectangle dimensions to vary arbitrarily subject to
+$k_n/(2n)\to\rho$, equivalently $k_n/(2n-k_n)\to\rho/(1-\rho)$.
+\end{remark}
 
 \section{Graph and Krylov complexity}
 
@@ -1247,7 +1263,7 @@ $-5\sqrt{2\pi}/64=-0.195830333955547\ldots$.
 Here and in Table~\ref{tab:numerics},
 $c=\sqrt{2\pi}/4=0.626657068657750\ldots$.
 
-\begin{table}[hbp]
+\begin{table}[!htbp]
 \centering
 \small
 \begin{tabular}{rccc}
@@ -1268,7 +1284,7 @@ Proposition~\ref{prop:exact-computation}.}
 \label{tab:numerics}
 \end{table}
 
-\begin{table}[hbp]
+\begin{table}[!htbp]
 \centering
 \small
 \begin{tabular}{cccr@{\qquad}r}
@@ -1292,22 +1308,15 @@ bounds.
 
 \section{Conclusion}
 
-The matchgate components of West et al. are cover graphs of rectangular
-minuscule lattices, so
-the distance law and moment convergence of Defant et al. imply the
-$n^{3/2}$ central growth in Conjecture~14.  The cumulative-count argument gives
-an independent finite-population proof, including arbitrary density sequences
-and explicit moment bounds.  The minuscule-lattice Wiener formula of Defant et
-al., also recorded in discrete earth-mover notation by Bourn and Erickson,
-supplies the closed-form finite-size mean and its leading $n^{1/2}$ correction.
-The central conditional-on-$|S\setminus T|$ decomposition gives a different
-finite-sum identity.
-For complexity, the distance asymptotic implies
-Corollary~\ref{cor:complexity} only after averaging both the initial Pauli
-vertex and the Haar matchgate unitary.  Corollary~\ref{cor:krylov} is a separate
-pointwise comparison for the specified Hamiltonian
-\eqref{eq:matchgate-Hamiltonian}; it does not identify a Haar-averaged Krylov
-quantity without an additional dynamical law.
+The rectangular-lattice interpretation connects matchgate operator distances
+to a classical path-area problem.  It makes the implication of Defant et al.'s
+theorem for Conjecture~14 explicit, while cumulative counting functions give
+an independent route to the distance law for arbitrary density sequences.
+The same distance controls graph complexity under joint vertex and Haar
+averaging.  For the Hamiltonians in \eqref{eq:matchgate-Hamiltonian}, nested
+graph-distance and Krylov subspaces give the pointwise complexity comparison.
+The exact finite-size formulas complement these asymptotic and dynamical
+statements with directly computable component means.
 
 \section*{AI-use disclosure}
 
@@ -1320,34 +1329,17 @@ claims, citations, computations, and wording.
 
 \section*{Data and code availability}
 
-The source archive accompanying this manuscript contains the checker and its
-recorded output under \texttt{code/} and \texttt{results/}, together with the
-\texttt{Makefile}.  The versioned source package is available at
-\url{https://github.com/skypher/matchgate}.  The manuscript version
-corresponding to this source package is archived at Git tag
+The manuscript source, numerical checker, and recorded outputs are available
+at \url{https://github.com/skypher/matchgate}.  The numerical source and
+outputs used for Tables~\ref{tab:numerics} and~\ref{tab:noncentral} are
+archived at Git tag
 \href{https://github.com/skypher/matchgate/tree/paper-2026-09-04-r6}%
-{\texttt{paper-2026-09-04-r6}}.  It is built and run, for example, with
-\begin{gather*}
- \texttt{make paper},\qquad \texttt{make exact-mean},\\
- \texttt{./build/exact\_mean 100 400 800 1600},\\
- \texttt{make check-exact-mean}.
-\end{gather*}
-The manuscript build requires pdf\LaTeX.  The numerical build requires a C++20
-compiler with OpenMP support, and the checker requires Python~3.10 or later.
-The values in
-Tables~\ref{tab:numerics} and~\ref{tab:noncentral} were produced with
-GCC~13.3.0.  The implementation
-uses \texttt{long double}, \texttt{lgammal}, and normalized exponential
-weights to evaluate the exact finite-sum identities numerically; reported
-quantities are printed directly at \texttt{long double} round-trip precision.
-The \texttt{check-exact-mean} target first checks the token-graph metric
-assertion in Proposition~\ref{prop:graph-metric}, Propositions
-\ref{prop:closed-form} and \ref{prop:exact-computation}, and
-Lemma~\ref{lem:transport} by exact rational enumeration for $N\leq8$,
-Lemma~\ref{lem:discrete-bridge-area} for $m\leq6$, and
-Proposition~\ref{prop:central-exact} for $n\leq5$.  It then replays every
-recorded floating-point row and fails if an output leaves its stated numerical
-tolerance.
+{\texttt{paper-2026-09-04-r6}}.  The checker tests the metric and finite-sum
+identities by exact rational enumeration in small cases, then reproduces the
+recorded floating-point evaluations within stated tolerances.  The tables
+were produced with GCC~13.3.0 using \texttt{long double} arithmetic.
+Build instructions, software requirements, and the ranges of the exact checks
+are documented in the repository's \texttt{README.md}.
 
 \begin{thebibliography}{99}
 \footnotesize\raggedright
